@@ -49,10 +49,7 @@ import UserEditor from "./UserEditor.vue";
 const keys = ref(Object.keys(locales));
 const local = ref('zhCn');
 
-
-const getById = userService.createGetById();
 const query = userService.createQuery();
-console.log(query.response)
 const userEditorRef = ref();
 
 onMounted(() => {
@@ -60,11 +57,6 @@ onMounted(() => {
 })
 const onRowDblClickHandler = (row: any) => {
   userEditorRef.value.edit(row.id)
-}
-const exeGetById = () => {
-  getById.execute().then((resp: any) => {
-    console.log(resp)
-  })
 }
 const exeQuery = () => {
   query.execute({a: 1}, {b: 2}).then((resp: any) => {

@@ -1,8 +1,7 @@
 <template>
-  <base-service-test></base-service-test>
+  <router-view></router-view>
 </template>
 <script setup lang="ts">
-import BaseServiceTest from "./components/UserManager.vue";
 </script>
 
 
