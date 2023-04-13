@@ -1,6 +1,6 @@
 import {defineConfig} from 'vite'
 import vue from '@vitejs/plugin-vue'
-import path from 'path'
+import path, {resolve} from 'path'
 //接口mock服务器
 import {viteMockServe} from 'vite-plugin-mock';
 //压缩，混淆
@@ -40,7 +40,7 @@ export default defineConfig({
         })],
     resolve: {
         alias: {
-            '@': fileURLToPath(new URL('./src', import.meta.url))
+            "@": resolve(__dirname, "src"),
         }
     },
     server: {
