@@ -5,9 +5,22 @@
   "module": "./dist/index.es.js",
   "exports": {
     ".": {
-      "import": "./dist/index.es.js",
-      "require": "./dist/index.umd.js"
+      "types": {
+        "import": "./src/index.d.ts",
+        "default": "./src/index.d.ts"
+      },
+      "browser": {
+        "require": "./dist/index.umd.js",
+        "import": "./dist/index.es.js",
+        "default": "./dist/index.es.js"
+      },
+      "default": {
+        "require": "./dist/index.umd.js",
+        "import": "./dist/index.es.js",
+        "default": "./dist/index.es.js"
+      }
     },
+    "./package.json": "./package.json",
     "./dist/style.css": {
       "import": "./dist/style.css",
       "require": "./dist/style.css"
