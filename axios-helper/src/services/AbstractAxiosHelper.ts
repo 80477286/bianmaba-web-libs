@@ -1,7 +1,7 @@
 import {AxiosResponse, CreateAxiosDefaults, default as axios, InternalAxiosRequestConfig} from "axios";
 import {ElNotification} from "element-plus";
 import GlobalOptions from "./interface/GlobalOptions";
-import {merge} from "../libs/utils";
+import {merge} from "@bianmaba/utils/src/index"
 import {DEFAULT_GLOBAL_OPTIONS} from "@/services/interface/DefaultGlobalOptions";
 
 
