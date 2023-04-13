@@ -1,6 +1,6 @@
 const toString = Object.prototype.toString;
-const kindOf = (function (cache): any {
-    return function (thing: any) {
+const kindOf = ((cache): any => {
+    return (thing: any): any => {
         let str = toString.call(thing);
         return cache[str] || (cache[str] = str.slice(8, -1).toLowerCase());
     };
@@ -10,6 +10,13 @@ const kindOfTest = (type: any): Function => {
     type = type.toLowerCase();
     return function isKindOf(thing: any): boolean {
         return kindOf(thing) === type;
+    };
+}
+
+
+const bind = (fn: any, thisArg: any): any => {
+    return function wrap() {
+        return fn.apply(thisArg, arguments);
     };
 }
 
@@ -271,12 +278,6 @@ export const forEach = (obj: any, fn: any): void => {
     }
 }
 
-function bind(fn: any, thisArg: any): any {
-    return function wrap() {
-        return fn.apply(thisArg, arguments);
-    };
-}
-
 /**
  * 通过可变地添加对象 b 的属性来扩展对象 a。
  *
@@ -424,23 +425,53 @@ export const delay = (wait = 1000) => {
  * @param {Object} obj1,obj3... 要合并的对象
  */
 export const merge = function (...args: any[]): any {
-    if (arguments.length > 1) {
-        let result = arguments[0];
-        let assignValue = (val: any, key: any) => {
-            if (isPlainObject(result[key]) && isPlainObject(val)) {
-                result[key] = merge(result[key], val);
-            } else if (isPlainObject(val)) {
-                result[key] = merge({}, val);
-            } else if (isArray(val)) {
-                result[key] = val.slice();
-            } else {
-                result[key] = val;
-            }
-        }
-
-        for (let i = 0, l = arguments.length; i < l; i++) {
-            forEach(arguments[i], assignValue);
+    let result = arguments[0];
+    let assignValue = (val: any, key: any) => {
+        if (isPlainObject(result[key]) && isPlainObject(val)) {
+            result[key] = merge(result[key], val);
+        } else if (isPlainObject(val)) {
+            result[key] = merge({}, val);
+        } else if (isArray(val)) {
+            result[key] = val.slice();
+        } else {
+            result[key] = val;
         }
     }
-}
 
+    for (let i = 0, l = arguments.length; i < l; i++) {
+        forEach(arguments[i], assignValue);
+    }
+    return result;
+}
+const utils = {
+    merge,
+    delay,
+    isTypedArray,
+    toArray,
+    endsWith,
+    toFlatObject,
+    inherits,
+    stripBOM,
+    extend,
+    forEach,
+    isStandardBrowserEnv,
+    trim,
+    isURLSearchParams,
+    isFormData,
+    isStream,
+    isFunction,
+    isFileList,
+    isBlob,
+    isFile,
+    isDate,
+    isPlainObject,
+    isObject,
+    isNumber,
+    isString,
+    isArrayBufferView,
+    isArrayBuffer,
+    isBuffer,
+    isUndefined,
+    isArray
+}
+export default utils;

@@ -1,6 +1,6 @@
 import Executor from "./Executor";
 import {Axios, AxiosRequestConfig} from "axios";
-import {merge} from "../../libs/utils";
+import {merge} from "@bianmaba/utils/src/utils";
 
 export default class PostExecutor extends Executor {
     constructor(instance: Axios, url?: string) {

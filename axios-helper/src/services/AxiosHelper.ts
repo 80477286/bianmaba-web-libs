@@ -5,7 +5,7 @@ import GetExecutor from "./executors/GetExecutor";
 import PostExecutor from "./executors/PostExecutor";
 import {DefaultGlobalOptions} from "./interface/Types";
 import {HttpContentType, HttpMethod} from "./interface/Enums";
-import {merge} from "../libs/utils";
+import {merge} from "@bianmaba/utils/src/utils";
 import {reactive} from "vue";
 import {DEFAULT_GLOBAL_OPTIONS} from "@/services/interface/DefaultGlobalOptions";
 import GlobalOptions from "@/services/interface/GlobalOptions";

@@ -1,7 +1,5 @@
-import {AxiosHelper} from "@/index";
-import {HttpContentType} from "@/services/interface/Enums";
-import PostExecutor from "@/services/executors/PostExecutor";
-import GetExecutor from "@/services/executors/GetExecutor";
+import {AxiosHelper, GetExecutor, PostExecutor} from "../../src";
+import {HttpContentType} from "../../src/services/interface/Enums";
 
 // @ts-ignore
 class UserService extends AxiosHelper {

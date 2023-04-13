@@ -24,7 +24,7 @@
     "element-plus": "^2.3.2",
     "vite-plugin-mock": "^2.9.6",
     "vue": "^3.2.47",
-    "@bianmaba/utils": "^0.0.2"
+    "@bianmaba/utils": "^0.0.6"
   },
   "devDependencies": {
     "@types/node": "^18.15.11",

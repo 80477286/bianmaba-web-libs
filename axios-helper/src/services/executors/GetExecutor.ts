@@ -1,7 +1,8 @@
 import Executor from "./Executor";
 import {AxiosRequestConfig} from "axios";
 import {Axios} from "axios";
-import {merge} from "../../libs/utils";
+
+import {merge} from "@bianmaba/utils/src/utils";
 
 export default class GetExecutor extends Executor {
     constructor(instance: Axios, url?: string) {

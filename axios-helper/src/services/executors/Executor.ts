@@ -1,6 +1,6 @@
 import {Axios, AxiosRequestConfig, AxiosResponse} from "axios";
 import {ExecutorType, Result} from "../interface/Types";
-import {merge} from "../../libs/utils";
+import {merge} from "@bianmaba/utils/src/utils";
 
 
 export default class Executor {

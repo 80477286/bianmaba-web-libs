@@ -1,7 +1,7 @@
 import {AxiosResponse, CreateAxiosDefaults, default as axios, InternalAxiosRequestConfig} from "axios";
 import {ElNotification} from "element-plus";
 import GlobalOptions from "./interface/GlobalOptions";
-import {merge} from "@bianmaba/utils/src/index"
+import {merge} from "@bianmaba/utils/src/utils";
 import {DEFAULT_GLOBAL_OPTIONS} from "@/services/interface/DefaultGlobalOptions";
 
 
@@ -9,7 +9,7 @@ export default class AbstractAxiosHelper {
     protected globalOptions: GlobalOptions = DEFAULT_GLOBAL_OPTIONS;
 
     constructor(options: GlobalOptions = DEFAULT_GLOBAL_OPTIONS) {
-        this.globalOptions = merge(this.globalOptions, options);
+        this.globalOptions = merge(this.globalOptions||{}, options);
         console.debug("初始化全局配置...")
         axios.defaults.baseURL = this.globalOptions.baseUrl;
         axios.defaults.method = this.globalOptions.method;
