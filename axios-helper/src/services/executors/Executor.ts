@@ -1,6 +1,6 @@
 import {Axios, AxiosRequestConfig, AxiosResponse} from "axios";
 import {ExecutorType, Result} from "../interface/Types";
-import {merge} from "@bianmaba/utils/src/utils";
+import {utils} from "@bianmaba/utils";
 
 
 export default class Executor {
@@ -18,8 +18,8 @@ export default class Executor {
 
     public execute(options: AxiosRequestConfig<any> = {}): Promise<Result> {
         this.loading = true;
-        this.data = merge(this.data || {}, options.data || {});
-        this.params = merge(this.params || {}, options.params || {});
+        this.data = utils.merge(this.data || {}, options.data || {});
+        this.params = utils.merge(this.params || {}, options.params || {});
         options.url = options.url ? options.url : this.url;
         return new Promise((resolve, reject) => {
             this.instance.request(options).then((resp) => {
@@ -33,17 +33,17 @@ export default class Executor {
     }
 
     public setDefaultResponse(defaultResponse: any = {}): ExecutorType {
-        this.response = merge(this.response, defaultResponse);
+        this.response = utils.merge(this.response, defaultResponse);
         return this;
     }
 
     public setDefaultRequestData(defaultRequestData: any = {}): ExecutorType {
-        this.data = merge(this.data, defaultRequestData);
+        this.data = utils.merge(this.data, defaultRequestData);
         return this;
     }
 
     public setDefaultResultParams(defaultResultParams: any = {}): ExecutorType {
-        this.params = merge(this.params, defaultResultParams);
+        this.params = utils.merge(this.params, defaultResultParams);
         return this;
     }
 

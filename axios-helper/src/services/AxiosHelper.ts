@@ -5,7 +5,7 @@ import GetExecutor from "./executors/GetExecutor";
 import PostExecutor from "./executors/PostExecutor";
 import {DefaultGlobalOptions} from "./interface/Types";
 import {HttpContentType, HttpMethod} from "./interface/Enums";
-import {merge} from "@bianmaba/utils/src/utils";
+import {utils} from "@bianmaba/utils";
 import {reactive} from "vue";
 import {DEFAULT_GLOBAL_OPTIONS} from "@/services/interface/DefaultGlobalOptions";
 import GlobalOptions from "@/services/interface/GlobalOptions";
@@ -32,7 +32,7 @@ export default class AxiosHelper extends AbstractAxiosHelper {
      * @param options  axios实例配置选项，此选项中的data及params不会生效
      */
     public createGetExecutor(url: string = '', options: CreateAxiosDefaults<any> | any = {}): GetExecutor {
-        let _options = merge({
+        let _options = utils.merge({
             method: HttpMethod.GET,
             data: null,
             params: null,
@@ -47,7 +47,7 @@ export default class AxiosHelper extends AbstractAxiosHelper {
      * @param options  axios实例配置选项，此选项中的data及params不会生效
      */
     public createPostExecutor(url: string = '', options: CreateAxiosDefaults<any> | any = {}): PostExecutor {
-        let _options = merge({
+        let _options = utils.merge({
             method: HttpMethod.POST,
             data: null,
             params: null,
@@ -72,7 +72,7 @@ export default class AxiosHelper extends AbstractAxiosHelper {
     // @ts-ignore
     public static getInstance(options?: GlobalOptions | any): AxiosHelper {
         if (!this.instance) {
-            this.instance = new AxiosHelper(merge(DEFAULT_GLOBAL_OPTIONS, options || {}))
+            this.instance = new AxiosHelper(utils.merge(DEFAULT_GLOBAL_OPTIONS, options || {}))
         } else {
             if (options) {
                 console.error('实例已经存在，重获取实例时，配置选项将不会生效！')
