@@ -2,7 +2,7 @@ import * as Mock from "mockjs";
 
 export default [{
     url: "/user/query",
-    response: ({req, res}) => {
+    response: ({}) => {
         return {
             success: true,
             result: "查询成功",
