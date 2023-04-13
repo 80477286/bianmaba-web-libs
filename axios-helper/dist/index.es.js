@@ -1,76 +1,72 @@
-var P = Object.defineProperty;
-var E = (t, e, s) => e in t ? P(t, e, { enumerable: !0, configurable: !0, writable: !0, value: s }) : t[e] = s;
-var l = (t, e, s) => (E(t, typeof e != "symbol" ? e + "" : e, s), s);
+var E = Object.defineProperty;
+var w = (t, e, s) => e in t ? E(t, e, { enumerable: !0, configurable: !0, writable: !0, value: s }) : t[e] = s;
+var l = (t, e, s) => (w(t, typeof e != "symbol" ? e + "" : e, s), s);
 import i from "axios";
-import { ElNotification as x } from "element-plus";
-import { reactive as p } from "vue";
-const T = Object.prototype.toString, w = function(t) {
-  return function(e) {
-    let s = T.call(e);
-    return t[s] || (t[s] = s.slice(8, -1).toLowerCase());
-  };
-}(/* @__PURE__ */ Object.create(null)), f = (t) => {
-  if (w(t) !== "object")
+import { reactive as f } from "vue";
+const T = Object.prototype.toString, R = ((t) => (e) => {
+  let s = T.call(e);
+  return t[s] || (t[s] = s.slice(8, -1).toLowerCase());
+})(/* @__PURE__ */ Object.create(null)), o = (t) => (t = t.toLowerCase(), function(s) {
+  return R(s) === t;
+}), P = (t) => Array.isArray(t);
+o("ArrayBuffer");
+const m = (t) => {
+  if (R(t) !== "object")
     return !1;
   let e = Object.getPrototypeOf(t);
   return e === null || e === Object.prototype;
-}, R = (t) => Array.isArray(t), S = (t, e) => {
+};
+o("Date");
+o("File");
+o("Blob");
+o("FileList");
+o("URLSearchParams");
+const S = (t, e) => {
   if (!(t === null || typeof t > "u"))
-    if (typeof t != "object" && (t = [t]), R(t))
+    if (typeof t != "object" && (t = [t]), P(t))
       for (let s = 0, a = t.length; s < a; s++)
         e.call(null, t[s], s, t);
     else
       for (let s in t)
         Object.prototype.hasOwnProperty.call(t, s) && e.call(null, t[s], s, t);
 }, n = function(...t) {
-  let e = {}, s = (a, r) => {
-    f(e[r]) && f(a) ? e[r] = n(e[r], a) : f(a) ? e[r] = n({}, a) : R(a) ? e[r] = a.slice() : e[r] = a;
+  let e = arguments[0], s = (a, r) => {
+    m(e[r]) && m(a) ? e[r] = n(e[r], a) : m(a) ? e[r] = n({}, a) : P(a) ? e[r] = a.slice() : e[r] = a;
   };
-  for (let a = 0, r = t.length; a < r; a++)
-    S(t[a], s);
+  for (let a = 0, r = arguments.length; a < r; a++)
+    S(arguments[a], s);
   return e;
 };
-var c = /* @__PURE__ */ ((t) => (t["application/atom+xml"] = "application/atom+xml", t["application/json"] = "application/json", t["application/x-www-form-urlencoded"] = "application/x-www-form-urlencoded", t["application/xml"] = "application/xml", t["multipart/form-data"] = "multipart/form-data", t["text/html"] = "text/html", t["text/plain"] = "text/plain", t))(c || {}), u = /* @__PURE__ */ ((t) => (t.POST = "POST", t.GET = "GET", t.DELETE = "DELETE", t.HEAD = "HEAD", t.OPTIONS = "OPTIONS", t.PUT = "PUT", t.PATCH = "PATCH", t.PURGE = "PURGE", t.LINK = "LINK", t.UNLINK = "UNLINK", t))(u || {});
-const h = {
-  method: u.POST,
-  headers: { "Content-Type": c["application/json"] },
+var u = /* @__PURE__ */ ((t) => (t["application/atom+xml"] = "application/atom+xml", t["application/json"] = "application/json", t["application/x-www-form-urlencoded"] = "application/x-www-form-urlencoded", t["application/xml"] = "application/xml", t["multipart/form-data"] = "multipart/form-data", t["text/html"] = "text/html", t["text/plain"] = "text/plain", t))(u || {}), h = /* @__PURE__ */ ((t) => (t.POST = "POST", t.GET = "GET", t.DELETE = "DELETE", t.HEAD = "HEAD", t.OPTIONS = "OPTIONS", t.PUT = "PUT", t.PATCH = "PATCH", t.PURGE = "PURGE", t.LINK = "LINK", t.UNLINK = "UNLINK", t))(h || {});
+const d = {
+  method: h.POST,
+  headers: { "Content-Type": u["application/json"] },
   xRequestedWith: "XMLHttpRequest"
 };
 class q {
-  constructor(e = h) {
-    l(this, "globalOptions", h);
-    this.globalOptions = n(this.globalOptions, e), console.debug("初始化全局配置..."), i.defaults.baseURL = this.globalOptions.baseUrl, i.defaults.method = this.globalOptions.method, i.defaults.headers.common["X-Requested-With"] = this.globalOptions.xRequestedWith, i.interceptors.request.use(this.globalOptions.requestSuccessHandler || this.defaultRequestSuccessHandler, this.globalOptions.requestFailHandler || this.defaultRequestFailHandler), i.interceptors.response.use(this.globalOptions.responseSuccessHandler || this.defaultResponseSuccessHandler, this.globalOptions.responseFailHandler || this.defaultResponseFailHandler), console.debug("全局配置初始化完成。");
+  constructor(e = d) {
+    l(this, "globalOptions", d);
+    this.globalOptions = n(this.globalOptions || {}, e), console.debug("初始化全局配置..."), i.defaults.baseURL = this.globalOptions.baseUrl, i.defaults.method = this.globalOptions.method, i.defaults.headers.common["X-Requested-With"] = this.globalOptions.xRequestedWith, i.interceptors.request.use(this.globalOptions.requestSuccessHandler || this.defaultRequestSuccessHandler, this.globalOptions.requestFailHandler || this.defaultRequestFailHandler), i.interceptors.response.use(this.globalOptions.responseSuccessHandler || this.defaultResponseSuccessHandler, this.globalOptions.responseFailHandler || this.defaultResponseFailHandler), console.debug("全局配置初始化完成。");
   }
   defaultRequestSuccessHandler(e) {
     return e;
   }
   defaultRequestFailHandler(e) {
-    return x.error({
-      title: "错误",
-      message: "远程请求出现错误：",
-      offset: 120,
-      duration: 2e3
-    }), Promise.reject(e);
+    return console.error("远程请求出现错误!"), Promise.reject(e);
   }
   defaultResponseSuccessHandler(e) {
     return e;
   }
   defaultResponseFailHandler(e) {
     var s, a;
-    return x.error({
-      title: "错误",
-      dangerouslyUseHTMLString: !0,
-      message: ((a = (s = e.response) == null ? void 0 : s.data) == null ? void 0 : a.result) || "远程请求出现错误(code=" + e.response.status + ")",
-      offset: 120,
-      duration: 2e3
-    }), Promise.reject(e);
+    return console.log(((a = (s = e.response) == null ? void 0 : s.data) == null ? void 0 : a.result) || "远程请求出现错误(code=" + e.response.status + ")"), Promise.reject(e);
   }
   createAxiosInstance(e) {
     let s = i.create(e);
     return s.interceptors.request.use(this.globalOptions.requestSuccessHandler, this.globalOptions.requestFailHandler), s.interceptors.response.use(this.globalOptions.responseSuccessHandler, this.globalOptions.responseFailHandler), s;
   }
 }
-class g {
+class O {
   constructor(e, s) {
     l(this, "instance");
     l(this, "url", "");
@@ -112,42 +108,42 @@ class g {
     }
   }
 }
-class I extends g {
+class I extends O {
   constructor(e, s) {
     super(e, s);
   }
   // @ts-ignore
   execute(e = {}, s = {}) {
     return this.loading = !0, this.params = n(this.params || {}, s.params || {}, e || {}), s.params = this.params, new Promise((a, r) => {
-      this.instance.get(s.url || this.url, s).then((o) => {
-        this.handleThenResponse(a, o);
-      }).catch((o) => {
-        this.handleCatchResponse(r, o);
+      this.instance.get(s.url || this.url, s).then((c) => {
+        this.handleThenResponse(a, c);
+      }).catch((c) => {
+        this.handleCatchResponse(r, c);
       }).finally(() => {
         this.loading = !1;
       });
     });
   }
 }
-class b extends g {
+class b extends O {
   constructor(e, s) {
     super(e, s);
   }
   // @ts-ignore
   execute(e = {}, s = {}, a = {}) {
-    return this.loading = !0, this.data = n(this.data || {}, a.data || {}, e || {}), this.params = n(this.params || {}, a.params || {}, s || {}), this.setDefaultResponse({ total: 0, page: 1, size: 10 }), a.params = this.params, new Promise((r, o) => {
-      this.instance.post(a.url || this.url, this.data, a).then((d) => {
-        this.handleThenResponse(r, d);
-      }).catch((d) => {
-        this.handleCatchResponse(o, d);
+    return this.loading = !0, this.data = n(this.data || {}, a.data || {}, e || {}), this.params = n(this.params || {}, a.params || {}, s || {}), this.setDefaultResponse({ total: 0, page: 1, size: 10 }), a.params = this.params, new Promise((r, c) => {
+      this.instance.post(a.url || this.url, this.data, a).then((p) => {
+        this.handleThenResponse(r, p);
+      }).catch((p) => {
+        this.handleCatchResponse(c, p);
       }).finally(() => {
         this.loading = !1;
       });
     });
   }
 }
-const O = class extends q {
-  constructor(e = h) {
+const x = class extends q {
+  constructor(e = d) {
     super(e);
   }
   /**
@@ -156,7 +152,7 @@ const O = class extends q {
    */
   createRequestExecutor(e = "", s = {}) {
     let a = this.createAxiosInstance(s);
-    return p(new g(a, e));
+    return f(new O(a, e));
   }
   /**
    *
@@ -164,12 +160,12 @@ const O = class extends q {
    */
   createGetExecutor(e = "", s = {}) {
     let a = n({
-      method: u.GET,
+      method: h.GET,
       data: null,
       params: null,
-      headers: { "Content-Type": c["application/x-www-form-urlencoded"] }
+      headers: { "Content-Type": u["application/x-www-form-urlencoded"] }
     }, s), r = this.createAxiosInstance(a);
-    return p(new I(r, e));
+    return f(new I(r, e));
   }
   /**
    *
@@ -177,12 +173,12 @@ const O = class extends q {
    */
   createPostExecutor(e = "", s = {}) {
     let a = n({
-      method: u.POST,
+      method: h.POST,
       data: null,
       params: null,
-      headers: { "Content-Type": c["multipart/form-data"] }
+      headers: { "Content-Type": u["multipart/form-data"] }
     }, s), r = this.createAxiosInstance(a);
-    return p(new b(r, e));
+    return f(new b(r, e));
   }
   /**
    * 获取AxiosHelper实例（单例模式）
@@ -197,15 +193,17 @@ const O = class extends q {
    */
   // @ts-ignore
   static getInstance(e) {
-    return this.instance ? e && console.error("实例已经存在，重获取实例时，配置选项将不会生效！") : this.instance = new O(n(h, e || {})), this.instance;
+    return this.instance ? e && console.error("实例已经存在，重获取实例时，配置选项将不会生效！") : this.instance = new x(n(d, e || {})), this.instance;
   }
 };
-let m = O;
-l(m, "instance");
+let g = x;
+l(g, "instance");
 export {
   q as AbstractAxiosHelper,
-  m as AxiosHelper,
-  g as Executor,
+  g as AxiosHelper,
+  O as Executor,
   I as GetExecutor,
+  u as HttpContentType,
+  h as HttpMethod,
   b as PostExecutor
 };

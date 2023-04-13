@@ -3,22 +3,12 @@
   "version": "0.0.1",
   "main": "./dist/index.umd.js",
   "module": "./dist/index.es.js",
+  "types": "./src/index.ts",
   "exports": {
     ".": {
-      "types": {
-        "import": "./src/index.d.ts",
-        "default": "./src/index.d.ts"
-      },
-      "browser": {
-        "require": "./dist/index.umd.js",
-        "import": "./dist/index.es.js",
-        "default": "./dist/index.es.js"
-      },
-      "default": {
-        "require": "./dist/index.umd.js",
-        "import": "./dist/index.es.js",
-        "default": "./dist/index.es.js"
-      }
+      "types": "./src/index.d.ts",
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.umd.js"
     },
     "./package.json": "./package.json",
     "./dist/style.css": {
@@ -34,10 +24,8 @@
   },
   "dependencies": {
     "axios": "^1.3.5",
-    "element-plus": "^2.3.2",
     "vite-plugin-mock": "^2.9.6",
-    "vue": "^3.2.47",
-    "@bianmaba/utils": "^0.0.6"
+    "vue": "^3.2.47"
   },
   "devDependencies": {
     "@types/node": "^18.15.11",

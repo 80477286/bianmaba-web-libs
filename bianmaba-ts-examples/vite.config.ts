@@ -12,14 +12,18 @@ import {resolve} from "path";
 
 // https://vitejs.dev/config/
 export default defineConfig({
+    server: {
+        host: '0.0.0.0',
+        port: 8080
+    },
     plugins: [vue(), AutoImport({
         resolvers: [ElementPlusResolver()],
-        dts: 'example/auto-imports.d.ts'
+        dts: 'auto-imports.d.ts'
     }),
         Components({
             resolvers: [ElementPlusResolver()],
-            dts: 'example/components.d.ts',
-            dirs: 'example/components'
+            dts: 'components.d.ts',
+            dirs: 'components'
         }),
         /**
          * mockPath：mock文件目录
@@ -27,7 +31,7 @@ export default defineConfig({
          * prodEnabled：生产环境mock开关
          */
         viteMockServe({
-            mockPath: './example/mock',
+            mockPath: './mock',
             localEnabled: true,
             prodEnabled: false,
             ignore: /^\_/

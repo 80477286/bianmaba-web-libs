@@ -1,5 +1,4 @@
-import {AxiosHelper, GetExecutor, PostExecutor} from '@bianmaba/axios-helper/src'
-import {HttpContentType} from '@bianmaba/axios-helper/src/services/interface/Enums'
+import {AxiosHelper, GetExecutor, PostExecutor, HttpContentType} from '@bianmaba/axios-helper'
 
 // @ts-ignore
 class UserService extends AxiosHelper {

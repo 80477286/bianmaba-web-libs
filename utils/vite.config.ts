@@ -1,8 +1,14 @@
 import {defineConfig} from 'vite'
 import * as path from "path";
-
+import vitePluginCompression from "vite-plugin-compression";
 // https://vitejs.dev/config/
 export default defineConfig({
+    plugins: [vitePluginCompression({
+        ext: '.gz',
+        filter: /\.(js|mjs|ts|json|css|html)$/i,
+        algorithm: 'gzip',
+        threshold: 5120
+    })],
     build: {
         lib: {
             entry: path.resolve(__dirname, './index.ts'),

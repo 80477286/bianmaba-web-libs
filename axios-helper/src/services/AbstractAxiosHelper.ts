@@ -1,5 +1,4 @@
 import {AxiosResponse, CreateAxiosDefaults, default as axios, InternalAxiosRequestConfig} from "axios";
-import {ElNotification} from "element-plus";
 import GlobalOptions from "./interface/GlobalOptions";
 import {merge} from "@bianmaba/utils/src/utils";
 import {DEFAULT_GLOBAL_OPTIONS} from "@/services/interface/DefaultGlobalOptions";
@@ -9,7 +8,7 @@ export default class AbstractAxiosHelper {
     protected globalOptions: GlobalOptions = DEFAULT_GLOBAL_OPTIONS;
 
     constructor(options: GlobalOptions = DEFAULT_GLOBAL_OPTIONS) {
-        this.globalOptions = merge(this.globalOptions||{}, options);
+        this.globalOptions = merge(this.globalOptions || {}, options);
         console.debug("初始化全局配置...")
         axios.defaults.baseURL = this.globalOptions.baseUrl;
         axios.defaults.method = this.globalOptions.method;
@@ -26,9 +25,7 @@ export default class AbstractAxiosHelper {
     }
 
     private defaultRequestFailHandler(error: any) {
-        ElNotification.error({
-            title: '错误', message: '远程请求出现错误：', offset: 120, duration: 2000
-        });
+        console.error('远程请求出现错误!')
         return Promise.reject(error);
     }
 
@@ -38,13 +35,7 @@ export default class AbstractAxiosHelper {
     }
 
     private defaultResponseFailHandler(error: any) {
-        ElNotification.error({
-            title: '错误',
-            dangerouslyUseHTMLString: true,
-            message: (error.response?.data?.result || '远程请求出现错误(code=' + error.response.status + ')'),
-            offset: 120,
-            duration: 2000
-        });
+        console.log(error.response?.data?.result || '远程请求出现错误(code=' + error.response.status + ')')
         return Promise.reject(error);
     }
 

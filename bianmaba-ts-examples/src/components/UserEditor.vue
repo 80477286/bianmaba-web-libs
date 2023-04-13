@@ -46,7 +46,7 @@
 <script lang="ts" setup>
 
 import {reactive} from "vue";
-import {ElNotification, FormRules} from "element-plus";
+import {ElNotification} from "element-plus";
 import {userService} from "./UserService";
 
 const getById = userService.createGetById();
@@ -55,7 +55,7 @@ const state = reactive({
   visible: false,
   srcId: null
 })
-const rules = reactive<FormRules>({
+const rules = reactive({
   name: [{required: true, message: '请输入人员姓名', trigger: 'blur'},
     {min: 3, max: 32, message: '长度必须为 3 - 32个字符', trigger: 'blur'}],
   regin: [{required: true, message: '请输入所在地域', trigger: 'blur'},
