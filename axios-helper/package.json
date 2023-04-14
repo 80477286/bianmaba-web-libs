@@ -16,8 +16,7 @@
       "types": "./src/types/index.d.ts",
       "import": "./dist/es/index.js",
       "require": "./dist/umd/index.js"
-    },
-    "./package.json": "./package.json"
+    }
   },
   "scripts": {
     "dev": "vite",

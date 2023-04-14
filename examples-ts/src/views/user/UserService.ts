@@ -1,5 +1,5 @@
 import {AxiosHelper, GetExecutor, PostExecutor, HttpContentType} from '@bianmaba/axios-helper'
-import {merge} from "@bianmaba/utils/src/utils";
+import {merge} from "@bianmaba/utils";
 
 class UserService extends AxiosHelper {
     static instance: UserService = new UserService();
