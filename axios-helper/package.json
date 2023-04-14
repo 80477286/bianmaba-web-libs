@@ -13,9 +13,9 @@
   ],
   "exports": {
     ".": {
-      "types": "./src/index.d.ts",
-      "import": "./dist/index.es.js",
-      "require": "./dist/index.umd.js"
+      "types": "./src/types/index.d.ts",
+      "import": "./dist/es/index.js",
+      "require": "./dist/umd/index.js"
     },
     "./package.json": "./package.json"
   },
