@@ -16,11 +16,6 @@ export default defineConfig({
         entryRoot: "./src",
         outputDir: ["dist/types"]
     })],
-    resolve: {
-        alias: {
-            "@": path.resolve(__dirname, "src"),
-        }
-    },
     server: {
         host: '0.0.0.0',
         port: 8082

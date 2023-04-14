@@ -1,7 +1,7 @@
 import {AxiosInstance, AxiosResponse, CreateAxiosDefaults, default as axios, InternalAxiosRequestConfig} from "axios";
 import {merge} from "@bianmaba/utils";
-import {DEFAULT_GLOBAL_OPTIONS} from "@/interface/DefaultGlobalOptions";
-import {DefaultGlobalOptions} from "@/interface/types";
+import {DEFAULT_GLOBAL_OPTIONS} from "./interface/DefaultGlobalOptions";
+import {DefaultGlobalOptions} from "./interface/types";
 
 
 export default class AbstractAxiosHelper {

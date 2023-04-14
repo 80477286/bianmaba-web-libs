@@ -2,7 +2,7 @@ import {AxiosHelper, GetExecutor, PostExecutor, HttpContentType} from '@bianmaba
 import {merge} from "@bianmaba/utils";
 
 class UserService extends AxiosHelper {
-    static instance: UserService = new UserService();
+    static userService: UserService = new UserService();
 
     public createGetById(): GetExecutor {
         merge()
@@ -28,5 +28,5 @@ class UserService extends AxiosHelper {
     }
 }
 
-export const userService = UserService.instance;
+export const userService = UserService.userService;
 

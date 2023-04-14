@@ -2,7 +2,6 @@
 import Executor from "./Executor";
 import {AxiosInstance, AxiosRequestConfig} from "axios";
 import {merge} from "@bianmaba/utils";
-import {Result} from "@/interface/types";
 
 export default class PostExecutor extends Executor {
     constructor(instance: AxiosInstance, url?: string) {
@@ -10,7 +9,7 @@ export default class PostExecutor extends Executor {
     }
 
     // @ts-ignore
-    public execute(data: any = {}, params: any = {}, options: AxiosRequestConfig<any> = {}): Promise<Result> {
+    public execute(data: any = {}, params: any = {}, options: AxiosRequestConfig<any> | any = {}): Promise<Result> {
         this.loading = true;
         this.data = merge(this.data || {}, options.data || {}, data || {});
         this.params = merge(this.params || {}, options.params || {}, params || {});

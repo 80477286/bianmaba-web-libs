@@ -6,20 +6,26 @@
     "src/**/*.vue"
   ],
   "compilerOptions": {
+    //指定输出路径
+    "outDir": "dist",
+    "noImplicitAny": false,
+    "ignoreDeprecations": "5.0",
+    "isolatedModules": true,
+    "preserveValueImports": false,
+    "importsNotUsedAsValues": "remove",
     "baseUrl": ".",
     "target": "ESNext",
     "useDefineForClassFields": true,
     "module": "ESNext",
     "moduleResolution": "Node",
     "strict": true,
-    "jsx": "preserve",
+    "jsx": "ESNext",
     "resolveJsonModule": true,
-    "isolatedModules": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "noEmit": true,
     "lib": [
-      "ESNext",
+      "ES6",
       "DOM"
     ],
     "paths": {

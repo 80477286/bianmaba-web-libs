@@ -10,7 +10,7 @@ export default class GetExecutor extends Executor {
     }
 
     // @ts-ignore
-    public execute(params: any = {}, options: AxiosRequestConfig<any> = {}): Promise<Result> {
+    public execute(params: any = {}, options: AxiosRequestConfig<any> | any = {}): Promise<Result> {
         this.loading = true;
         this.params = merge(this.params || {}, options.params || {}, params || {});
         options.params = this.params;

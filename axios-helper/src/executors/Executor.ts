@@ -16,7 +16,7 @@ export default class Executor {
         this.url = url || '';
     }
 
-    public execute(options: AxiosRequestConfig<any> = {}): Promise<Result> {
+    public execute(options: AxiosRequestConfig<any> | any = {}): Promise<Result> {
         this.loading = true;
         this.data = merge(this.data || {}, options.data || {});
         this.params = merge(this.params || {}, options.params || {});

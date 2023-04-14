@@ -12,8 +12,7 @@
     "skipLibCheck": true,
     "noEmit": true,
     "baseUrl": ".",
-    "lib": ["ES6", "DOM"],
-    "paths": {"@/*": ["src/*"]}
+    "lib": ["ES6", "DOM"]
   },
   "include": [
     "src/**/*.ts",

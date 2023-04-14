@@ -6,8 +6,8 @@ import PostExecutor from "./executors/PostExecutor";
 import {DefaultGlobalOptions} from "./interface/types";
 import {HttpContentType, HttpMethod} from "./interface/enums";
 import {reactive} from "vue";
-import {DEFAULT_GLOBAL_OPTIONS} from "@/interface/DefaultGlobalOptions";
-import GlobalOptions from "@/interface/GlobalOptions";
+import {DEFAULT_GLOBAL_OPTIONS} from "./interface/DefaultGlobalOptions";
+import GlobalOptions from "./interface/GlobalOptions";
 import {merge} from "@bianmaba/utils";
 
 export default class AxiosHelper extends AbstractAxiosHelper {
