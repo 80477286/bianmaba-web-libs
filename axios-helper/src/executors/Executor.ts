@@ -3,7 +3,6 @@ import {AxiosInstance, AxiosRequestConfig, AxiosResponse} from "axios";
 import {ExecutorType, Result} from "../interface/types";
 import {merge} from "@bianmaba/utils";
 
-
 export default class Executor {
     public instance: AxiosInstance;
     public url: string = '';

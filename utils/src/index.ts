@@ -1,4 +1,4 @@
-import * as utils from "./src/utils";
+import * as utils from "./utils";
 
 export default utils;
 export const merge = utils.merge;

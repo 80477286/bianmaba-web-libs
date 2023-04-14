@@ -8,16 +8,17 @@
   "files": [
     "./dist",
     "./src",
-    "index.ts",
     "README.md"
   ],
   "exports": {
     ".": {
-      "types": "./index.d.ts",
-      "import": "./dist/index.es.js",
-      "require": "./dist/index.umd.js"
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/es/index.js",
+      "require": "./dist/umd/index.js"
     },
-    "./package.json": "./package.json"
+    "./dist/types/utils": {
+      "types": "./dist/types/utils.d.ts"
+    }
   },
   "scripts": {
     "build": "vite build"
@@ -26,6 +27,7 @@
     "@types/node": "^18.15.11",
     "typescript": "^5.0.4",
     "vite": "^4.2.1",
-    "vite-plugin-compression": "^0.5.1"
+    "vite-plugin-compression": "^0.5.1",
+    "vite-plugin-dts": "^2.2.0"
   }
 }

@@ -1,18 +1,13 @@
 import {defineConfig} from 'vite'
 import vue from '@vitejs/plugin-vue'
 import * as path from "path";
-//接口mock服务器
-import {viteMockServe} from 'vite-plugin-mock';
 //压缩，混淆
 import vitePluginCompression from 'vite-plugin-compression';
+import dts from 'vite-plugin-dts'
 
-import AutoImport from 'unplugin-auto-import/vite'
-import Components from 'unplugin-vue-components/vite'
-import {ElementPlusResolver} from "unplugin-vue-components/resolvers"
-import {fileURLToPath, URL} from "node:url";
 // https://vitejs.dev/config/
 export default defineConfig({
-    plugins: [vitePluginCompression({
+    plugins: [vue(), dts(), vitePluginCompression({
         ext: '.gz',
         filter: /\.(js|mjs|ts|json|css|html)$/i,
         algorithm: 'gzip',
@@ -29,7 +24,7 @@ export default defineConfig({
     },
     build: {
         lib: {
-            entry: path.resolve(__dirname, './index.ts'),
+            entry: path.resolve(__dirname, './src/index.ts'),
             name: 'index',
             fileName: (format) => `index.${format}.js`
         },

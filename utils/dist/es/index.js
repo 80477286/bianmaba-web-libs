@@ -128,4 +128,4 @@ export {
   H as toFlatObject,
   k as trim
 };
-//# sourceMappingURL=index.es.js.map
+//# sourceMappingURL=index.js.map
