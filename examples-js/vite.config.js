@@ -42,5 +42,15 @@ export default defineConfig({
         alias: {
             "@": resolve(__dirname, "src"),
         }
+    },
+    build: {
+        "outDir": "dist",
+        "assetsDir": "static",
+        "assetsInlineLimit": 4096,
+        "cssCodeSplit": true,
+        "sourcemap": false,
+        "chunkSizeWarningLimit": 500,
+        "emptyOutDir": true,
+        "minify": "terser"
     }
 })
