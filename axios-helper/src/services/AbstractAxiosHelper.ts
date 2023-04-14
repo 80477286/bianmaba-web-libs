@@ -1,14 +1,14 @@
-import {AxiosResponse, CreateAxiosDefaults, default as axios, InternalAxiosRequestConfig} from "axios";
-import GlobalOptions from "./interface/GlobalOptions";
-import {utils} from "@bianmaba/utils";
+import {AxiosInstance, AxiosResponse, CreateAxiosDefaults, default as axios, InternalAxiosRequestConfig} from "axios";
+import {merge} from "@bianmaba/utils";
 import {DEFAULT_GLOBAL_OPTIONS} from "@/services/interface/DefaultGlobalOptions";
+import {DefaultGlobalOptions} from "@/services/interface/types";
 
 
 export default class AbstractAxiosHelper {
-    protected globalOptions: GlobalOptions = DEFAULT_GLOBAL_OPTIONS;
+    protected globalOptions: DefaultGlobalOptions = DEFAULT_GLOBAL_OPTIONS;
 
-    constructor(options: GlobalOptions = DEFAULT_GLOBAL_OPTIONS) {
-        this.globalOptions = utils.merge(this.globalOptions || {}, options);
+    constructor(options: DefaultGlobalOptions = DEFAULT_GLOBAL_OPTIONS) {
+        this.globalOptions = merge(this.globalOptions || {}, options);
         console.debug("初始化全局配置...")
         axios.defaults.baseURL = this.globalOptions.baseUrl;
         axios.defaults.method = this.globalOptions.method;
@@ -39,8 +39,9 @@ export default class AbstractAxiosHelper {
         return Promise.reject(error);
     }
 
-    public createAxiosInstance(options: CreateAxiosDefaults) {
+    public createAxiosInstance(options: CreateAxiosDefaults): AxiosInstance {
         let instance = axios.create(options);
+        console.log("axios instance created")
         // // 请求拦截器
         instance.interceptors.request.use(this.globalOptions.requestSuccessHandler, this.globalOptions.requestFailHandler);
         instance.interceptors.response.use(this.globalOptions.responseSuccessHandler, this.globalOptions.responseFailHandler);

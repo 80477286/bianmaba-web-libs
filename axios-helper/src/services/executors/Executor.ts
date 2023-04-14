@@ -1,53 +1,60 @@
-import {Axios, AxiosRequestConfig, AxiosResponse} from "axios";
-import {ExecutorType, Result} from "../interface/Types";
-import {utils} from "@bianmaba/utils";
+"use strict";
+import {AxiosInstance, AxiosRequestConfig, AxiosResponse} from "axios";
+import {ExecutorType, Result} from "../interface/types";
+import {merge} from "@bianmaba/utils";
 
 
 export default class Executor {
-    public instance: Axios;
+    public instance: AxiosInstance;
     public url: string = '';
     public loading: boolean = false;
     public response: Result = {success: false};
     public data: any = {}
     public params: any = {}
 
-    constructor(instance: Axios, url?: string) {
+    constructor(instance: AxiosInstance, url?: string) {
         this.instance = instance;
         this.url = url || '';
     }
 
     public execute(options: AxiosRequestConfig<any> = {}): Promise<Result> {
         this.loading = true;
-        this.data = utils.merge(this.data || {}, options.data || {});
-        this.params = utils.merge(this.params || {}, options.params || {});
+        this.data = merge(this.data || {}, options.data || {});
+        this.params = merge(this.params || {}, options.params || {});
         options.url = options.url ? options.url : this.url;
         return new Promise((resolve, reject) => {
-            this.instance.request(options).then((resp) => {
-                this.handleThenResponse(resolve, resp);
+            this.instance.request(options).then((resp: AxiosResponse<any>) => {
+                try {
+                    this.handleThenResponse(resolve, resp);
+                } finally {
+                    this.loading = false;
+                }
             }).catch((e) => {
-                this.handleCatchResponse(reject, e);
-            }).finally(() => {
-                this.loading = false;
+                try {
+                    this.handleCatchResponse(reject, e);
+                } finally {
+                    this.loading = false;
+                }
             });
         })
     }
 
     public setDefaultResponse(defaultResponse: any = {}): ExecutorType {
-        this.response = utils.merge(this.response, defaultResponse);
+        this.response = merge(this.response, defaultResponse);
         return this;
     }
 
     public setDefaultRequestData(defaultRequestData: any = {}): ExecutorType {
-        this.data = utils.merge(this.data, defaultRequestData);
+        this.data = merge(this.data, defaultRequestData);
         return this;
     }
 
     public setDefaultResultParams(defaultResultParams: any = {}): ExecutorType {
-        this.params = utils.merge(this.params, defaultResultParams);
+        this.params = merge(this.params, defaultResultParams);
         return this;
     }
 
-    public handleThenResponse(resolve: (value: any) => void, resp: AxiosResponse<any>) {
+    public handleThenResponse(resolve: (value: any) => void, resp: AxiosResponse<any> | any) {
         this.response = resp.data;
         resolve(resp.data)
     }

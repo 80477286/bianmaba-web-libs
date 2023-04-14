@@ -1,5 +1,6 @@
 import {AxiosHelper, GetExecutor, PostExecutor, HttpContentType} from '@bianmaba/axios-helper'
 
+
 // @ts-ignore
 class UserService extends AxiosHelper {
     static instance: UserService = new UserService();

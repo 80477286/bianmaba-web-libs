@@ -443,35 +443,3 @@ export const merge = function (...args: any[]): any {
     }
     return result;
 }
-const utils = {
-    merge,
-    delay,
-    isTypedArray,
-    toArray,
-    endsWith,
-    toFlatObject,
-    inherits,
-    stripBOM,
-    extend,
-    forEach,
-    isStandardBrowserEnv,
-    trim,
-    isURLSearchParams,
-    isFormData,
-    isStream,
-    isFunction,
-    isFileList,
-    isBlob,
-    isFile,
-    isDate,
-    isPlainObject,
-    isObject,
-    isNumber,
-    isString,
-    isArrayBufferView,
-    isArrayBuffer,
-    isBuffer,
-    isUndefined,
-    isArray
-}
-export default utils;

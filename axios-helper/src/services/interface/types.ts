@@ -5,8 +5,8 @@ import Executor from "../executors/Executor";
 import GetExecutor from "../executors/GetExecutor";
 import PostExecutor from "../executors/PostExecutor";
 
-export type Result = QueryResult | OperationResult | any | null;
+export type Result = (QueryResult | OperationResult | any | null);
 
 export type DefaultGlobalOptions = GlobalOptions | any
 
-export type ExecutorType = Executor | GetExecutor | PostExecutor | any
+export type ExecutorType = (Executor | GetExecutor | PostExecutor | any)

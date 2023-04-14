@@ -1,7 +1,7 @@
 import {defineConfig} from 'vite'
 import * as path from "path";
 import vitePluginCompression from "vite-plugin-compression";
-// https://vitejs.dev/config/
+
 export default defineConfig({
     plugins: [vitePluginCompression({
         ext: '.gz',
@@ -10,9 +10,10 @@ export default defineConfig({
         threshold: 5120
     })],
     build: {
+        sourcemap: true,
         lib: {
             entry: path.resolve(__dirname, './index.ts'),
-            name: 'index',
+            name: 'utils',
             fileName: (format) => `index.${format}.js`
         },
         rollupOptions: {
