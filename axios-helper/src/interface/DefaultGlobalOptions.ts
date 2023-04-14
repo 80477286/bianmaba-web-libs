@@ -1,5 +1,5 @@
-import {DefaultGlobalOptions} from "@/interface/Types";
-import {HttpContentType, HttpMethod} from "@/interface/Enums";
+import {DefaultGlobalOptions} from "@/interface/types";
+import {HttpContentType, HttpMethod} from "@/interface/enums";
 
 export const DEFAULT_GLOBAL_OPTIONS: DefaultGlobalOptions = {
     method: HttpMethod.POST,

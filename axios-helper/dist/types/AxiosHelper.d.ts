@@ -3,7 +3,7 @@ import { CreateAxiosDefaults } from "axios";
 import Executor from "./executors/Executor";
 import GetExecutor from "./executors/GetExecutor";
 import PostExecutor from "./executors/PostExecutor";
-import { DefaultGlobalOptions } from "./interface/Types";
+import { DefaultGlobalOptions } from "./interface/types";
 import GlobalOptions from './interface/GlobalOptions';
 export default class AxiosHelper extends AbstractAxiosHelper {
     private static instance;
