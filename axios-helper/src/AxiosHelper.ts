@@ -10,7 +10,6 @@ import {DEFAULT_GLOBAL_OPTIONS} from "@/interface/DefaultGlobalOptions";
 import GlobalOptions from "@/interface/GlobalOptions";
 import {merge} from "@bianmaba/utils";
 
-
 export default class AxiosHelper extends AbstractAxiosHelper {
     private static instance: AxiosHelper | any;
 
