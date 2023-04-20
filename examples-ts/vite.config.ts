@@ -46,13 +46,27 @@ export default defineConfig({
         }
     },
     build: {
-        "outDir": "dist",
-        "assetsDir": "static",
-        "assetsInlineLimit": 4096,
-        "cssCodeSplit": true,
-        "sourcemap": false,
-        "chunkSizeWarningLimit": 500,
-        "emptyOutDir": true,
-        "minify": "terser"
+        outDir: "dist",
+        assetsDir: "static",
+        assetsInlineLimit: 4096,
+        cssCodeSplit: true,
+        sourcemap: false,
+        chunkSizeWarningLimit: 500,
+        emptyOutDir: true,
+        minify: "terser",
+        rollupOptions: {
+            output: {
+                manualChunks(id) {
+                    if (id.includes('node_modules')) {
+                        return id.toString().split("node_modules/")[1].split('/')[0].toString();
+                    }
+                },
+                chunkFileNames: (chunkInfo) => {
+                    const facadeModuleId = chunkInfo.facadeModuleId ? chunkInfo.facadeModuleId.split('/') : [];
+                    const fileName = facadeModuleId[facadeModuleId.length - 2] || '[name]';
+                    return `js/${fileName}/[name].[hash].js`;
+                }
+            }
+        }
     }
 })
