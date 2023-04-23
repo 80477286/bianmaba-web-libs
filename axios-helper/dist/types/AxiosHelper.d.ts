@@ -4,7 +4,7 @@ import Executor from "./executors/Executor";
 import GetExecutor from "./executors/GetExecutor";
 import PostExecutor from "./executors/PostExecutor";
 import { DefaultGlobalOptions } from "./interface/types";
-import GlobalOptions from './interface/GlobalOptions';
+import GlobalOptions from "./interface/GlobalOptions";
 export default class AxiosHelper extends AbstractAxiosHelper {
     private static instance;
     protected constructor(options?: DefaultGlobalOptions);

@@ -1,5 +1,5 @@
 import { AxiosInstance, CreateAxiosDefaults } from "axios";
-import { DefaultGlobalOptions } from './interface/types';
+import { DefaultGlobalOptions } from "./interface/types";
 export default class AbstractAxiosHelper {
     protected globalOptions: DefaultGlobalOptions;
     constructor(options?: DefaultGlobalOptions);

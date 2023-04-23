@@ -8,7 +8,7 @@ export default class Executor {
     data: any;
     params: any;
     constructor(instance: AxiosInstance, url?: string);
-    execute(options?: AxiosRequestConfig<any>): Promise<Result>;
+    execute(options?: AxiosRequestConfig<any> | any): Promise<Result>;
     setDefaultResponse(defaultResponse?: any): ExecutorType;
     setDefaultRequestData(defaultRequestData?: any): ExecutorType;
     setDefaultResultParams(defaultResultParams?: any): ExecutorType;
