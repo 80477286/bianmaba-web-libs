@@ -1,14 +1,12 @@
 {
   "name": "@bianmaba/axios-helper",
-  "version": "0.0.9",
+  "version": "0.1.0",
   "main": "./dist/index.umd.js",
   "module": "./dist/index.es.js",
   "types": "./src/index.ts",
   "type": "module",
   "files": [
     "./dist",
-    "./src",
-    "index.ts",
     "README.md"
   ],
   "exports": {
