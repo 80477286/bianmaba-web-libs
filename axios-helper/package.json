@@ -1,6 +1,6 @@
 {
   "name": "@bianmaba/axios-helper",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "main": "./dist/index.umd.js",
   "module": "./dist/index.es.js",
   "types": "./src/index.ts",
@@ -19,6 +19,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "release": "npm publish --access=public",
     "preview": "vite preview"
   },
   "dependencies": {
