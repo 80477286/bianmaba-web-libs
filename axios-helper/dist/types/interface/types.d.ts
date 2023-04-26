@@ -1,6 +1,6 @@
-import QueryResult from "./QueryResult";
-import OperationResult from "./OperationResult";
-import GlobalOptions from "./GlobalOptions";
+import { QueryResult } from "./QueryResult";
+import { OperationResult } from "./OperationResult";
+import { GlobalOptions } from "./GlobalOptions";
 import Executor from "../executors/Executor";
 import GetExecutor from "../executors/GetExecutor";
 import PostExecutor from "../executors/PostExecutor";

@@ -1,5 +1,5 @@
 import { AxiosResponse, InternalAxiosRequestConfig, Method } from "axios";
-export default interface GlobalOptions {
+export interface GlobalOptions {
     baseUrl?: string;
     method?: Method;
     headers: any;

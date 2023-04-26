@@ -1,6 +1,9 @@
 import {AxiosResponse, InternalAxiosRequestConfig, Method} from "axios";
+import {HttpContentType, HttpMethod} from "../executors/request/Request";
 
-export default interface GlobalOptions {
+export type GlobalOptions = IGlobalOptions | any;
+
+export interface IGlobalOptions {
     baseUrl?: string,
     method?: Method,
     headers: any,
@@ -10,3 +13,13 @@ export default interface GlobalOptions {
     responseSuccessHandler?: ((value: AxiosResponse<any, any>) => (AxiosResponse<any, any> | Promise<AxiosResponse<any, any>>)) | null | undefined,
     responseFailHandler?: ((error: any) => any) | null
 }
+
+class DefaultGlobalOptions implements IGlobalOptions {
+    method = HttpMethod.POST
+    headers = {'Content-Type': HttpContentType["application/json"]}
+    xRequestedWith = 'XMLHttpRequest'
+}
+
+const defaultGlobalOptions = new DefaultGlobalOptions();
+
+export default defaultGlobalOptions

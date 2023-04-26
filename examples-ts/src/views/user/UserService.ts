@@ -1,30 +1,22 @@
-import {AxiosHelper, GetExecutor, PostExecutor, HttpContentType} from '@bianmaba/axios-helper'
+import {HttpClient, GetExecutor, PostExecutor, HttpContentType} from '@bianmaba/axios-helper'
 import {merge} from "@bianmaba/utils";
 
-class UserService extends AxiosHelper {
+class UserService extends HttpClient {
     static userService: UserService = new UserService();
 
     public createGetById(): GetExecutor {
         merge()
-        return this.createGetExecutor('/user/getById').setDefaultResponse({data: {}})
+        return this.createGetExecutor('/user/getById');
     }
 
     public createQuery(): PostExecutor {
-        return this.createPostExecutor('/user/query', {
-            headers: {'Content-Type': HttpContentType["application/json"]}
-        })
-            .setDefaultRequestData({
-                size: 10,
-                page: 1,
-                pageOffset: -1
-            });
+        return this.createPostExecutor('/user/query').toAjaxRequest();
     }
 
     public createSave(): PostExecutor {
         return this.createPostExecutor('/user/save', {
             headers: {'Content-Type': HttpContentType["application/json"]}
-        })
-            .setDefaultRequestData({size: 10, page: 1, pageOffset: -1});
+        });
     }
 }
 

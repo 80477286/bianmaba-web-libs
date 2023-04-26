@@ -1,7 +1,7 @@
-import {AxiosHelper, HttpContentType} from '@bianmaba/axios-helper'
+import {HttpClient, HttpContentType} from '@bianmaba/axios-helper'
 
 // @ts-ignore
-class UserService extends AxiosHelper {
+class UserService extends HttpClient {
     static instance = new UserService();
 
     createGetById() {

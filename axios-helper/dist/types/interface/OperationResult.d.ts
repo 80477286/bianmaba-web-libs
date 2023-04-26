@@ -1,4 +1,4 @@
-export default interface OperationResult {
+export interface OperationResult {
     success: boolean;
     result?: string;
     data?: Array<any> | Object;
