@@ -20,6 +20,8 @@ export interface IPageableQueryRequestData extends IQueryRequestData {
 }
 
 export class DefaultQueryRequestData implements IQueryRequestData {
+    order = new Order("id", 'asc')
+    queryProperties = ['id']
 }
 
 export class DefaultPageableQueryRequestData extends DefaultQueryRequestData implements IPageableQueryRequestData {

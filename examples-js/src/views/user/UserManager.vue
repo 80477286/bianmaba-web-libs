@@ -59,7 +59,7 @@ const onRowDblClickHandler = (row) => {
   userEditorRef.value.edit(row.id)
 }
 const exeQuery = () => {
-  query.execute({a: 1}, {b: 2}).then((resp) => {
+  query.execute().then((resp) => {
     console.log(resp)
   })
 }

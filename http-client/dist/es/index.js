@@ -3,15 +3,15 @@ var F = (s, e, t) => e in s ? A(s, e, { enumerable: !0, configurable: !0, writab
 var r = (s, e, t) => (F(s, typeof e != "symbol" ? e + "" : e, t), t);
 import c from "axios";
 import { reactive as p } from "vue";
-const L = Object.prototype.toString, T = ((s) => (e) => {
+const L = Object.prototype.toString, b = ((s) => (e) => {
   let t = L.call(e);
   return s[t] || (s[t] = t.slice(8, -1).toLowerCase());
 })(/* @__PURE__ */ Object.create(null)), h = (s) => (s = s.toLowerCase(), function(e) {
-  return T(e) === s;
-}), b = (s) => Array.isArray(s);
+  return b(e) === s;
+}), k = (s) => Array.isArray(s);
 h("ArrayBuffer");
 const y = (s) => {
-  if (T(s) !== "object")
+  if (b(s) !== "object")
     return !1;
   let e = Object.getPrototypeOf(s);
   return e === null || e === Object.prototype;
@@ -23,7 +23,7 @@ h("FileList");
 h("URLSearchParams");
 const G = (s, e) => {
   if (!(s === null || typeof s > "u"))
-    if (typeof s != "object" && (s = [s]), b(s))
+    if (typeof s != "object" && (s = [s]), k(s))
       for (let t = 0, a = s.length; t < a; t++)
         e.call(null, s[t], t, s);
     else
@@ -31,15 +31,19 @@ const G = (s, e) => {
         Object.prototype.hasOwnProperty.call(s, t) && e.call(null, s[t], t, s);
 }, R = function(...s) {
   let e = arguments[0], t = (a, l) => {
-    y(e[l]) && y(a) ? e[l] = R(e[l], a) : y(a) ? e[l] = R({}, a) : b(a) ? e[l] = a.slice() : e[l] = a;
+    y(e[l]) && y(a) ? e[l] = R(e[l], a) : y(a) ? e[l] = R({}, a) : k(a) ? e[l] = a.slice() : e[l] = a;
   };
   for (let a = 0, l = arguments.length; a < l; a++)
     G(arguments[a], t);
   return e;
 }, u = R;
-class k {
+class I {
+  constructor() {
+    r(this, "order", new P("id", "asc"));
+    r(this, "queryProperties", ["id"]);
+  }
 }
-class U extends k {
+class U extends I {
   constructor(t = 1, a = 10, l = -1) {
     super();
     r(this, "size", 10);
@@ -57,7 +61,7 @@ class U extends k {
     this.pageOffset = t;
   }
 }
-class I {
+class S {
   constructor(e, t, a) {
     r(this, "property", null);
     r(this, "joinType", null);
@@ -65,17 +69,17 @@ class I {
     this.property = e || this.property, this.joinType = t || this.joinType, this.on = a || this.on;
   }
   of(e, t, a) {
-    return new I(e, t, a);
+    return new S(e, t, a);
   }
 }
-class S {
+class P {
   constructor(e, t) {
     r(this, "property", null);
     r(this, "direction", "asc");
     this.property = e, this.direction = t;
   }
   of(e, t = "asc") {
-    return new S(e, t);
+    return new P(e, t);
   }
 }
 class X {
@@ -145,7 +149,7 @@ class z extends f {
     r(this, "total", 0);
   }
 }
-class P {
+class D {
   constructor(e, t) {
     r(this, "instance");
     r(this, "url", "");
@@ -212,7 +216,7 @@ class P {
     }
   }
 }
-class K extends P {
+class K extends D {
   constructor(e, t) {
     super(e, t);
   }
@@ -234,7 +238,7 @@ class K extends P {
     });
   }
 }
-class j extends P {
+class j extends D {
   constructor(e, t) {
     super(e, t);
   }
@@ -261,7 +265,7 @@ class q extends j {
     super(e, t), this.setDefaultResponse(new f());
   }
 }
-const D = class extends m {
+const T = class extends m {
   constructor(e = g) {
     super(e);
   }
@@ -271,7 +275,7 @@ const D = class extends m {
    */
   createRequestExecutor(e = "", t = {}) {
     let a = this.createAxiosInstance(t);
-    return p(new P(a, e));
+    return p(new D(a, e));
   }
   /**
    *
@@ -297,7 +301,7 @@ const D = class extends m {
       params: null,
       headers: { "Content-Type": i["application/x-www-form-urlencoded"] }
     }, t), l = this.createAxiosInstance(a);
-    return p(new q(l, e).setDefaultResponse({ data: [] }).setDefaultRequestData(new k()));
+    return p(new q(l, e).setDefaultResponse({ data: [] }).setDefaultRequestData(new I()));
   }
   /**
    *
@@ -330,10 +334,10 @@ const D = class extends m {
    * @param options
    */
   static getInstance(e) {
-    return this.instance ? e && console.error("实例已经存在，重获取实例时，配置选项将不会生效！") : this.instance = new D(e), this.instance;
+    return this.instance ? e && console.error("实例已经存在，重获取实例时，配置选项将不会生效！") : this.instance = new T(e), this.instance;
   }
 };
-let w = D;
+let w = T;
 r(w, "instance");
 class E extends q {
   constructor(e, t) {
@@ -345,17 +349,17 @@ export {
   X as Condition,
   U as DefaultPageableQueryRequestData,
   z as DefaultPageableQueryResponse,
-  k as DefaultQueryRequestData,
+  I as DefaultQueryRequestData,
   f as DefaultResponse,
   N as EConditionOpt,
   v as EOrderDirection,
-  P as Executor,
+  D as Executor,
   K as GetExecutor,
   w as HttpClient,
   i as HttpContentType,
   o as HttpMethod,
-  I as Join,
-  S as Order,
+  S as Join,
+  P as Order,
   E as PageableQueryExecutor,
   j as PostExecutor,
   q as QueryExecutor

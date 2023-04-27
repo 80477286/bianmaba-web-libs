@@ -12,7 +12,6 @@ class UserService extends HttpClient {
 
     public createQuery(): PostExecutor {
         return this.createQueryExecutor('/user/query').toAjaxRequest().setDefaultRequestData({
-            d: 4,
             order: new Order('name', 'asc')
         });
     }

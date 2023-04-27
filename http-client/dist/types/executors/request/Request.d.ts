@@ -17,6 +17,8 @@ export interface IPageableQueryRequestData extends IQueryRequestData {
     pageOffset?: number;
 }
 export declare class DefaultQueryRequestData implements IQueryRequestData {
+    order: Order;
+    queryProperties: string[];
 }
 export declare class DefaultPageableQueryRequestData extends DefaultQueryRequestData implements IPageableQueryRequestData {
     size: number;
