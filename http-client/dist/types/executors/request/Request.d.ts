@@ -1,28 +1,24 @@
-export type RequestData = (QueryRequestData | PageableQueryRequestData | any);
+export type RequestData = (DefaultQueryRequestData | DefaultPageableQueryRequestData | any);
 export type RequestParams = any;
-export declare class QueryRequestData {
-    query: string | any;
-    order: Order | any;
-    condition: Condition | any;
-    sorts: Array<Order> | any;
-    queryProperties: Array<string> | any;
-    idProperty: string | any;
-    excludeIds: Array<string> | any;
-    joins: Array<Join> | Array<any>;
-    fetches: Array<Join> | Array<any>;
-    setQuery(query: string): this;
-    setOrder(order: Order): this;
-    setCondition(condition: Condition): this;
-    setSorts(sorts: Array<Order>): this;
-    setQueryProperties(queryProperties: Array<string>): this;
-    setIdProperty(idProperty: string): this;
-    setExcludeIds(ids: Array<string>): this;
-    setFetches(fetches: Array<Join>): this;
-    setJoins(joins: Array<Join>): this;
-    addFetch(property: string | Join, joinType?: string, on?: Array<Condition>): number;
-    addJoin(property: string | Join, joinType: string, on: Array<Condition>): number;
+export interface IQueryRequestData {
+    query?: string | null;
+    idProperty?: string | null;
+    order?: Order;
+    condition?: Condition;
+    sorts?: Array<Order>;
+    queryProperties?: Array<string>;
+    excludeIds?: Array<string>;
+    joins?: Array<Join> | Array<any>;
+    fetches?: Array<Join> | Array<any>;
 }
-export declare class PageableQueryRequestData extends QueryRequestData {
+export interface IPageableQueryRequestData extends IQueryRequestData {
+    size: number;
+    page: number;
+    pageOffset?: number;
+}
+export declare class DefaultQueryRequestData implements IQueryRequestData {
+}
+export declare class DefaultPageableQueryRequestData extends DefaultQueryRequestData implements IPageableQueryRequestData {
     size: number;
     page: number;
     pageOffset: number;
@@ -39,14 +35,14 @@ export declare class Join {
     of(property: string, joinType: string, on: Array<Condition>): Join;
 }
 export declare class Order {
-    property: string | null;
-    direction: OrderDirection;
-    constructor(property: string, direction: OrderDirection);
+    property?: string | null;
+    direction?: OrderDirection;
+    constructor(property?: string, direction?: OrderDirection);
     of(property: string, direction?: OrderDirection): Order;
 }
 export declare class Condition {
-    property: string | null;
-    value: number | boolean | string | null | '' | Array<number | boolean | string>;
+    property?: string | null;
+    value?: number | boolean | string | null | '' | Array<number | boolean | string>;
     opt: ConditionOpt;
     and: Array<Condition>;
     or: Array<Condition>;

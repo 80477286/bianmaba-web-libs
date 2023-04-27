@@ -1,80 +1,28 @@
-export type RequestData = (QueryRequestData | PageableQueryRequestData | any);
+export type RequestData = (DefaultQueryRequestData | DefaultPageableQueryRequestData | any);
 export type RequestParams = any;
 
-export class QueryRequestData {
-    query: string | any = null
-    order: Order | any = null
-    condition: Condition | any = {any: [], or: []}
-    sorts: Array<Order> | any = []
-    queryProperties: Array<string> | any = []
-    idProperty: string | any = null
-    excludeIds: Array<string> | any = []
-    joins: Array<Join> | Array<any> = []
-    fetches: Array<Join> | Array<any> = []
-
-    setQuery(query: string) {
-        this.query = query;
-        return this;
-    }
-
-    setOrder(order: Order) {
-        this.order = order;
-        return this;
-    }
-
-    setCondition(condition: Condition) {
-        this.condition = condition;
-        return this;
-    }
-
-    setSorts(sorts: Array<Order>) {
-        this.sorts = sorts;
-        return this;
-    }
-
-    setQueryProperties(queryProperties: Array<string>) {
-        this.queryProperties = queryProperties;
-        return this;
-    }
-
-    setIdProperty(idProperty: string) {
-        this.idProperty = idProperty;
-        return this;
-    }
-
-    setExcludeIds(ids: Array<string>) {
-        this.excludeIds = ids;
-        return this;
-    }
-
-    setFetches(fetches: Array<Join>) {
-        this.fetches = fetches;
-        return this;
-    }
-
-    setJoins(joins: Array<Join>) {
-        this.joins = joins;
-        return this;
-    }
-
-    addFetch(property: string | Join, joinType?: string, on?: Array<Condition>) {
-        if (property instanceof Join) {
-            return this.fetches.push(property);
-        } else {
-            return this.fetches.push(new Join(property, joinType, on));
-        }
-    }
-
-    addJoin(property: string | Join, joinType: string, on: Array<Condition>) {
-        if (property instanceof Join) {
-            return this.joins.push(property);
-        } else {
-            return this.joins.push(new Join(property, joinType, on));
-        }
-    }
+export interface IQueryRequestData {
+    query?: string | null
+    idProperty?: string | null
+    order?: Order
+    condition?: Condition
+    sorts?: Array<Order>
+    queryProperties?: Array<string>
+    excludeIds?: Array<string>
+    joins?: Array<Join> | Array<any>
+    fetches?: Array<Join> | Array<any>
 }
 
-export class PageableQueryRequestData extends QueryRequestData {
+export interface IPageableQueryRequestData extends IQueryRequestData {
+    size: number
+    page: number
+    pageOffset?: number
+}
+
+export class DefaultQueryRequestData implements IQueryRequestData {
+}
+
+export class DefaultPageableQueryRequestData extends DefaultQueryRequestData implements IPageableQueryRequestData {
     size: number = 10
     page: number = 1
     pageOffset: number = -1
@@ -117,10 +65,10 @@ export class Join {
 
 
 export class Order {
-    property: string | null = null
-    direction: OrderDirection = 'asc'
+    property?: string | null = null
+    direction?: OrderDirection = 'asc'
 
-    constructor(property: string, direction: OrderDirection) {
+    constructor(property?: string, direction?: OrderDirection) {
         this.property = property
         this.direction = direction;
     }
@@ -132,8 +80,8 @@ export class Order {
 
 
 export class Condition {
-    property: string | null = null
-    value: number | boolean | string | null | '' | Array<number | boolean | string> = null
+    property?: string | null = null
+    value?: number | boolean | string | null | '' | Array<number | boolean | string> = null
     opt: ConditionOpt = 'eq'
     and: Array<Condition> = []
     or: Array<Condition> = []

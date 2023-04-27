@@ -7,7 +7,12 @@ import PostExecutor from "../executors/PostExecutor";
 import {reactive} from "vue";
 import defaultGlobalOptions, {GlobalOptions} from "../config/GlobalOptions";
 import {merge} from "@bianmaba/utils";
-import {HttpContentType, HttpMethod, PageableQueryRequestData, QueryRequestData} from "../executors/request/Request";
+import {
+    HttpContentType,
+    HttpMethod,
+    DefaultPageableQueryRequestData,
+    DefaultQueryRequestData
+} from "../executors/request/Request";
 import QueryExecutor from "../executors/QueryExecutor";
 
 export default class HttpClient extends AbstractHttpClient {
@@ -53,7 +58,7 @@ export default class HttpClient extends AbstractHttpClient {
             headers: {'Content-Type': HttpContentType["application/x-www-form-urlencoded"]}
         }, options);
         let axiosInstance = this.createAxiosInstance(_options);
-        return reactive(new QueryExecutor(axiosInstance, url).setDefaultResponse({data: []}).setDefaultRequestData(new QueryRequestData()));
+        return reactive(new QueryExecutor(axiosInstance, url).setDefaultResponse({data: []}).setDefaultRequestData(new DefaultQueryRequestData()));
     }
 
     /**
@@ -68,7 +73,7 @@ export default class HttpClient extends AbstractHttpClient {
             headers: {'Content-Type': HttpContentType["application/x-www-form-urlencoded"]}
         }, options);
         let axiosInstance = this.createAxiosInstance(_options);
-        return reactive(new QueryExecutor(axiosInstance, url).setDefaultResponse({data: []}).setDefaultRequestData(new PageableQueryRequestData()));
+        return reactive(new QueryExecutor(axiosInstance, url).setDefaultResponse({data: []}).setDefaultRequestData(new DefaultPageableQueryRequestData()));
     }
 
     /**

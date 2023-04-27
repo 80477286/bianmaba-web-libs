@@ -6,8 +6,8 @@ import PostExecutor from "./executors/PostExecutor";
 import QueryExecutor from "./executors/QueryExecutor";
 import PageableQueryExecutor from "./executors/PageableQueryExecutor";
 import {
-    QueryRequestData,
-    PageableQueryRequestData,
+    DefaultQueryRequestData,
+    DefaultPageableQueryRequestData,
 
     Order, Join,
     Condition,
@@ -26,8 +26,8 @@ export {AbstractHttpClient, HttpClient}
 export {Executor, GetExecutor, PostExecutor, QueryExecutor, PageableQueryExecutor}
 export {DefaultResponse, DefaultPageableQueryResponse}
 export {
-    QueryRequestData,
-    PageableQueryRequestData,
+    DefaultQueryRequestData,
+    DefaultPageableQueryRequestData,
     Order,
     Join,
     Condition,
