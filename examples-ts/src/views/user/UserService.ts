@@ -1,15 +1,20 @@
-import {HttpClient, GetExecutor, PostExecutor, HttpContentType, DefaultResponse} from '@bianmaba/http-client'
+import {HttpClient, GetExecutor, PostExecutor, HttpContentType, DefaultResponse, Order} from '@bianmaba/http-client'
 
 class UserService extends HttpClient {
     static userService: UserService = new UserService();
 
     public createGetById(): GetExecutor {
-        let executor = this.createGetExecutor('/user/getById').setDefaultResponse({data: {}});
+        let executor = this.createGetExecutor('/user/getById').setDefaultResponse({
+            data: {}
+        });
         return executor;
     }
 
     public createQuery(): PostExecutor {
-        return this.createQueryExecutor('/user/query').toAjaxRequest();
+        return this.createQueryExecutor('/user/query').toAjaxRequest().setDefaultRequestData({
+            d: 4,
+            order: new Order('name', 'asc')
+        });
     }
 
     public createSave(): PostExecutor {

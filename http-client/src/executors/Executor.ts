@@ -2,7 +2,7 @@
 import {AxiosInstance, AxiosRequestConfig, AxiosResponse} from "axios";
 import {merge} from "@bianmaba/utils";
 import {HttpContentType, RequestData, RequestParams} from "./request/Request";
-import {DefaultPageableQueryResponse, DefaultResponse, Response} from "./response/Response";
+import {DefaultResponse, Response} from "./response/Response";
 import GetExecutor from "./GetExecutor";
 import PostExecutor from "./PostExecutor";
 
@@ -75,12 +75,12 @@ export default class Executor {
     }
 
     public setDefaultRequestData(defaultRequestData: RequestData = {}): ExecutorType {
-        this.data = defaultRequestData;
+        this.data = merge(this.data, defaultRequestData);
         return this;
     }
 
     public setDefaultResultParams(defaultResultParams: RequestParams = {}): ExecutorType {
-        this.params = defaultResultParams;
+        this.params = merge(this.params, defaultResultParams);
         return this;
     }
 

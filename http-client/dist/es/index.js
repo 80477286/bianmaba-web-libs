@@ -195,10 +195,10 @@ class P {
     return this.response = e, this.defaultResponse = u(this.response, {}), this;
   }
   setDefaultRequestData(e = {}) {
-    return this.data = e, this;
+    return this.data = u(this.data, e), this;
   }
   setDefaultResultParams(e = {}) {
-    return this.params = e, this;
+    return this.params = u(this.params, e), this;
   }
   handleThenResponse(e, t) {
     this.response = t.data, e(t.data);
