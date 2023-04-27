@@ -2,15 +2,15 @@ export type RequestData = (QueryRequestData | PageableQueryRequestData | any);
 export type RequestParams = any;
 
 export class QueryRequestData {
-    query: string | null = null
-    order: Order | null = null
-    condition: Condition | null = null
-    sorts: Array<Order> | null = null
-    queryProperties: Array<string> | null = null
-    idProperty: string | null = null
-    excludeIds: Array<string> | null = null
-    joins: Array<Join> = []
-    fetches: Array<Join> = []
+    query: string | any = null
+    order: Order | any = null
+    condition: Condition | any = {any: [], or: []}
+    sorts: Array<Order> | any = []
+    queryProperties: Array<string> | any = []
+    idProperty: string | any = null
+    excludeIds: Array<string> | any = []
+    joins: Array<Join> | Array<any> = []
+    fetches: Array<Join> | Array<any> = []
 
     setQuery(query: string) {
         this.query = query;
@@ -75,16 +75,16 @@ export class QueryRequestData {
 }
 
 export class PageableQueryRequestData extends QueryRequestData {
+    size: number = 10
+    page: number = 1
+    pageOffset: number = -1
+
     constructor(page: number = 1, size: number = 10, pageOffset: number = -1) {
         super();
         this.page = page;
         this.size = size;
         this.pageOffset = pageOffset;
     }
-
-    size: number = 10
-    page: number = 1
-    pageOffset: number = -1
 
     setSize(size: number) {
         this.size = size;

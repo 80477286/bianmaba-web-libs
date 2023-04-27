@@ -12,8 +12,8 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
-    "@bianmaba/axios-helper": "file:../axios-helper",
     "@bianmaba/utils": "file:../utils",
+    "@bianmaba/http-client": "file:../http-client",
     "axios": "^1.3.5",
     "element-plus": "^2.3.3",
     "pinia": "^2.0.34",
@@ -21,9 +21,9 @@
     "vue-router": "^4.1.6"
   },
   "devDependencies": {
-    "@vitejs/plugin-legacy": "^4.0.2",
     "@rushstack/eslint-patch": "^1.2.0",
     "@types/node": "^18.15.11",
+    "@vitejs/plugin-legacy": "^4.0.2",
     "@vitejs/plugin-vue": "^4.1.0",
     "@vue/eslint-config-prettier": "^7.1.0",
     "@vue/eslint-config-typescript": "^11.0.2",

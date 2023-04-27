@@ -1,16 +1,15 @@
-import {HttpClient, GetExecutor, PostExecutor, HttpContentType} from '@bianmaba/axios-helper'
-import {merge} from "@bianmaba/utils";
+import {HttpClient, GetExecutor, PostExecutor, HttpContentType, DefaultResponse} from '@bianmaba/http-client'
 
 class UserService extends HttpClient {
     static userService: UserService = new UserService();
 
     public createGetById(): GetExecutor {
-        merge()
-        return this.createGetExecutor('/user/getById');
+        let executor = this.createGetExecutor('/user/getById').setDefaultResponse({data: {}});
+        return executor;
     }
 
     public createQuery(): PostExecutor {
-        return this.createPostExecutor('/user/query').toAjaxRequest();
+        return this.createQueryExecutor('/user/query').toAjaxRequest();
     }
 
     public createSave(): PostExecutor {

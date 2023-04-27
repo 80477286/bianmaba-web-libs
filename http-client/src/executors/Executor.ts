@@ -2,7 +2,7 @@
 import {AxiosInstance, AxiosRequestConfig, AxiosResponse} from "axios";
 import {merge} from "@bianmaba/utils";
 import {HttpContentType, RequestData, RequestParams} from "./request/Request";
-import {DefaultResponse, Response} from "./response/Response";
+import {DefaultPageableQueryResponse, DefaultResponse, Response} from "./response/Response";
 import GetExecutor from "./GetExecutor";
 import PostExecutor from "./PostExecutor";
 
@@ -15,6 +15,7 @@ export default class Executor {
     public response: Response = new DefaultResponse();
     public data: RequestData = {}
     public params: RequestParams = {}
+    public defaultResponse: Response = new DefaultResponse();
 
     constructor(instance: AxiosInstance, url?: string) {
         this.instance = instance;
@@ -22,11 +23,11 @@ export default class Executor {
     }
 
     public execute(options: AxiosRequestConfig<any> | any = {}): Promise<Response> {
-        this.loading = true;
-        this.data = merge(this.data || {}, options.data || {});
-        this.params = merge(this.params || {}, options.params || {});
-        options.url = options.url ? options.url : this.url;
         return new Promise((resolve, reject) => {
+            this.loading = true;
+            this.data = merge(this.data || {}, options.data || {});
+            this.params = merge(this.params || {}, options.params || {});
+            options.url = options.url ? options.url : this.url;
             this.instance.request(options).then((resp: AxiosResponse<any>) => {
                 try {
                     this.handleThenResponse(resolve, resp);
@@ -67,22 +68,24 @@ export default class Executor {
         return this;
     }
 
-    public setDefaultResponse(defaultResponse: any = {}): ExecutorType {
-        this.response = merge(this.response, defaultResponse);
+    public setDefaultResponse(defaultResponse: Response = new DefaultResponse()): ExecutorType {
+        this.response = defaultResponse;
+        this.defaultResponse = merge(this.response, {});
         return this;
     }
 
-    public setDefaultRequestData(defaultRequestData: any = {}): ExecutorType {
-        this.data = merge(this.data, defaultRequestData);
+    public setDefaultRequestData(defaultRequestData: RequestData = {}): ExecutorType {
+        this.data = defaultRequestData;
         return this;
     }
 
-    public setDefaultResultParams(defaultResultParams: any = {}): ExecutorType {
-        this.params = merge(this.params, defaultResultParams);
+    public setDefaultResultParams(defaultResultParams: RequestParams = {}): ExecutorType {
+        this.params = defaultResultParams;
         return this;
     }
 
-    public handleThenResponse(resolve: (value: Response) => void, resp: AxiosResponse<any>) {
+
+    public handleThenResponse(resolve: (value: any) => void, resp: AxiosResponse<any>) {
         this.response = resp.data;
         resolve(resp.data)
     }

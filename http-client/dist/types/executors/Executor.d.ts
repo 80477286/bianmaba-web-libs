@@ -11,6 +11,7 @@ export default class Executor {
     response: Response;
     data: RequestData;
     params: RequestParams;
+    defaultResponse: Response;
     constructor(instance: AxiosInstance, url?: string);
     execute(options?: AxiosRequestConfig<any> | any): Promise<Response>;
     /**
@@ -25,9 +26,9 @@ export default class Executor {
      * 将执行器请求方式设置为：multipart/form-data
      */
     toFormDataRequest(): ExecutorType;
-    setDefaultResponse(defaultResponse?: any): ExecutorType;
-    setDefaultRequestData(defaultRequestData?: any): ExecutorType;
-    setDefaultResultParams(defaultResultParams?: any): ExecutorType;
-    handleThenResponse(resolve: (value: Response) => void, resp: AxiosResponse<any>): void;
+    setDefaultResponse(defaultResponse?: Response): ExecutorType;
+    setDefaultRequestData(defaultRequestData?: RequestData): ExecutorType;
+    setDefaultResultParams(defaultResultParams?: RequestParams): ExecutorType;
+    handleThenResponse(resolve: (value: any) => void, resp: AxiosResponse<any>): void;
     handleCatchResponse(reject: (reason?: any) => void, e: any): void;
 }

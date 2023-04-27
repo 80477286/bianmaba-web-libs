@@ -48,6 +48,7 @@
 import {reactive} from "vue";
 import {ElNotification} from "element-plus";
 import {userService} from "./UserService";
+import {DefaultResponse} from "@bianmaba/http-client";
 
 const getById = userService.createGetById();
 const save = userService.createSave();
