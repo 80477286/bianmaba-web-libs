@@ -29,14 +29,14 @@ const G = (s, e) => {
     else
       for (let t in s)
         Object.prototype.hasOwnProperty.call(s, t) && e.call(null, s[t], t, s);
-}, w = function(...s) {
+}, R = function(...s) {
   let e = arguments[0], t = (a, l) => {
-    y(e[l]) && y(a) ? e[l] = w(e[l], a) : y(a) ? e[l] = w({}, a) : k(a) ? e[l] = a.slice() : e[l] = a;
+    y(e[l]) && y(a) ? e[l] = R(e[l], a) : y(a) ? e[l] = R({}, a) : k(a) ? e[l] = a.slice() : e[l] = a;
   };
   for (let a = 0, l = arguments.length; a < l; a++)
     G(arguments[a], t);
   return e;
-}, u = w;
+}, u = R;
 class I {
   constructor() {
     r(this, "order", new P("id", "asc"));
@@ -99,15 +99,15 @@ class X {
   }
 }
 var v = /* @__PURE__ */ ((s) => (s.Asc = "asc", s.Desc = "desc", s))(v || {}), N = /* @__PURE__ */ ((s) => (s.equals = "equals", s.eq = "eq", s.ge = "ge", s.gt = "gt", s.lt = "lt", s.le = "le", s.ne = "ne", s.notlike = "notlike", s.like = "like", s["like:"] = "like:", s[":like"] = ":like", s[":like:"] = ":like:", s.lk = "like", s["lk:"] = "like:", s[":lk"] = ":like", s[":lk:"] = ":like:", s.between = "between", s.btw = "btw", s.isnull = "isnull", s.isnotnull = "isnotnull", s.isempty = "isempty", s.isnotempty = "isnotempty", s.in = "in", s.notin = "notin", s))(N || {}), i = /* @__PURE__ */ ((s) => (s["application/atom+xml"] = "application/atom+xml", s["application/json"] = "application/json", s["application/x-www-form-urlencoded"] = "application/x-www-form-urlencoded", s["application/xml"] = "application/xml", s["multipart/form-data"] = "multipart/form-data", s["text/html"] = "text/html", s["text/plain"] = "text/plain", s))(i || {}), o = /* @__PURE__ */ ((s) => (s.POST = "POST", s.GET = "GET", s.DELETE = "DELETE", s.HEAD = "HEAD", s.OPTIONS = "OPTIONS", s.PUT = "PUT", s.PATCH = "PATCH", s.PURGE = "PURGE", s.LINK = "LINK", s.UNLINK = "UNLINK", s))(o || {});
-class z {
+class Q {
   constructor() {
     r(this, "method", o.POST);
     r(this, "headers", { "Content-Type": i["application/json"] });
     r(this, "xRequestedWith", "XMLHttpRequest");
   }
 }
-const R = new z(), n = class {
-  constructor(e = R) {
+const g = new Q(), n = class {
+  constructor(e = g) {
     n.default = u(n.default || {}, e), console.debug("初始化全局配置..."), c.defaults.baseURL = n.default.baseUrl, c.defaults.method = n.default.method, c.defaults.headers.common["X-Requested-With"] = n.default.xRequestedWith, c.interceptors.request.use(n.default.requestSuccessHandler || this.defaultRequestSuccessHandler, n.default.requestFailHandler || this.defaultRequestFailHandler), c.interceptors.response.use(n.default.responseSuccessHandler || this.defaultResponseSuccessHandler, n.default.responseFailHandler || this.defaultResponseFailHandler), console.debug("全局配置初始化完成。");
   }
   defaultRequestSuccessHandler(e) {
@@ -129,7 +129,7 @@ const R = new z(), n = class {
   }
 };
 let m = n;
-r(m, "default", R);
+r(m, "default", g);
 class f {
   constructor() {
     r(this, "success", !1);
@@ -142,7 +142,7 @@ class f {
     r(this, "status", null);
   }
 }
-class Q extends f {
+class z extends f {
   constructor() {
     super(...arguments);
     r(this, "status", null);
@@ -266,7 +266,7 @@ class q extends j {
   }
 }
 const T = class extends m {
-  constructor(e = R) {
+  constructor(e = g) {
     super(e);
   }
   /**
@@ -337,31 +337,25 @@ const T = class extends m {
     return this.instance ? e && console.error("实例已经存在，重获取实例时，配置选项将不会生效！") : this.instance = new T(e), this.instance;
   }
 };
-let g = T;
-r(g, "instance");
+let w = T;
+r(w, "instance");
 class E extends q {
   constructor(e, t) {
-    super(e, t), this.setDefaultResponse(new Q());
-  }
-  pageSizeChange(e) {
-    return this.data.size = e, this.execute();
-  }
-  pageChange(e) {
-    return this.data.page = e, this.execute();
+    super(e, t), this.setDefaultResponse(new z());
   }
 }
 export {
   m as AbstractHttpClient,
   X as Condition,
   U as DefaultPageableQueryRequestData,
-  Q as DefaultPageableQueryResponse,
+  z as DefaultPageableQueryResponse,
   I as DefaultQueryRequestData,
   f as DefaultResponse,
   N as EConditionOpt,
   v as EOrderDirection,
   D as Executor,
   K as GetExecutor,
-  g as HttpClient,
+  w as HttpClient,
   i as HttpContentType,
   o as HttpMethod,
   S as Join,

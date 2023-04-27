@@ -8,14 +8,4 @@ export default class PageableQueryExecutor extends QueryExecutor {
         super(instance, url);
         this.setDefaultResponse(new DefaultPageableQueryResponse())
     }
-
-    public pageSizeChange(size: number): Promise<Response> {
-        this.data.size = size;
-        return this.execute();
-    }
-
-    public pageChange(page: number): Promise<Response> {
-        this.data.page = page;
-        return this.execute();
-    }
 }
