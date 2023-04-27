@@ -1,16 +1,16 @@
-var A = Object.defineProperty;
-var F = (s, e, t) => e in s ? A(s, e, { enumerable: !0, configurable: !0, writable: !0, value: t }) : s[e] = t;
-var r = (s, e, t) => (F(s, typeof e != "symbol" ? e + "" : e, t), t);
+var F = Object.defineProperty;
+var L = (s, e, t) => e in s ? F(s, e, { enumerable: !0, configurable: !0, writable: !0, value: t }) : s[e] = t;
+var r = (s, e, t) => (L(s, typeof e != "symbol" ? e + "" : e, t), t);
 import c from "axios";
 import { reactive as p } from "vue";
-const L = Object.prototype.toString, b = ((s) => (e) => {
-  let t = L.call(e);
+const G = Object.prototype.toString, b = ((s) => (e) => {
+  let t = G.call(e);
   return s[t] || (s[t] = t.slice(8, -1).toLowerCase());
 })(/* @__PURE__ */ Object.create(null)), h = (s) => (s = s.toLowerCase(), function(e) {
   return b(e) === s;
 }), k = (s) => Array.isArray(s);
 h("ArrayBuffer");
-const y = (s) => {
+const U = (s) => s != null && typeof s == "object" && Array.isArray(s) === !1, y = (s) => {
   if (b(s) !== "object")
     return !1;
   let e = Object.getPrototypeOf(s);
@@ -21,7 +21,7 @@ h("File");
 h("Blob");
 h("FileList");
 h("URLSearchParams");
-const G = (s, e) => {
+const v = (s, e) => {
   if (!(s === null || typeof s > "u"))
     if (typeof s != "object" && (s = [s]), k(s))
       for (let t = 0, a = s.length; t < a; t++)
@@ -34,16 +34,16 @@ const G = (s, e) => {
     y(e[l]) && y(a) ? e[l] = R(e[l], a) : y(a) ? e[l] = R({}, a) : k(a) ? e[l] = a.slice() : e[l] = a;
   };
   for (let a = 0, l = arguments.length; a < l; a++)
-    G(arguments[a], t);
+    v(arguments[a], t);
   return e;
-}, u = R;
-class I {
+}, u = R, I = U;
+class j {
   constructor() {
     r(this, "order", new P("id", "asc"));
     r(this, "queryProperties", ["id"]);
   }
 }
-class U extends I {
+class N extends j {
   constructor(t = 1, a = 10, l = -1) {
     super();
     r(this, "size", 10);
@@ -82,7 +82,7 @@ class P {
     return new P(e, t);
   }
 }
-class X {
+class $ {
   constructor(e, t, a) {
     r(this, "property", null);
     r(this, "value", null);
@@ -98,15 +98,15 @@ class X {
     this.or.push(e);
   }
 }
-var v = /* @__PURE__ */ ((s) => (s.Asc = "asc", s.Desc = "desc", s))(v || {}), N = /* @__PURE__ */ ((s) => (s.equals = "equals", s.eq = "eq", s.ge = "ge", s.gt = "gt", s.lt = "lt", s.le = "le", s.ne = "ne", s.notlike = "notlike", s.like = "like", s["like:"] = "like:", s[":like"] = ":like", s[":like:"] = ":like:", s.lk = "like", s["lk:"] = "like:", s[":lk"] = ":like", s[":lk:"] = ":like:", s.between = "between", s.btw = "btw", s.isnull = "isnull", s.isnotnull = "isnotnull", s.isempty = "isempty", s.isnotempty = "isnotempty", s.in = "in", s.notin = "notin", s))(N || {}), i = /* @__PURE__ */ ((s) => (s["application/atom+xml"] = "application/atom+xml", s["application/json"] = "application/json", s["application/x-www-form-urlencoded"] = "application/x-www-form-urlencoded", s["application/xml"] = "application/xml", s["multipart/form-data"] = "multipart/form-data", s["text/html"] = "text/html", s["text/plain"] = "text/plain", s))(i || {}), o = /* @__PURE__ */ ((s) => (s.POST = "POST", s.GET = "GET", s.DELETE = "DELETE", s.HEAD = "HEAD", s.OPTIONS = "OPTIONS", s.PUT = "PUT", s.PATCH = "PATCH", s.PURGE = "PURGE", s.LINK = "LINK", s.UNLINK = "UNLINK", s))(o || {});
-class Q {
+var Q = /* @__PURE__ */ ((s) => (s.Asc = "asc", s.Desc = "desc", s))(Q || {}), z = /* @__PURE__ */ ((s) => (s.equals = "equals", s.eq = "eq", s.ge = "ge", s.gt = "gt", s.lt = "lt", s.le = "le", s.ne = "ne", s.notlike = "notlike", s.like = "like", s["like:"] = "like:", s[":like"] = ":like", s[":like:"] = ":like:", s.lk = "like", s["lk:"] = "like:", s[":lk"] = ":like", s[":lk:"] = ":like:", s.between = "between", s.btw = "btw", s.isnull = "isnull", s.isnotnull = "isnotnull", s.isempty = "isempty", s.isnotempty = "isnotempty", s.in = "in", s.notin = "notin", s))(z || {}), i = /* @__PURE__ */ ((s) => (s["application/atom+xml"] = "application/atom+xml", s["application/json"] = "application/json", s["application/x-www-form-urlencoded"] = "application/x-www-form-urlencoded", s["application/xml"] = "application/xml", s["multipart/form-data"] = "multipart/form-data", s["text/html"] = "text/html", s["text/plain"] = "text/plain", s))(i || {}), o = /* @__PURE__ */ ((s) => (s.POST = "POST", s.GET = "GET", s.DELETE = "DELETE", s.HEAD = "HEAD", s.OPTIONS = "OPTIONS", s.PUT = "PUT", s.PATCH = "PATCH", s.PURGE = "PURGE", s.LINK = "LINK", s.UNLINK = "UNLINK", s))(o || {});
+class K {
   constructor() {
     r(this, "method", o.POST);
     r(this, "headers", { "Content-Type": i["application/json"] });
     r(this, "xRequestedWith", "XMLHttpRequest");
   }
 }
-const g = new Q(), n = class {
+const g = new K(), n = class {
   constructor(e = g) {
     n.default = u(n.default || {}, e), console.debug("初始化全局配置..."), c.defaults.baseURL = n.default.baseUrl, c.defaults.method = n.default.method, c.defaults.headers.common["X-Requested-With"] = n.default.xRequestedWith, c.interceptors.request.use(n.default.requestSuccessHandler || this.defaultRequestSuccessHandler, n.default.requestFailHandler || this.defaultRequestFailHandler), c.interceptors.response.use(n.default.responseSuccessHandler || this.defaultResponseSuccessHandler, n.default.responseFailHandler || this.defaultResponseFailHandler), console.debug("全局配置初始化完成。");
   }
@@ -142,7 +142,7 @@ class f {
     r(this, "status", null);
   }
 }
-class z extends f {
+class W extends f {
   constructor() {
     super(...arguments);
     r(this, "status", null);
@@ -162,7 +162,7 @@ class D {
   }
   execute(e = {}) {
     return new Promise((t, a) => {
-      this.loading = !0, this.data = u(this.data || {}, e.data || {}), this.params = u(this.params || {}, e.params || {}), e.url = e.url ? e.url : this.url, this.instance.request(e).then((l) => {
+      this.loading = !0, I(e.data) ? this.data = u(this.data || {}, e.data || {}) : this.data = e.data, this.params = u(this.params || {}, e.params || {}), e.url = e.url ? e.url : this.url, this.instance.request(e).then((l) => {
         try {
           this.handleThenResponse(t, l);
         } finally {
@@ -216,7 +216,7 @@ class D {
     }
   }
 }
-class K extends D {
+class B extends D {
   constructor(e, t) {
     super(e, t);
   }
@@ -238,12 +238,12 @@ class K extends D {
     });
   }
 }
-class j extends D {
+class A extends D {
   constructor(e, t) {
     super(e, t);
   }
   execute(e = {}, t = {}, a = {}) {
-    return this.loading = !0, this.data = u(this.data || {}, a.data || {}, e || {}), this.params = u(this.params || {}, a.params || {}, t || {}), a.params = this.params, new Promise((l, d) => {
+    return this.loading = !0, I(e) ? this.data = u(this.data || {}, a.data || {}, e || {}) : this.data = e, this.params = u(this.params || {}, a.params || {}, t || {}), a.params = this.params, new Promise((l, d) => {
       this.instance.post(a.url || this.url, this.data, a).then((x) => {
         try {
           this.handleThenResponse(l, x);
@@ -260,7 +260,7 @@ class j extends D {
     });
   }
 }
-class q extends j {
+class q extends A {
   constructor(e, t) {
     super(e, t), this.setDefaultResponse(new f());
   }
@@ -288,7 +288,7 @@ const T = class extends m {
       params: null,
       headers: { "Content-Type": i["application/x-www-form-urlencoded"] }
     }, t), l = this.createAxiosInstance(a);
-    return p(new K(l, e));
+    return p(new B(l, e));
   }
   /**
    *
@@ -301,7 +301,7 @@ const T = class extends m {
       params: null,
       headers: { "Content-Type": i["application/x-www-form-urlencoded"] }
     }, t), l = this.createAxiosInstance(a);
-    return p(new q(l, e).setDefaultResponse({ data: [] }).setDefaultRequestData(new I()));
+    return p(new q(l, e).setDefaultResponse({ data: [] }).setDefaultRequestData(new j()));
   }
   /**
    *
@@ -314,7 +314,7 @@ const T = class extends m {
       params: null,
       headers: { "Content-Type": i["application/x-www-form-urlencoded"] }
     }, t), l = this.createAxiosInstance(a);
-    return p(new q(l, e).setDefaultResponse({ data: [] }).setDefaultRequestData(new U()));
+    return p(new q(l, e).setDefaultResponse({ data: [] }).setDefaultRequestData(new N()));
   }
   /**
    *
@@ -327,7 +327,7 @@ const T = class extends m {
       params: null,
       headers: { "Content-Type": i["multipart/form-data"] }
     }, t), l = this.createAxiosInstance(a);
-    return p(new j(l, e));
+    return p(new A(l, e));
   }
   /**
    * 获取AxiosHelper实例（单例模式），首将获取时会根据参数初始化实例，后续再获取时参数将不会生效，而是直接返回已经存在的实例
@@ -339,28 +339,28 @@ const T = class extends m {
 };
 let w = T;
 r(w, "instance");
-class E extends q {
+class J extends q {
   constructor(e, t) {
-    super(e, t), this.setDefaultResponse(new z());
+    super(e, t), this.setDefaultResponse(new W());
   }
 }
 export {
   m as AbstractHttpClient,
-  X as Condition,
-  U as DefaultPageableQueryRequestData,
-  z as DefaultPageableQueryResponse,
-  I as DefaultQueryRequestData,
+  $ as Condition,
+  N as DefaultPageableQueryRequestData,
+  W as DefaultPageableQueryResponse,
+  j as DefaultQueryRequestData,
   f as DefaultResponse,
-  N as EConditionOpt,
-  v as EOrderDirection,
+  z as EConditionOpt,
+  Q as EOrderDirection,
   D as Executor,
-  K as GetExecutor,
+  B as GetExecutor,
   w as HttpClient,
   i as HttpContentType,
   o as HttpMethod,
   S as Join,
   P as Order,
-  E as PageableQueryExecutor,
-  j as PostExecutor,
+  J as PageableQueryExecutor,
+  A as PostExecutor,
   q as QueryExecutor
 };
