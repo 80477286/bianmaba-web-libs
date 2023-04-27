@@ -1,7 +1,7 @@
 "use strict";
 import Executor from "./Executor";
 import {AxiosInstance, AxiosRequestConfig} from "axios";
-import {merge} from "@bianmaba/utils";
+import {isArray, isObject, merge} from "@bianmaba/utils";
 import {RequestData, RequestParams} from "./request/Request";
 import {Response} from "./response/Response";
 
@@ -12,7 +12,11 @@ export default class PostExecutor extends Executor {
 
     public execute(data: RequestData | null = {}, params: RequestParams = {}, options: AxiosRequestConfig<any> | any = {}): Promise<Response> {
         this.loading = true;
-        this.data = merge(this.data || {}, options.data || {}, data || {});
+        if (isObject(data)) {
+            this.data = merge(this.data || {}, options.data || {}, data || {});
+        } else {
+            this.data = data;
+        }
         this.params = merge(this.params || {}, options.params || {}, params || {});
         options.params = this.params;
         return new Promise((resolve, reject) => {

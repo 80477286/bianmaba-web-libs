@@ -1,6 +1,6 @@
 "use strict";
 import {AxiosInstance, AxiosRequestConfig, AxiosResponse} from "axios";
-import {merge} from "@bianmaba/utils";
+import {isObject, merge} from "@bianmaba/utils";
 import {HttpContentType, RequestData, RequestParams} from "./request/Request";
 import {DefaultResponse, Response} from "./response/Response";
 import GetExecutor from "./GetExecutor";
@@ -25,7 +25,11 @@ export default class Executor {
     public execute(options: AxiosRequestConfig<any> | any = {}): Promise<Response> {
         return new Promise((resolve, reject) => {
             this.loading = true;
-            this.data = merge(this.data || {}, options.data || {});
+            if (isObject(options.data)) {
+                this.data = merge(this.data || {}, options.data || {});
+            } else {
+                this.data = options.data;
+            }
             this.params = merge(this.params || {}, options.params || {});
             options.url = options.url ? options.url : this.url;
             this.instance.request(options).then((resp: AxiosResponse<any>) => {
