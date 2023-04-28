@@ -13,7 +13,7 @@ class UserService extends HttpClient {
     }
 
     createQuery() {
-        return this.createQueryExecutor('/user/query').toAjaxRequest().setDefaultRequestData({
+        return this.createQueryExecutor('/user/query').toJsonRequest().setDefaultRequestData({
             order: new Order('name', 'asc')
         });
     }

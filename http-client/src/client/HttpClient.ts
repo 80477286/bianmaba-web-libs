@@ -108,27 +108,24 @@ export default class HttpClient extends AbstractHttpClient {
 
     public static post(): PostMethod {
         return {
-            do(url: string, data: RequestData | null = {}, params: RequestParams = {}, options: GlobalOptions | any = {}) {
+            do(url: string, data: RequestData = {}, params: RequestParams = {}, options: GlobalOptions = {}) {
                 return HttpClient.getInstance().createPostExecutor(url, options).execute(data, params, options)
             },
-            multipartFormData(url: string, data: RequestData | null = {}, params: RequestParams = {}, options: GlobalOptions | any = {}) {
-                options = merge(options, {headers: {'Content-Type': HttpContentType["multipart/form-data"]}})
-                return this.do(url, data, params, options);
+            multipartFormData(url: string, data: RequestData = {}, params: RequestParams = {}, options: GlobalOptions = {}) {
+                return HttpClient.getInstance().createPostExecutor(url, options).toFormDataRequest().execute(data, params, options)
             },
-            form(url: string, data: RequestData | null = {}, params: RequestParams = {}, options: GlobalOptions | any = {}) {
-                options = merge(options, {headers: {'Content-Type': HttpContentType["application/x-www-form-urlencoded"]}})
-                return this.do(url, data, params, options);
+            form(url: string, data: RequestData = {}, params: RequestParams = {}, options: GlobalOptions = {}) {
+                return HttpClient.getInstance().createPostExecutor(url, options).toFormRequest().execute(data, params, options)
             },
-            json(url: string, data: RequestData | null = {}, params: RequestParams = {}, options: GlobalOptions | any = {}) {
-                options = merge(options, {headers: {'Content-Type': HttpContentType["application/json"]}})
-                return this.do(url, data, params, options);
+            json(url: string, data: RequestData = {}, params: RequestParams = {}, options: GlobalOptions = {}) {
+                return HttpClient.getInstance().createPostExecutor(url, options).toJsonRequest().execute(data, params, options)
             }
         } as PostMethod
     }
 
     public static get(): GetMethods {
         return {
-            do(url: string, params: RequestParams = {}, options: GlobalOptions | any = {}) {
+            do(url: string, params: RequestParams = {}, options: GlobalOptions = {}) {
                 return HttpClient.getInstance().createGetExecutor(url, options).execute(params, options)
             }
         } as GetMethods

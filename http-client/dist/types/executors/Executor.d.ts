@@ -17,7 +17,7 @@ export default class Executor {
     /**
      * 将执行器请求方式设置为：application/json
      */
-    toAjaxRequest(): ExecutorType;
+    toJsonRequest(): ExecutorType;
     /**
      * 将执行器请求方式设置为：application/x-www-form-urlencoded
      */

@@ -51,7 +51,7 @@ export default class Executor {
     /**
      * 将执行器请求方式设置为：application/json
      */
-    public toAjaxRequest(): ExecutorType {
+    public toJsonRequest(): ExecutorType {
         this.instance.defaults.headers['Content-Type'] = HttpContentType["application/json"]
         return this;
     }
