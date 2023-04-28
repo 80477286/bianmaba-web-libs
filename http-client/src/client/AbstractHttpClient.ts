@@ -10,7 +10,7 @@ export default class AbstractHttpClient {
         AbstractHttpClient.default = merge(AbstractHttpClient.default || {}, options);
         console.debug("初始化全局配置...")
         axios.defaults.baseURL = AbstractHttpClient.default.baseUrl;
-        axios.defaults.method = AbstractHttpClient.default.method;
+        axios.defaults.method = AbstractHttpClient.default.method || axios.defaults.method;
         axios.defaults.headers.common['X-Requested-With'] = AbstractHttpClient.default.xRequestedWith;
         // // 请求拦截器
         axios.interceptors.request.use(AbstractHttpClient.default.requestSuccessHandler || this.defaultRequestSuccessHandler, AbstractHttpClient.default.requestFailHandler || this.defaultRequestFailHandler);
