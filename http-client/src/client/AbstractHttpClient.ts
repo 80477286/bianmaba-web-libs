@@ -4,7 +4,7 @@ import defaultGlobalOptions, {GlobalOptions} from "../config/GlobalOptions";
 
 
 export default class AbstractHttpClient {
-    protected static default: GlobalOptions = defaultGlobalOptions;
+    public static default: GlobalOptions = defaultGlobalOptions;
 
     constructor(options: GlobalOptions = defaultGlobalOptions) {
         AbstractHttpClient.default = merge(AbstractHttpClient.default || {}, options);
