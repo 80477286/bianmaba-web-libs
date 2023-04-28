@@ -11,7 +11,7 @@ import {
     HttpContentType,
     HttpMethod,
     DefaultPageableQueryRequestData,
-    DefaultQueryRequestData
+    DefaultQueryRequestData, RequestData, RequestParams
 } from "../executors/request/Request";
 import QueryExecutor from "../executors/QueryExecutor";
 
@@ -92,7 +92,7 @@ export default class HttpClient extends AbstractHttpClient {
     }
 
     /**
-     * 获取AxiosHelper实例（单例模式），首将获取时会根据参数初始化实例，后续再获取时参数将不会生效，而是直接返回已经存在的实例
+     * 获取HttpClient实例（单例模式），首将获取时会根据参数初始化实例，后续再获取时参数将不会生效，而是直接返回已经存在的实例
      * @param options
      */
     public static getInstance(options?: GlobalOptions | any): HttpClient {
@@ -105,4 +105,43 @@ export default class HttpClient extends AbstractHttpClient {
         }
         return this.instance;
     }
+
+    public static post(): PostMethod {
+        return {
+            do(url: string, data: RequestData | null = {}, params: RequestParams = {}, options: GlobalOptions | any = {}) {
+                return HttpClient.getInstance().createPostExecutor(url, options).execute(data, params, options)
+            },
+            multipartFormData(url: string, data: RequestData | null = {}, params: RequestParams = {}, options: GlobalOptions | any = {}) {
+                options = merge(options, {headers: {'Content-Type': HttpContentType["multipart/form-data"]}})
+                return this.do(url, data, params, options);
+            },
+            form(url: string, data: RequestData | null = {}, params: RequestParams = {}, options: GlobalOptions | any = {}) {
+                options = merge(options, {headers: {'Content-Type': HttpContentType["application/x-www-form-urlencoded"]}})
+                return this.do(url, data, params, options);
+            },
+            json(url: string, data: RequestData | null = {}, params: RequestParams = {}, options: GlobalOptions | any = {}) {
+                options = merge(options, {headers: {'Content-Type': HttpContentType["application/json"]}})
+                return this.do(url, data, params, options);
+            }
+        } as PostMethod
+    }
+
+    public static get(): GetMethods {
+        return {
+            do(url: string, params: RequestParams = {}, options: GlobalOptions | any = {}) {
+                return HttpClient.getInstance().createGetExecutor(url, options).execute(params, options)
+            }
+        } as GetMethods
+    }
+}
+
+export interface GetMethods {
+    do: Function;
+}
+
+export interface PostMethod {
+    do: Function;
+    multipartFormData: Function;
+    form: Function;
+    json: Function;
 }

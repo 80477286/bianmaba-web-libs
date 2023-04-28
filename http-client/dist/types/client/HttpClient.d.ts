@@ -33,8 +33,19 @@ export default class HttpClient extends AbstractHttpClient {
      */
     createPostExecutor(url?: string, options?: CreateAxiosDefaults<any> | any): PostExecutor;
     /**
-     * 获取AxiosHelper实例（单例模式），首将获取时会根据参数初始化实例，后续再获取时参数将不会生效，而是直接返回已经存在的实例
+     * 获取HttpClient实例（单例模式），首将获取时会根据参数初始化实例，后续再获取时参数将不会生效，而是直接返回已经存在的实例
      * @param options
      */
     static getInstance(options?: GlobalOptions | any): HttpClient;
+    static post(): PostMethod;
+    static get(): GetMethods;
+}
+export interface GetMethods {
+    do: Function;
+}
+export interface PostMethod {
+    do: Function;
+    multipartFormData: Function;
+    form: Function;
+    json: Function;
 }
