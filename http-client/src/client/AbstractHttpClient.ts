@@ -6,7 +6,7 @@ import defaultGlobalOptions, {GlobalOptions} from "../config/GlobalOptions";
 export default class AbstractHttpClient {
     public static default: GlobalOptions = defaultGlobalOptions;
 
-    constructor(options: GlobalOptions = defaultGlobalOptions) {
+    constructor(options: GlobalOptions = {}) {
         AbstractHttpClient.default = merge(AbstractHttpClient.default || {}, options);
         console.debug("初始化全局配置...")
         axios.defaults.baseURL = AbstractHttpClient.default.baseUrl;

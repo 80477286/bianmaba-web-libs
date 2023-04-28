@@ -1,6 +1,6 @@
 {
   "name": "@bianmaba/http-client",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "main": "./dist/index.umd.js",
   "module": "./dist/index.es.js",
   "types": "./src/index.ts",
