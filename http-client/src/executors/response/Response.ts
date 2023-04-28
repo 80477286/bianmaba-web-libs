@@ -1,14 +1,14 @@
 export type Response = (IResponse | IPageableQueryResponse | any);
 
 export interface IResponse {
-    success: boolean;
-    result?: string | null,
-    data?: Array<any> | any;
-    errors?: Array<any>;
-    messages?: Array<any>;
-    extendedData?: any;
-    status?: any;
-    exception?: any;
+    success: boolean
+    result?: string | null
+    data?: Array<any> | any
+    errors?: Array<any>
+    messages?: Array<any>
+    extendedData?: any
+    status?: any
+    exception?: any
 }
 
 export interface IPageableQueryResponse extends IResponse {

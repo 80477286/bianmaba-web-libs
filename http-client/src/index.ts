@@ -8,8 +8,8 @@ import PageableQueryExecutor from "./executors/PageableQueryExecutor";
 import {
     DefaultQueryRequestData,
     DefaultPageableQueryRequestData,
-
-    Order, Join,
+    Order,
+    Join,
     Condition,
     EOrderDirection,
     EConditionOpt,
