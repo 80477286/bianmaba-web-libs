@@ -3,7 +3,7 @@
   "version": "0.0.9",
   "main": "./dist/index.umd.js",
   "module": "./dist/index.es.js",
-  "types": "./src/index.ts",
+  "types": "./dist/types/index.d.ts",
   "type": "module",
   "files": [
     "./dist",
@@ -12,7 +12,7 @@
   ],
   "exports": {
     ".": {
-      "types": "./src/types/index.d.ts",
+      "types": "./dist/types/index.d.ts",
       "import": "./dist/es/index.js",
       "require": "./dist/umd/index.js"
     }

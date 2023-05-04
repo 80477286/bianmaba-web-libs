@@ -36,7 +36,7 @@ const v = (s, e) => {
   for (let a = 0, r = arguments.length; a < r; a++)
     v(arguments[a], t);
   return e;
-}, u = w, b = U;
+}, n = w, b = U;
 class k {
   constructor() {
     l(this, "order", new q("id", "asc"));
@@ -82,7 +82,7 @@ class q {
     return new q(e, t);
   }
 }
-class X {
+class $ {
   constructor(e, t, a) {
     l(this, "property", null);
     l(this, "value", null);
@@ -106,9 +106,9 @@ class z {
     l(this, "xRequestedWith", "XMLHttpRequest");
   }
 }
-const S = new z(), n = class {
+const S = new z(), u = class {
   constructor(e = {}) {
-    n.default = u(n.default || {}, e), console.debug("初始化全局配置..."), c.defaults.baseURL = n.default.baseUrl || c.defaults.baseURL, c.defaults.method = n.default.method || c.defaults.method, c.defaults.headers.common["X-Requested-With"] = n.default.xRequestedWith, c.interceptors.request.use(n.default.requestSuccessHandler || this.defaultRequestSuccessHandler, n.default.requestFailHandler || this.defaultRequestFailHandler), c.interceptors.response.use(n.default.responseSuccessHandler || this.defaultResponseSuccessHandler, n.default.responseFailHandler || this.defaultResponseFailHandler), console.debug("全局配置初始化完成。");
+    u.default = n(u.default || {}, e), console.debug("初始化全局配置..."), c.defaults.baseURL = u.default.baseUrl || c.defaults.baseURL, c.defaults.method = u.default.method || c.defaults.method || "POST", c.defaults.headers.common["X-Requested-With"] = u.default.xRequestedWith, c.interceptors.request.use(this.defaultRequestSuccessHandler, this.defaultRequestFailHandler), c.interceptors.request.use(u.default.requestSuccessHandler, u.default.requestFailHandler), c.interceptors.response.use(this.defaultResponseSuccessHandler, this.defaultResponseFailHandler), c.interceptors.response.use(u.default.responseSuccessHandler, u.default.responseFailHandler), console.debug("全局配置初始化完成。");
   }
   defaultRequestSuccessHandler(e) {
     return e;
@@ -124,11 +124,11 @@ const S = new z(), n = class {
     return console.log(((a = (t = e.response) == null ? void 0 : t.data) == null ? void 0 : a.result) || "远程请求出现错误(code=" + e.response.status + ")"), Promise.reject(e);
   }
   createAxiosInstance(e) {
-    let t = c.create(u(c.defaults, e || {}));
-    return console.log("axios instance created"), t.interceptors.request.use(n.default.requestSuccessHandler, n.default.requestFailHandler), t.interceptors.response.use(n.default.responseSuccessHandler, n.default.responseFailHandler), t;
+    let t = c.create(e);
+    return console.log("axios instance created"), t;
   }
 };
-let x = n;
+let x = u;
 l(x, "default", S);
 class m {
   constructor() {
@@ -162,7 +162,7 @@ class D {
   }
   execute(e = {}) {
     return new Promise((t, a) => {
-      this.loading = !0, b(e.data) ? this.data = u(this.data || {}, e.data || {}) : this.data = e.data, this.params = u(this.params || {}, e.params || {}), e.url = e.url ? e.url : this.url, this.instance.request(e).then((r) => {
+      this.loading = !0, b(e.data) ? this.data = n(this.data || {}, e.data || {}) : this.data = e.data, this.params = n(this.params || {}, e.params || {}), e.url = e.url ? e.url : this.url, this.instance.request(e).then((r) => {
         try {
           this.handleThenResponse(t, r);
         } finally {
@@ -196,13 +196,13 @@ class D {
     return this.instance.defaults.headers["Content-Type"] = i["multipart/form-data"], this;
   }
   setDefaultResponse(e = new m()) {
-    return this.response = e, this.defaultResponse = u(this.response, {}), this;
+    return this.response = e, this.defaultResponse = n(this.response, {}), this;
   }
   setDefaultRequestData(e = {}) {
-    return this.data = u(this.data, e), this;
+    return this.data = n(this.data, e), this;
   }
   setDefaultResultParams(e = {}) {
-    return this.params = u(this.params, e), this;
+    return this.params = n(this.params, e), this;
   }
   handleThenResponse(e, t) {
     this.response = t.data, e(t.data);
@@ -221,7 +221,7 @@ class W extends D {
     super(e, t);
   }
   execute(e = {}, t = {}) {
-    return this.loading = !0, this.params = u(this.params || {}, t.params || {}, e || {}), t.params = this.params, new Promise((a, r) => {
+    return this.loading = !0, this.params = n(this.params || {}, t.params || {}, e || {}), t.params = this.params, new Promise((a, r) => {
       this.instance.get(t.url || this.url, t).then((f) => {
         try {
           this.handleThenResponse(a, f);
@@ -243,7 +243,7 @@ class A extends D {
     super(e, t);
   }
   execute(e = {}, t = {}, a = {}) {
-    return this.loading = !0, b(e) ? this.data = u(this.data || {}, a.data || {}, e || {}) : this.data = e, this.params = u(this.params || {}, a.params || {}, t || {}), a.params = this.params, new Promise((r, f) => {
+    return this.loading = !0, b(e) ? this.data = n(this.data || {}, a.data || {}, e || {}) : this.data = e, this.params = n(this.params || {}, a.params || {}, t || {}), a.params = this.params, new Promise((r, f) => {
       this.instance.post(a.url || this.url, this.data, a).then((y) => {
         try {
           this.handleThenResponse(r, y);
@@ -282,7 +282,7 @@ const o = class extends x {
    * @param options  axios实例配置选项，此选项中的data及params不会生效
    */
   createGetExecutor(e = "", t = {}) {
-    let a = u({
+    let a = n({
       method: h.GET,
       data: null,
       params: null,
@@ -295,7 +295,7 @@ const o = class extends x {
    * @param options  axios实例配置选项，此选项中的data及params不会生效
    */
   createQueryExecutor(e = "", t = {}) {
-    let a = u({
+    let a = n({
       method: h.GET,
       data: null,
       params: null,
@@ -308,7 +308,7 @@ const o = class extends x {
    * @param options  axios实例配置选项，此选项中的data及params不会生效
    */
   createPageableQueryExecutor(e = "", t = {}) {
-    let a = u({
+    let a = n({
       method: h.GET,
       data: null,
       params: null,
@@ -321,7 +321,7 @@ const o = class extends x {
    * @param options  axios实例配置选项，此选项中的data及params不会生效
    */
   createPostExecutor(e = "", t = {}) {
-    let a = u({
+    let a = n({
       method: h.POST,
       data: null,
       params: null,
@@ -362,14 +362,14 @@ const o = class extends x {
 };
 let g = o;
 l(g, "instance");
-class $ extends P {
+class V extends P {
   constructor(e, t) {
     super(e, t), this.setDefaultResponse(new K());
   }
 }
 export {
   x as AbstractHttpClient,
-  X as Condition,
+  $ as Condition,
   N as DefaultPageableQueryRequestData,
   K as DefaultPageableQueryResponse,
   k as DefaultQueryRequestData,
@@ -383,7 +383,7 @@ export {
   h as HttpMethod,
   j as Join,
   q as Order,
-  $ as PageableQueryExecutor,
+  V as PageableQueryExecutor,
   A as PostExecutor,
   P as QueryExecutor
 };

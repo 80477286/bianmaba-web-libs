@@ -1,8 +1,6 @@
 import { AxiosInstance, CreateAxiosDefaults } from "axios";
-import { GlobalOptions } from "../config/GlobalOptions";
 export default class AbstractHttpClient {
-    static default: GlobalOptions;
-    constructor(options?: GlobalOptions);
+    constructor(options?: any);
     private defaultRequestSuccessHandler;
     private defaultRequestFailHandler;
     private defaultResponseSuccessHandler;
