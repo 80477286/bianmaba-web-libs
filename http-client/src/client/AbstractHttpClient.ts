@@ -39,11 +39,12 @@ export default class AbstractHttpClient {
     }
 
     public createAxiosInstance(options: CreateAxiosDefaults): AxiosInstance {
-        let instance = axios.create(options);
+        let instance = axios.create(merge(AbstractHttpClient.default || {}, options));
         console.log("axios instance created")
         // // 请求拦截器
-        instance.interceptors.request.use(AbstractHttpClient.default.requestSuccessHandler, AbstractHttpClient.default.requestFailHandler);
-        instance.interceptors.response.use(AbstractHttpClient.default.responseSuccessHandler, AbstractHttpClient.default.responseFailHandler);
+        axios.interceptors.request.use(AbstractHttpClient.default.requestSuccessHandler || this.defaultRequestSuccessHandler, AbstractHttpClient.default.requestFailHandler || this.defaultRequestFailHandler);
+
+        axios.interceptors.response.use(AbstractHttpClient.default.responseSuccessHandler || this.defaultResponseSuccessHandler, AbstractHttpClient.default.responseFailHandler || this.defaultResponseFailHandler);
         return instance;
     }
 }

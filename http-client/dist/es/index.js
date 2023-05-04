@@ -1,10 +1,10 @@
-var F = Object.defineProperty;
-var L = (s, e, t) => e in s ? F(s, e, { enumerable: !0, configurable: !0, writable: !0, value: t }) : s[e] = t;
-var l = (s, e, t) => (L(s, typeof e != "symbol" ? e + "" : e, t), t);
+var A = Object.defineProperty;
+var G = (s, e, t) => e in s ? A(s, e, { enumerable: !0, configurable: !0, writable: !0, value: t }) : s[e] = t;
+var l = (s, e, t) => (G(s, typeof e != "symbol" ? e + "" : e, t), t);
 import c from "axios";
 import { reactive as p } from "vue";
-const G = Object.prototype.toString, T = ((s) => (e) => {
-  let t = G.call(e);
+const L = Object.prototype.toString, T = ((s) => (e) => {
+  let t = L.call(e);
   return s[t] || (s[t] = t.slice(8, -1).toLowerCase());
 })(/* @__PURE__ */ Object.create(null)), d = (s) => (s = s.toLowerCase(), function(e) {
   return T(e) === s;
@@ -36,14 +36,14 @@ const v = (s, e) => {
   for (let a = 0, r = arguments.length; a < r; a++)
     v(arguments[a], t);
   return e;
-}, n = w, b = U;
-class k {
+}, u = w, b = U;
+class S {
   constructor() {
-    l(this, "order", new q("id", "asc"));
+    l(this, "order", new P("id", "asc"));
     l(this, "queryProperties", ["id"]);
   }
 }
-class N extends k {
+class N extends S {
   constructor(t = 1, a = 10, r = -1) {
     super();
     l(this, "size", 10);
@@ -61,7 +61,7 @@ class N extends k {
     this.pageOffset = t;
   }
 }
-class j {
+class k {
   constructor(e, t, a) {
     l(this, "property", null);
     l(this, "joinType", null);
@@ -69,20 +69,20 @@ class j {
     this.property = e || this.property, this.joinType = t || this.joinType, this.on = a || this.on;
   }
   of(e, t, a) {
-    return new j(e, t, a);
+    return new k(e, t, a);
   }
 }
-class q {
+class P {
   constructor(e, t) {
     l(this, "property", null);
     l(this, "direction", "asc");
     this.property = e, this.direction = t;
   }
   of(e, t = "asc") {
-    return new q(e, t);
+    return new P(e, t);
   }
 }
-class $ {
+class X {
   constructor(e, t, a) {
     l(this, "property", null);
     l(this, "value", null);
@@ -99,16 +99,16 @@ class $ {
   }
 }
 var Q = /* @__PURE__ */ ((s) => (s.Asc = "asc", s.Desc = "desc", s))(Q || {}), E = /* @__PURE__ */ ((s) => (s.equals = "equals", s.eq = "eq", s.ge = "ge", s.gt = "gt", s.lt = "lt", s.le = "le", s.ne = "ne", s.notlike = "notlike", s.like = "like", s["like:"] = "like:", s[":like"] = ":like", s[":like:"] = ":like:", s.lk = "like", s["lk:"] = "like:", s[":lk"] = ":like", s[":lk:"] = ":like:", s.between = "between", s.btw = "btw", s.isnull = "isnull", s.isnotnull = "isnotnull", s.isempty = "isempty", s.isnotempty = "isnotempty", s.in = "in", s.notin = "notin", s))(E || {}), i = /* @__PURE__ */ ((s) => (s["application/atom+xml"] = "application/atom+xml", s["application/json"] = "application/json", s["application/x-www-form-urlencoded"] = "application/x-www-form-urlencoded", s["application/xml"] = "application/xml", s["multipart/form-data"] = "multipart/form-data", s["text/html"] = "text/html", s["text/plain"] = "text/plain", s))(i || {}), h = /* @__PURE__ */ ((s) => (s.POST = "POST", s.GET = "GET", s.DELETE = "DELETE", s.HEAD = "HEAD", s.OPTIONS = "OPTIONS", s.PUT = "PUT", s.PATCH = "PATCH", s.PURGE = "PURGE", s.LINK = "LINK", s.UNLINK = "UNLINK", s))(h || {});
-class z {
+class H {
   constructor() {
     l(this, "method", h.POST);
     l(this, "headers", { "Content-Type": i["application/json"] });
     l(this, "xRequestedWith", "XMLHttpRequest");
   }
 }
-const S = new z(), u = class {
+const j = new H(), n = class {
   constructor(e = {}) {
-    u.default = n(u.default || {}, e), console.debug("初始化全局配置..."), c.defaults.baseURL = u.default.baseUrl || c.defaults.baseURL, c.defaults.method = u.default.method || c.defaults.method || "POST", c.defaults.headers.common["X-Requested-With"] = u.default.xRequestedWith, c.interceptors.request.use(this.defaultRequestSuccessHandler, this.defaultRequestFailHandler), c.interceptors.request.use(u.default.requestSuccessHandler, u.default.requestFailHandler), c.interceptors.response.use(this.defaultResponseSuccessHandler, this.defaultResponseFailHandler), c.interceptors.response.use(u.default.responseSuccessHandler, u.default.responseFailHandler), console.debug("全局配置初始化完成。");
+    n.default = u(n.default || {}, e), console.debug("初始化全局配置..."), c.defaults.baseURL = n.default.baseUrl, c.defaults.method = n.default.method || c.defaults.method, c.defaults.headers.common["X-Requested-With"] = n.default.xRequestedWith, c.interceptors.request.use(n.default.requestSuccessHandler || this.defaultRequestSuccessHandler, n.default.requestFailHandler || this.defaultRequestFailHandler), c.interceptors.response.use(n.default.responseSuccessHandler || this.defaultResponseSuccessHandler, n.default.responseFailHandler || this.defaultResponseFailHandler), console.debug("全局配置初始化完成。");
   }
   defaultRequestSuccessHandler(e) {
     return e;
@@ -124,12 +124,12 @@ const S = new z(), u = class {
     return console.log(((a = (t = e.response) == null ? void 0 : t.data) == null ? void 0 : a.result) || "远程请求出现错误(code=" + e.response.status + ")"), Promise.reject(e);
   }
   createAxiosInstance(e) {
-    let t = c.create(e);
-    return console.log("axios instance created"), t;
+    let t = c.create(u(n.default || {}, e));
+    return console.log("axios instance created"), c.interceptors.request.use(n.default.requestSuccessHandler || this.defaultRequestSuccessHandler, n.default.requestFailHandler || this.defaultRequestFailHandler), c.interceptors.response.use(n.default.responseSuccessHandler || this.defaultResponseSuccessHandler, n.default.responseFailHandler || this.defaultResponseFailHandler), t;
   }
 };
-let x = u;
-l(x, "default", S);
+let x = n;
+l(x, "default", j);
 class m {
   constructor() {
     l(this, "success", !1);
@@ -142,7 +142,7 @@ class m {
     l(this, "status", null);
   }
 }
-class K extends m {
+class z extends m {
   constructor() {
     super(...arguments);
     l(this, "status", null);
@@ -162,7 +162,7 @@ class D {
   }
   execute(e = {}) {
     return new Promise((t, a) => {
-      this.loading = !0, b(e.data) ? this.data = n(this.data || {}, e.data || {}) : this.data = e.data, this.params = n(this.params || {}, e.params || {}), e.url = e.url ? e.url : this.url, this.instance.request(e).then((r) => {
+      this.loading = !0, b(e.data) ? this.data = u(this.data || {}, e.data || {}) : this.data = e.data, this.params = u(this.params || {}, e.params || {}), e.url = e.url ? e.url : this.url, this.instance.request(e).then((r) => {
         try {
           this.handleThenResponse(t, r);
         } finally {
@@ -196,13 +196,13 @@ class D {
     return this.instance.defaults.headers["Content-Type"] = i["multipart/form-data"], this;
   }
   setDefaultResponse(e = new m()) {
-    return this.response = e, this.defaultResponse = n(this.response, {}), this;
+    return this.response = e, this.defaultResponse = u(this.response, {}), this;
   }
   setDefaultRequestData(e = {}) {
-    return this.data = n(this.data, e), this;
+    return this.data = u(this.data, e), this;
   }
   setDefaultResultParams(e = {}) {
-    return this.params = n(this.params, e), this;
+    return this.params = u(this.params, e), this;
   }
   handleThenResponse(e, t) {
     this.response = t.data, e(t.data);
@@ -216,12 +216,12 @@ class D {
     }
   }
 }
-class W extends D {
+class K extends D {
   constructor(e, t) {
     super(e, t);
   }
   execute(e = {}, t = {}) {
-    return this.loading = !0, this.params = n(this.params || {}, t.params || {}, e || {}), t.params = this.params, new Promise((a, r) => {
+    return this.loading = !0, this.params = u(this.params || {}, t.params || {}, e || {}), t.params = this.params, new Promise((a, r) => {
       this.instance.get(t.url || this.url, t).then((f) => {
         try {
           this.handleThenResponse(a, f);
@@ -238,12 +238,12 @@ class W extends D {
     });
   }
 }
-class A extends D {
+class F extends D {
   constructor(e, t) {
     super(e, t);
   }
   execute(e = {}, t = {}, a = {}) {
-    return this.loading = !0, b(e) ? this.data = n(this.data || {}, a.data || {}, e || {}) : this.data = e, this.params = n(this.params || {}, a.params || {}, t || {}), a.params = this.params, new Promise((r, f) => {
+    return this.loading = !0, b(e) ? this.data = u(this.data || {}, a.data || {}, e || {}) : this.data = e, this.params = u(this.params || {}, a.params || {}, t || {}), a.params = this.params, new Promise((r, f) => {
       this.instance.post(a.url || this.url, this.data, a).then((y) => {
         try {
           this.handleThenResponse(r, y);
@@ -260,13 +260,13 @@ class A extends D {
     });
   }
 }
-class P extends A {
+class q extends F {
   constructor(e, t) {
     super(e, t), this.setDefaultResponse(new m());
   }
 }
 const o = class extends x {
-  constructor(e = S) {
+  constructor(e = j) {
     super(e);
   }
   /**
@@ -282,52 +282,52 @@ const o = class extends x {
    * @param options  axios实例配置选项，此选项中的data及params不会生效
    */
   createGetExecutor(e = "", t = {}) {
-    let a = n({
+    let a = u({
       method: h.GET,
       data: null,
       params: null,
       headers: { "Content-Type": i["application/x-www-form-urlencoded"] }
     }, t), r = this.createAxiosInstance(a);
-    return p(new W(r, e));
+    return p(new K(r, e));
   }
   /**
    *
    * @param options  axios实例配置选项，此选项中的data及params不会生效
    */
   createQueryExecutor(e = "", t = {}) {
-    let a = n({
+    let a = u({
       method: h.GET,
       data: null,
       params: null,
       headers: { "Content-Type": i["application/x-www-form-urlencoded"] }
     }, t), r = this.createAxiosInstance(a);
-    return p(new P(r, e).setDefaultResponse({ data: [] }).setDefaultRequestData(new k()));
+    return p(new q(r, e).setDefaultResponse({ data: [] }).setDefaultRequestData(new S()));
   }
   /**
    *
    * @param options  axios实例配置选项，此选项中的data及params不会生效
    */
   createPageableQueryExecutor(e = "", t = {}) {
-    let a = n({
+    let a = u({
       method: h.GET,
       data: null,
       params: null,
       headers: { "Content-Type": i["application/x-www-form-urlencoded"] }
     }, t), r = this.createAxiosInstance(a);
-    return p(new P(r, e).setDefaultResponse({ data: [] }).setDefaultRequestData(new N()));
+    return p(new q(r, e).setDefaultResponse({ data: [] }).setDefaultRequestData(new N()));
   }
   /**
    *
    * @param options  axios实例配置选项，此选项中的data及params不会生效
    */
   createPostExecutor(e = "", t = {}) {
-    let a = n({
+    let a = u({
       method: h.POST,
       data: null,
       params: null,
       headers: { "Content-Type": i["multipart/form-data"] }
     }, t), r = this.createAxiosInstance(a);
-    return p(new A(r, e));
+    return p(new F(r, e));
   }
   /**
    * 获取HttpClient实例（单例模式），首将获取时会根据参数初始化实例，后续再获取时参数将不会生效，而是直接返回已经存在的实例
@@ -362,28 +362,28 @@ const o = class extends x {
 };
 let g = o;
 l(g, "instance");
-class V extends P {
+class $ extends q {
   constructor(e, t) {
-    super(e, t), this.setDefaultResponse(new K());
+    super(e, t), this.setDefaultResponse(new z());
   }
 }
 export {
   x as AbstractHttpClient,
-  $ as Condition,
+  X as Condition,
   N as DefaultPageableQueryRequestData,
-  K as DefaultPageableQueryResponse,
-  k as DefaultQueryRequestData,
+  z as DefaultPageableQueryResponse,
+  S as DefaultQueryRequestData,
   m as DefaultResponse,
   E as EConditionOpt,
   Q as EOrderDirection,
   D as Executor,
-  W as GetExecutor,
+  K as GetExecutor,
   g as HttpClient,
   i as HttpContentType,
   h as HttpMethod,
-  j as Join,
-  q as Order,
-  V as PageableQueryExecutor,
-  A as PostExecutor,
-  P as QueryExecutor
+  k as Join,
+  P as Order,
+  $ as PageableQueryExecutor,
+  F as PostExecutor,
+  q as QueryExecutor
 };
