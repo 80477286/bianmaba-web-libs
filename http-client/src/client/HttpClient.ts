@@ -5,20 +5,22 @@ import GetExecutor from "../executors/GetExecutor";
 import PostExecutor from "../executors/PostExecutor";
 
 import {reactive} from "vue";
-import defaultGlobalOptions, {GlobalOptions} from "../config/GlobalOptions";
 import {merge} from "@bianmaba/utils";
 import {
+    DefaultPageableQueryRequestData,
+    DefaultQueryRequestData,
     HttpContentType,
     HttpMethod,
-    DefaultPageableQueryRequestData,
-    DefaultQueryRequestData, RequestData, RequestParams
+    RequestData,
+    RequestParams
 } from "../executors/request/Request";
 import QueryExecutor from "../executors/QueryExecutor";
+import PageableQueryExecutor from "../executors/PageableQueryExecutor";
 
 export default class HttpClient extends AbstractHttpClient {
     private static instance: HttpClient | any;
 
-    constructor(options: GlobalOptions = defaultGlobalOptions) {
+    constructor(options: CreateAxiosDefaults = {}) {
         super(options)
     }
 
@@ -26,7 +28,7 @@ export default class HttpClient extends AbstractHttpClient {
      *
      * @param options  axios实例配置选项，此选项中的data及params不会生效
      */
-    public createRequestExecutor(url: string = '', options: CreateAxiosDefaults<any> | any = {},): Executor {
+    public createRequestExecutor(url: string = '', options: CreateAxiosDefaults<any> | any = {}): Executor {
         let axiosInstance = this.createAxiosInstance(options);
         return reactive(new Executor(axiosInstance, url));
     }
@@ -73,7 +75,7 @@ export default class HttpClient extends AbstractHttpClient {
             headers: {'Content-Type': HttpContentType["application/x-www-form-urlencoded"]}
         }, options);
         let axiosInstance = this.createAxiosInstance(_options);
-        return reactive(new QueryExecutor(axiosInstance, url).setDefaultResponse({data: []}).setDefaultRequestData(new DefaultPageableQueryRequestData()));
+        return reactive(new PageableQueryExecutor(axiosInstance, url).setDefaultResponse({data: []}).setDefaultRequestData(new DefaultPageableQueryRequestData()));
     }
 
     /**
@@ -95,7 +97,7 @@ export default class HttpClient extends AbstractHttpClient {
      * 获取HttpClient实例（单例模式），首将获取时会根据参数初始化实例，后续再获取时参数将不会生效，而是直接返回已经存在的实例
      * @param options
      */
-    public static getInstance(options?: GlobalOptions | any): HttpClient {
+    public static getInstance(options?: CreateAxiosDefaults | any): HttpClient {
         if (!this.instance) {
             this.instance = new HttpClient(options);
         } else {
@@ -108,16 +110,16 @@ export default class HttpClient extends AbstractHttpClient {
 
     public static post(): PostMethod {
         return {
-            do(url: string, data: RequestData = {}, params: RequestParams = {}, options: GlobalOptions = {}) {
+            do(url: string, data: RequestData = {}, params: RequestParams = {}, options: CreateAxiosDefaults = {}) {
                 return HttpClient.getInstance().createPostExecutor(url, options).execute(data, params, options)
             },
-            multipartFormData(url: string, data: RequestData = {}, params: RequestParams = {}, options: GlobalOptions = {}) {
+            multipartFormData(url: string, data: RequestData = {}, params: RequestParams = {}, options: CreateAxiosDefaults = {}) {
                 return HttpClient.getInstance().createPostExecutor(url, options).toFormDataRequest().execute(data, params, options)
             },
-            form(url: string, data: RequestData = {}, params: RequestParams = {}, options: GlobalOptions = {}) {
+            form(url: string, data: RequestData = {}, params: RequestParams = {}, options: CreateAxiosDefaults = {}) {
                 return HttpClient.getInstance().createPostExecutor(url, options).toFormRequest().execute(data, params, options)
             },
-            json(url: string, data: RequestData = {}, params: RequestParams = {}, options: GlobalOptions = {}) {
+            json(url: string, data: RequestData = {}, params: RequestParams = {}, options: CreateAxiosDefaults = {}) {
                 return HttpClient.getInstance().createPostExecutor(url, options).toJsonRequest().execute(data, params, options)
             }
         } as PostMethod
@@ -125,7 +127,7 @@ export default class HttpClient extends AbstractHttpClient {
 
     public static get(): GetMethods {
         return {
-            do(url: string, params: RequestParams = {}, options: GlobalOptions = {}) {
+            do(url: string, params: RequestParams = {}, options: CreateAxiosDefaults = {}) {
                 return HttpClient.getInstance().createGetExecutor(url, options).execute(params, options)
             }
         } as GetMethods

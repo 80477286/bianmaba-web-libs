@@ -22,7 +22,7 @@ import {
     DefaultPageableQueryResponse
 } from "./executors/response/Response";
 
-export {AbstractHttpClient, HttpClient}
+export {HttpClient}
 export {Executor, GetExecutor, PostExecutor, QueryExecutor, PageableQueryExecutor}
 export {DefaultResponse, DefaultPageableQueryResponse}
 export {
