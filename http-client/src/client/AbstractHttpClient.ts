@@ -7,8 +7,10 @@ export default class AbstractHttpClient {
 
     constructor(options: CreateAxiosDefaults = {}) {
         axios.defaults = merge(axios.defaults || {}, {
-            'X-Requested-With': 'XMLHttpRequest',
-            'Content-Type': HttpContentType["application/json"]
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'Content-Type': HttpContentType["application/json"]
+            }
         }, options);
         console.debug("初始化全局配置...")
         console.debug("全局配置初始化完成。")

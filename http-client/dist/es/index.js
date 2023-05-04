@@ -102,8 +102,10 @@ var S = /* @__PURE__ */ ((t) => (t.Asc = "asc", t.Desc = "desc", t))(S || {}), F
 class Q {
   constructor(e = {}) {
     h.defaults = n(h.defaults || {}, {
-      "X-Requested-With": "XMLHttpRequest",
-      "Content-Type": u["application/json"]
+      headers: {
+        "X-Requested-With": "XMLHttpRequest",
+        "Content-Type": u["application/json"]
+      }
     }, e), console.debug("初始化全局配置..."), console.debug("全局配置初始化完成。");
   }
   createAxiosInstance(e) {
