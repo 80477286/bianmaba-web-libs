@@ -10,12 +10,12 @@ import "element-plus/theme-chalk/el-message-box.css";
 import axios from "axios";
 
 const app = createApp(App)
-axios.interceptors.response.use((resp) => {
-    console.log("abcdef", resp)
-    return resp;
+axios.interceptors.request.use((config) => {
+    console.log("test-request-interceptor", config)
+    return config;
 })
 axios.interceptors.response.use((resp) => {
-    console.log("fdsa", resp)
+    console.log("test-response-interceptor", resp)
     return resp;
 })
 app.use(createPinia())
