@@ -5,6 +5,7 @@ import GetExecutor from "./GetExecutor";
 import PostExecutor from "./PostExecutor";
 export type ExecutorType = (Executor | GetExecutor | PostExecutor | any);
 export default class Executor {
+    controller: AbortController;
     instance: AxiosInstance;
     url: string;
     loading: boolean;
@@ -13,6 +14,7 @@ export default class Executor {
     params: RequestParams;
     defaultResponse: Response;
     constructor(instance: AxiosInstance, url?: string);
+    abort(): void;
     execute(options?: AxiosRequestConfig<any> | any): Promise<Response>;
     /**
      * 将执行器请求方式设置为：application/json

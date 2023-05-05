@@ -9,6 +9,7 @@ import PostExecutor from "./PostExecutor";
 export type ExecutorType = (Executor | GetExecutor | PostExecutor | any)
 
 export default class Executor {
+    public controller: AbortController = new AbortController()
     public instance: AxiosInstance;
     public url: string = '';
     public loading: boolean = false;
@@ -18,8 +19,13 @@ export default class Executor {
     public defaultResponse: Response = new DefaultResponse();
 
     constructor(instance: AxiosInstance, url?: string) {
+
         this.instance = instance;
         this.url = url || this.url;
+    }
+
+    public abort() {
+        this.controller.abort({success: false, result: '请求操作已被用户取消！'})
     }
 
     public execute(options: AxiosRequestConfig<any> | any = {}): Promise<Response> {
@@ -32,6 +38,7 @@ export default class Executor {
             }
             this.params = merge(this.params || {}, options.params || {});
             options.url = options.url ? options.url : this.url;
+            options.signal = this.controller.signal;
             this.instance.request(options).then((resp: AxiosResponse<any>) => {
                 try {
                     this.handleThenResponse(resolve, resp);

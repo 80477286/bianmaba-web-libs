@@ -1,5 +1,5 @@
-var A = Object.defineProperty;
-var j = (t, e, s) => e in t ? A(t, e, { enumerable: !0, configurable: !0, writable: !0, value: s }) : t[e] = s;
+var k = Object.defineProperty;
+var j = (t, e, s) => e in t ? k(t, e, { enumerable: !0, configurable: !0, writable: !0, value: s }) : t[e] = s;
 var l = (t, e, s) => (j(t, typeof e != "symbol" ? e + "" : e, s), s);
 import h from "axios";
 import { reactive as p } from "vue";
@@ -29,21 +29,21 @@ const v = (t, e) => {
     else
       for (let s in t)
         Object.prototype.hasOwnProperty.call(t, s) && e.call(null, t[s], s, t);
-}, g = function(...t) {
+}, y = function(...t) {
   let e = arguments[0], s = (a, r) => {
-    x(e[r]) && x(a) ? e[r] = g(e[r], a) : x(a) ? e[r] = g({}, a) : D(a) ? e[r] = a.slice() : e[r] = a;
+    x(e[r]) && x(a) ? e[r] = y(e[r], a) : x(a) ? e[r] = y({}, a) : D(a) ? e[r] = a.slice() : e[r] = a;
   };
   for (let a = 0, r = arguments.length; a < r; a++)
     v(arguments[a], s);
   return e;
-}, n = g, T = G;
-class q {
+}, n = y, T = G;
+class b {
   constructor() {
     l(this, "order", new w("id", "asc"));
     l(this, "queryProperties", ["id"]);
   }
 }
-class N extends q {
+class N extends b {
   constructor(s = 1, a = 10, r = -1) {
     super();
     l(this, "size", 10);
@@ -61,7 +61,7 @@ class N extends q {
     this.pageOffset = s;
   }
 }
-class I {
+class q {
   constructor(e, s, a) {
     l(this, "property", null);
     l(this, "joinType", null);
@@ -69,7 +69,7 @@ class I {
     this.property = e || this.property, this.joinType = s || this.joinType, this.on = a || this.on;
   }
   of(e, s, a) {
-    return new I(e, s, a);
+    return new q(e, s, a);
   }
 }
 class w {
@@ -134,6 +134,7 @@ class U extends d {
 }
 class R {
   constructor(e, s) {
+    l(this, "controller", new AbortController());
     l(this, "instance");
     l(this, "url", "");
     l(this, "loading", !1);
@@ -143,9 +144,12 @@ class R {
     l(this, "defaultResponse", new d());
     this.instance = e, this.url = s || this.url;
   }
+  abort() {
+    this.controller.abort({ success: !1, result: "请求操作已被用户取消！" });
+  }
   execute(e = {}) {
     return new Promise((s, a) => {
-      this.loading = !0, T(e.data) ? this.data = n(this.data || {}, e.data || {}) : this.data = e.data, this.params = n(this.params || {}, e.params || {}), e.url = e.url ? e.url : this.url, this.instance.request(e).then((r) => {
+      this.loading = !0, T(e.data) ? this.data = n(this.data || {}, e.data || {}) : this.data = e.data, this.params = n(this.params || {}, e.params || {}), e.url = e.url ? e.url : this.url, e.signal = this.controller.signal, this.instance.request(e).then((r) => {
         try {
           this.handleThenResponse(s, r);
         } finally {
@@ -204,7 +208,7 @@ class E extends R {
     super(e, s);
   }
   execute(e = {}, s = {}) {
-    return this.loading = !0, this.params = n(this.params || {}, s.params || {}, e || {}), s.params = this.params, new Promise((a, r) => {
+    return this.loading = !0, this.params = n(this.params || {}, s.params || {}, e || {}), s.params = this.params, s.signal = this.controller.signal, new Promise((a, r) => {
       this.instance.get(s.url || this.url, s).then((o) => {
         try {
           this.handleThenResponse(a, o);
@@ -221,12 +225,12 @@ class E extends R {
     });
   }
 }
-class b extends R {
+class I extends R {
   constructor(e, s) {
     super(e, s);
   }
   execute(e = {}, s = {}, a = {}) {
-    return this.loading = !0, T(e) ? this.data = n(this.data || {}, a.data || {}, e || {}) : this.data = e, this.params = n(this.params || {}, a.params || {}, s || {}), a.params = this.params, new Promise((r, o) => {
+    return this.loading = !0, T(e) ? this.data = n(this.data || {}, a.data || {}, e || {}) : this.data = e, this.params = n(this.params || {}, a.params || {}, s || {}), a.params = this.params, a.signal = this.controller.signal, new Promise((r, o) => {
       this.instance.post(a.url || this.url, this.data, a).then((m) => {
         try {
           this.handleThenResponse(r, m);
@@ -243,12 +247,12 @@ class b extends R {
     });
   }
 }
-class k extends b {
+class A extends I {
   constructor(e, s) {
     super(e, s), this.setDefaultResponse(new d());
   }
 }
-class z extends k {
+class z extends A {
   constructor(e, s) {
     super(e, s), this.setDefaultResponse(new U());
   }
@@ -289,7 +293,7 @@ const c = class extends Q {
       params: null,
       headers: { "Content-Type": u["application/x-www-form-urlencoded"] }
     }, s), r = this.createAxiosInstance(a);
-    return p(new k(r, e).setDefaultResponse({ data: [] }).setDefaultRequestData(new q()));
+    return p(new A(r, e).setDefaultResponse({ data: [] }).setDefaultRequestData(new b()));
   }
   /**
    *
@@ -315,7 +319,7 @@ const c = class extends Q {
       params: null,
       headers: { "Content-Type": u["multipart/form-data"] }
     }, s), r = this.createAxiosInstance(a);
-    return p(new b(r, e));
+    return p(new I(r, e));
   }
   /**
    * 获取HttpClient实例（单例模式），首将获取时会根据参数初始化实例，后续再获取时参数将不会生效，而是直接返回已经存在的实例
@@ -348,24 +352,24 @@ const c = class extends Q {
     };
   }
 };
-let y = c;
-l(y, "instance");
+let g = c;
+l(g, "instance");
 export {
   X as Condition,
   N as DefaultPageableQueryRequestData,
   U as DefaultPageableQueryResponse,
-  q as DefaultQueryRequestData,
+  b as DefaultQueryRequestData,
   d as DefaultResponse,
   F as EConditionOpt,
   S as EOrderDirection,
   R as Executor,
   E as GetExecutor,
-  y as HttpClient,
+  g as HttpClient,
   u as HttpContentType,
   f as HttpMethod,
-  I as Join,
+  q as Join,
   w as Order,
   z as PageableQueryExecutor,
-  b as PostExecutor,
-  k as QueryExecutor
+  I as PostExecutor,
+  A as QueryExecutor
 };
