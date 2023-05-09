@@ -26,7 +26,7 @@ export class DefaultResponse implements IResponse {
     messages = [];
     result = null;
     status = null;
-    progressEvent: { progress: number } | any
+    progressEvent: { progress: number, total: number, loaded: number, uploaded: number } | any
 }
 
 export class DefaultPageableQueryResponse extends DefaultResponse implements IPageableQueryResponse {
