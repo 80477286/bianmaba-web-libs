@@ -33,14 +33,14 @@ export default class Executor {
         if (options.onDownloadProgress) {
             options._onDownloadProgress = options.onDownloadProgress
             options.onDownloadProgress = (e) => {
-                this.data.progress = e.progress;
+                this.data.progressEvent = e;
                 options._onDownloadProgress(e)
             };
         }
         if (options.onUploadProgress) {
             options._onUploadProgress = options.onUploadProgress
             options.onUploadProgress = (e) => {
-                this.data.progress = e.progress;
+                this.data.progressEvent = e;
                 options._onUploadProgress(e)
             };
         }
