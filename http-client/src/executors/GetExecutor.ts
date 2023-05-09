@@ -13,7 +13,7 @@ export default class GetExecutor extends Executor {
         this.loading = true;
         this.params = merge(this.params || {}, options.params || {}, params || {});
         options.params = this.params;
-        options.signal = this.controller.signal;
+        this.initOptions(options)
         return new Promise((resolve, reject) => {
             this.instance.get(options.url || this.url, options).then((resp) => {
                 try {

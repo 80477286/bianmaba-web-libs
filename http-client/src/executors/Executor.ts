@@ -28,6 +28,24 @@ export default class Executor {
         this.controller.abort({success: false, result: '请求操作已被用户取消！'})
     }
 
+    protected initOptions(options: AxiosRequestConfig<any> | any = {}) {
+        options.signal = this.controller.signal;
+        if (options.onDownloadProgress) {
+            options._onDownloadProgress = options.onDownloadProgress
+            options.onDownloadProgress = (e) => {
+                this.data.progress = e.progress;
+                options._onDownloadProgress(e)
+            };
+        }
+        if (options.onUploadProgress) {
+            options._onUploadProgress = options.onUploadProgress
+            options.onUploadProgress = (e) => {
+                this.data.progress = e.progress;
+                options._onUploadProgress(e)
+            };
+        }
+    }
+
     public execute(options: AxiosRequestConfig<any> | any = {}): Promise<Response> {
         return new Promise((resolve, reject) => {
             this.loading = true;
@@ -38,7 +56,7 @@ export default class Executor {
             }
             this.params = merge(this.params || {}, options.params || {});
             options.url = options.url ? options.url : this.url;
-            options.signal = this.controller.signal;
+            this.initOptions(options)
             this.instance.request(options).then((resp: AxiosResponse<any>) => {
                 try {
                     this.handleThenResponse(resolve, resp);

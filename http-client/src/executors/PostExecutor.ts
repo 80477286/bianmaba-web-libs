@@ -19,7 +19,7 @@ export default class PostExecutor extends Executor {
         }
         this.params = merge(this.params || {}, options.params || {}, params || {});
         options.params = this.params;
-        options.signal = this.controller.signal;
+        this.initOptions(options)
         return new Promise((resolve, reject) => {
             this.instance.post(options.url || this.url, this.data, options).then((resp) => {
                 try {

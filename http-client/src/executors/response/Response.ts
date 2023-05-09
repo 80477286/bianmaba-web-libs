@@ -26,6 +26,7 @@ export class DefaultResponse implements IResponse {
     messages = [];
     result = null;
     status = null;
+    progress: 0
 }
 
 export class DefaultPageableQueryResponse extends DefaultResponse implements IPageableQueryResponse {
