@@ -8,6 +8,12 @@ export interface IResponse {
     extendedData?: any;
     status?: any;
     exception?: any;
+    progressEvent?: {
+        total?: number;
+        loaded?: number;
+        progress: number;
+        uploaded?: number;
+    } | any;
 }
 export interface IPageableQueryResponse extends IResponse {
     page?: number;
@@ -23,8 +29,14 @@ export declare class DefaultResponse implements IResponse {
     messages: never[];
     result: null;
     status: null;
+    progressEvent: {
+        progress: number;
+    };
 }
 export declare class DefaultPageableQueryResponse extends DefaultResponse implements IPageableQueryResponse {
     status: null;
     total: number;
+    progressEvent: {
+        progress: number;
+    };
 }

@@ -15,6 +15,7 @@ export default class Executor {
     defaultResponse: Response;
     constructor(instance: AxiosInstance, url?: string);
     abort(): void;
+    initOptions(options?: AxiosRequestConfig<any> | any): void;
     execute(options?: AxiosRequestConfig<any> | any): Promise<Response>;
     /**
      * 将执行器请求方式设置为：application/json

@@ -28,18 +28,18 @@ export default class Executor {
         this.controller.abort({success: false, result: '请求操作已被用户取消！'})
     }
 
-    protected initOptions(options: AxiosRequestConfig<any> | any = {}) {
+    public initOptions(options: AxiosRequestConfig<any> | any = {}) {
         options.signal = this.controller.signal;
         if (options.onDownloadProgress) {
             options._onDownloadProgress = options.onDownloadProgress
-            options.onDownloadProgress = (e) => {
+            options.onDownloadProgress = (e: any) => {
                 this.data.progressEvent = e;
                 options._onDownloadProgress(e)
             };
         }
         if (options.onUploadProgress) {
             options._onUploadProgress = options.onUploadProgress
-            options.onUploadProgress = (e) => {
+            options.onUploadProgress = (e: any) => {
                 this.data.progressEvent = e;
                 options._onUploadProgress(e)
             };
