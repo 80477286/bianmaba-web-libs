@@ -89,6 +89,17 @@ export const isString = (val: any): boolean => {
 }
 
 /**
+ * 判断一个值是否为字符串
+ *
+ * @function
+ * @param {Object} val 要测试的值
+ * @returns {boolean} 如果值是字符串，则为 true，否则为 false
+ */
+export const isBoolean = (val: any): boolean => {
+    return typeof val === 'boolean';
+}
+
+/**
  * 确定一个值是否为数字
  *
  * @param {Object} val 要测试的值
