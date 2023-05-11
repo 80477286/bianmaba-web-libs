@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@bianmaba/utils": "file:../utils",
+    "@bianmaba/bmb-view": "file:../bmb-view",
     "@bianmaba/http-client": "file:../http-client",
     "axios": "^1.3.5",
     "element-plus": "^2.3.3",

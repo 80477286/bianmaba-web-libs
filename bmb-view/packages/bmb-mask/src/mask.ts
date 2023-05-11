@@ -1,5 +1,5 @@
 import {createApp, defineComponent, reactive, toRefs, h, withDirectives, withCtx, Transition, vShow, ref} from 'vue'
-import "./mask.css"
+import "../../css/mask.css"
 
 
 export interface MaskOption {
@@ -12,7 +12,11 @@ export interface MaskOption {
 }
 
 
-export function createMaskComponent(options: MaskOption = {visible: false, fullScreen: false, target: document.body}) {
+export function createMaskComponent(options: MaskOption | any = {
+    visible: false,
+    fullScreen: false,
+    target: document.body
+}) {
     options.target = options.target ?? document.body;
     let afterLeaveTimer: number
     const afterLeaveFlag = ref(false)
@@ -180,7 +184,7 @@ export function createMaskComponent(options: MaskOption = {visible: false, fullS
 }
 
 
-export function masking(options: MaskOption = {visible: false, fullScreen: false, target: document.body}) {
+export function masking(options: MaskOption | any = {visible: false, fullScreen: false, target: document.body}) {
     options.target = options.target ?? document.body;
     let instance = options.target['MASK_KEY']?.instance
     if (!instance) {

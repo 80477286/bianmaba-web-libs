@@ -4,9 +4,11 @@
   "main": "./dist/index.umd.js",
   "module": "./dist/index.es.js",
   "types": "./dist/types/index.d.ts",
+  "style": "./dist/index.css",
   "type": "module",
   "files": [
     "./dist",
+    "./dist/*.css",
     "packages",
     "README.md"
   ],
@@ -15,7 +17,8 @@
       "types": "./dist/types/index.d.ts",
       "import": "./dist/es/index.js",
       "require": "./dist/umd/index.js"
-    }
+    },
+    "./index.css": "./dist/index.css"
   },
   "scripts": {
     "dev": "vite",

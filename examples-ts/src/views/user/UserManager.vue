@@ -15,7 +15,7 @@
         </el-input>
       </el-button-group>
     </div>
-    <el-table :data="query.response.data"
+    <el-table :data="query.response.data" v-mask="{visible:true}"
               @row-dblclick="onRowDblClickHandler"
               border stripe style="padding: 10px 0 10px 0;">
       <el-table-column prop="id" label="ID" width="180"/>
@@ -45,7 +45,6 @@ import {onMounted, ref} from "vue";
 import {userService} from "./UserService";
 import * as locales from 'element-plus/es/locale/index'
 import UserEditor from "./UserEditor.vue";
-
 const keys = ref(Object.keys(locales));
 const local = ref('zhCn');
 

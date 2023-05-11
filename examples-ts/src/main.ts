@@ -1,12 +1,13 @@
 import {createApp} from 'vue'
 import {createPinia} from 'pinia'
-
+import bmbView from '@bianmaba/bmb-view'
 import App from './App.vue'
 import router from './router'
 import "element-plus/theme-chalk/el-loading.css";
 import "element-plus/theme-chalk/el-message.css";
 import "element-plus/theme-chalk/el-notification.css";
 import "element-plus/theme-chalk/el-message-box.css";
+import "@bianmaba/bmb-view/dist/index.css"
 import axios from "axios";
 
 const app = createApp(App)
@@ -20,5 +21,6 @@ axios.interceptors.response.use((resp) => {
 })
 app.use(createPinia())
 app.use(router)
+app.use(bmbView)
 
 app.mount('#app')
