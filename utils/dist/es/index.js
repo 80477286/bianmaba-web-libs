@@ -1,21 +1,21 @@
-const d = Object.prototype.toString, $ = ((t) => (e) => {
-  let r = d.call(e);
+const p = Object.prototype.toString, $ = ((t) => (e) => {
+  let r = p.call(e);
   return t[r] || (t[r] = r.slice(8, -1).toLowerCase());
 })(/* @__PURE__ */ Object.create(null)), o = (t) => (t = t.toLowerCase(), function(r) {
   return $(r) === t;
 }), C = (t, e) => function() {
   return t.apply(e, arguments);
-}, a = (t) => Array.isArray(t), f = (t) => typeof t > "u", A = (t) => t !== null && !f(t) && t.constructor !== null && !f(t.constructor) && typeof t.constructor.isBuffer == "function" && t.constructor.isBuffer(t), p = o("ArrayBuffer"), B = (t) => {
+}, a = (t) => Array.isArray(t), f = (t) => typeof t > "u", B = (t) => t !== null && !f(t) && t.constructor !== null && !f(t.constructor) && typeof t.constructor.isBuffer == "function" && t.constructor.isBuffer(t), d = o("ArrayBuffer"), A = (t) => {
   let e;
-  return typeof ArrayBuffer < "u" && ArrayBuffer.isView ? e = ArrayBuffer.isView(t) : e = t && t.buffer && p(t.buffer), e;
-}, O = (t) => typeof t == "string", F = (t) => typeof t == "number" && isFinite(t), m = (t) => t != null && typeof t == "object" && Array.isArray(t) === !1, c = (t) => {
+  return typeof ArrayBuffer < "u" && ArrayBuffer.isView ? e = ArrayBuffer.isView(t) : e = t && t.buffer && d(t.buffer), e;
+}, O = (t) => typeof t == "string", W = (t) => typeof t == "boolean", F = (t) => typeof t == "number" && isFinite(t), m = (t) => t != null && typeof t == "object" && Array.isArray(t) === !1, c = (t) => {
   if ($(t) !== "object")
     return !1;
   let e = Object.getPrototypeOf(t);
   return e === null || e === Object.prototype;
-}, S = o("Date"), w = o("File"), b = o("Blob"), h = o("FileList"), l = (t) => d.call(t) === "[object Function]", P = (t) => m(t) && l(t.pipe), D = (t) => {
+}, S = o("Date"), w = o("File"), b = o("Blob"), h = o("FileList"), l = (t) => p.call(t) === "[object Function]", P = (t) => m(t) && l(t.pipe), D = (t) => {
   let e = "[object FormData]";
-  return t && (typeof FormData == "function" && t instanceof FormData || d.call(t) === e || l(t.toString) && t.toString() === e);
+  return t && (typeof FormData == "function" && t instanceof FormData || p.call(t) === e || l(t.toString) && t.toString() === e);
 }, L = o("URLSearchParams"), U = (t) => t.trim ? t.trim() : t.replace(/^\s+|\s+$/g, ""), N = () => typeof navigator < "u" && (navigator.product === "ReactNative" || navigator.product === "NativeScript" || navigator.product === "NS") ? !1 : typeof window < "u" && typeof document < "u", y = (t, e) => {
   if (!(t === null || typeof t > "u"))
     if (typeof t != "object" && (t = [t]), a(t))
@@ -64,7 +64,7 @@ const d = Object.prototype.toString, $ = ((t) => (e) => {
   for (let n = 0, i = arguments.length; n < i; n++)
     y(arguments[n], r);
   return e;
-}, W = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+}, z = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   delay: _,
   endsWith: R,
@@ -72,10 +72,11 @@ const d = Object.prototype.toString, $ = ((t) => (e) => {
   forEach: y,
   inherits: E,
   isArray: a,
-  isArrayBuffer: p,
-  isArrayBufferView: B,
+  isArrayBuffer: d,
+  isArrayBufferView: A,
   isBlob: b,
-  isBuffer: A,
+  isBoolean: W,
+  isBuffer: B,
   isDate: S,
   isFile: w,
   isFileList: h,
@@ -95,37 +96,37 @@ const d = Object.prototype.toString, $ = ((t) => (e) => {
   toArray: T,
   toFlatObject: j,
   trim: U
-}, Symbol.toStringTag, { value: "Module" })), z = u, I = _, K = M, q = T, G = R, H = j, J = E, Q = x, X = V, Y = y, Z = N, k = U, v = L, tt = D, et = P, rt = l, nt = h, it = b, st = w, ot = S, ct = c, ft = m, ut = F, at = O, lt = B, yt = p, dt = A, pt = f, mt = a;
+}, Symbol.toStringTag, { value: "Module" })), I = u, K = _, q = M, G = T, H = R, J = j, Q = E, X = x, Y = V, Z = y, k = N, v = U, tt = L, et = D, rt = P, nt = l, it = h, st = b, ot = w, ct = S, ft = c, ut = m, at = F, lt = O, yt = A, pt = d, dt = B, mt = f, gt = a;
 export {
-  W as default,
-  I as delay,
-  G as endsWith,
-  X as extend,
-  Y as forEach,
-  J as inherits,
-  mt as isArray,
-  yt as isArrayBuffer,
-  lt as isArrayBufferView,
-  it as isBlob,
+  z as default,
+  K as delay,
+  H as endsWith,
+  Y as extend,
+  Z as forEach,
+  Q as inherits,
+  gt as isArray,
+  pt as isArrayBuffer,
+  yt as isArrayBufferView,
+  st as isBlob,
   dt as isBuffer,
-  ot as isDate,
-  st as isFile,
-  nt as isFileList,
-  tt as isFormData,
-  rt as isFunction,
-  ut as isNumber,
-  ft as isObject,
-  ct as isPlainObject,
-  Z as isStandardBrowserEnv,
-  et as isStream,
-  at as isString,
-  K as isTypedArray,
-  v as isURLSearchParams,
-  pt as isUndefined,
-  z as merge,
-  Q as stripBOM,
-  q as toArray,
-  H as toFlatObject,
-  k as trim
+  ct as isDate,
+  ot as isFile,
+  it as isFileList,
+  et as isFormData,
+  nt as isFunction,
+  at as isNumber,
+  ut as isObject,
+  ft as isPlainObject,
+  k as isStandardBrowserEnv,
+  rt as isStream,
+  lt as isString,
+  q as isTypedArray,
+  tt as isURLSearchParams,
+  mt as isUndefined,
+  I as merge,
+  X as stripBOM,
+  G as toArray,
+  J as toFlatObject,
+  v as trim
 };
 //# sourceMappingURL=index.js.map

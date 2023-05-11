@@ -37,13 +37,13 @@ const L = (s, e) => {
     L(arguments[a], t);
   return e;
 }, n = y, T = U;
-class b {
+class I {
   constructor() {
     l(this, "order", new w("id", "asc"));
     l(this, "queryProperties", ["id"]);
   }
 }
-class E extends b {
+class E extends I {
   constructor(t = 1, a = 10, r = -1) {
     super();
     l(this, "size", 10);
@@ -61,7 +61,7 @@ class E extends b {
     this.pageOffset = t;
   }
 }
-class q {
+class b {
   constructor(e, t, a) {
     l(this, "property", null);
     l(this, "joinType", null);
@@ -69,7 +69,7 @@ class q {
     this.property = e || this.property, this.joinType = t || this.joinType, this.on = a || this.on;
   }
   of(e, t, a) {
-    return new q(e, t, a);
+    return new b(e, t, a);
   }
 }
 class w {
@@ -234,7 +234,7 @@ class Q extends P {
     });
   }
 }
-class I extends P {
+class q extends P {
   constructor(e, t) {
     super(e, t);
   }
@@ -256,7 +256,7 @@ class I extends P {
     });
   }
 }
-class A extends I {
+class A extends q {
   constructor(e, t) {
     super(e, t), this.setDefaultResponse(new f());
   }
@@ -302,7 +302,7 @@ const c = class extends S {
       params: null,
       headers: { "Content-Type": u["application/x-www-form-urlencoded"] }
     }, t), r = this.createAxiosInstance(a);
-    return p(new A(r, e).setDefaultResponse({ data: [] }).setDefaultRequestData(new b()));
+    return p(new A(r, e).setDefaultResponse({ data: [] }).setDefaultRequestData(new I()));
   }
   /**
    *
@@ -328,7 +328,7 @@ const c = class extends S {
       params: null,
       headers: { "Content-Type": u["multipart/form-data"] }
     }, t), r = this.createAxiosInstance(a);
-    return p(new I(r, e));
+    return p(new q(r, e));
   }
   /**
    * 获取HttpClient实例（单例模式），首将获取时会根据参数初始化实例，后续再获取时参数将不会生效，而是直接返回已经存在的实例
@@ -367,7 +367,7 @@ export {
   X as Condition,
   E as DefaultPageableQueryRequestData,
   F as DefaultPageableQueryResponse,
-  b as DefaultQueryRequestData,
+  I as DefaultQueryRequestData,
   f as DefaultResponse,
   N as EConditionOpt,
   G as EOrderDirection,
@@ -376,9 +376,9 @@ export {
   x as HttpClient,
   u as HttpContentType,
   d as HttpMethod,
-  q as Join,
+  b as Join,
   w as Order,
   z as PageableQueryExecutor,
-  I as PostExecutor,
+  q as PostExecutor,
   A as QueryExecutor
 };

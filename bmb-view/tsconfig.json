@@ -2,6 +2,7 @@
   "compilerOptions": {
     "baseUrl": "./",
     "target": "ES6",
+    "noImplicitAny": false,
     "useDefineForClassFields": true,
     "module": "ESNext",
     "moduleResolution": "Node",
@@ -12,13 +13,12 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "noEmit": true,
-    "lib": ["ES6", "ES2016", "ES2020", "ES2021", "ESNext", "DOM"]
+    "lib": ["ES6", "ES2016", "ES2020", "ES2021", "ESNext", "dom"]
   },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.d.ts",
-    "src/**/*.vue",
-    "src/**/*.js"
-  ],
-  "exclude": ["node_modules","dist"]
+  "include": ["packages/**/*.ts", "packages/**/*.d.ts", "packages/**/*.vue"],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**/*.md"
+  ]
 }
