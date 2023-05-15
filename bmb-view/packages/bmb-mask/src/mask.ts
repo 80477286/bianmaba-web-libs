@@ -1,6 +1,4 @@
 import {createApp, defineComponent, reactive, toRefs, h, withDirectives, withCtx, Transition, vShow, ref} from 'vue'
-import "../../css/mask.css"
-
 
 export interface MaskOption {
     fullScreen: boolean,

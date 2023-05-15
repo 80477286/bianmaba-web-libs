@@ -1,9 +1,9 @@
 {
   "name": "@bianmaba/utils",
-  "version": "0.1.0",
-  "main": "./dist/index.umd.js",
-  "module": "./dist/index.es.js",
-  "types": "./src/index.ts",
+  "version": "0.1.2",
+  "main": "./dist/umd/index.js",
+  "module": "./dist/es/index.js",
+  "types": "./dist/types/index.d.ts",
   "type": "module",
   "files": [
     "./dist",
@@ -18,7 +18,8 @@
     }
   },
   "scripts": {
-    "build": "vite build"
+    "build": "vite build",
+    "release": "npm publish --access=public"
   },
   "devDependencies": {
     "@types/node": "^18.15.11",
