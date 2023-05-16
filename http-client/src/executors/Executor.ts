@@ -116,6 +116,11 @@ export default class Executor {
 
 
     public handleThenResponse(resolve: (value: any) => void, resp: AxiosResponse<any>) {
+        for (let key in this.defaultResponse) {
+            if (resp.data[key] == undefined || resp.data[key] == null) {
+                resp.data[key] = this.defaultResponse[key];
+            }
+        }
         this.response = resp.data;
         resolve(resp.data)
     }
