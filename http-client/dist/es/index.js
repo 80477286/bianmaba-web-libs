@@ -6,21 +6,21 @@ import { reactive as p } from "vue";
 const v = Object.prototype.toString, R = ((s) => (e) => {
   let t = v.call(e);
   return s[t] || (s[t] = t.slice(8, -1).toLowerCase());
-})(/* @__PURE__ */ Object.create(null)), o = (s) => (s = s.toLowerCase(), function(e) {
+})(/* @__PURE__ */ Object.create(null)), c = (s) => (s = s.toLowerCase(), function(e) {
   return R(e) === s;
 }), D = (s) => Array.isArray(s);
-o("ArrayBuffer");
+c("ArrayBuffer");
 const U = (s) => s != null && typeof s == "object" && Array.isArray(s) === !1, g = (s) => {
   if (R(s) !== "object")
     return !1;
   let e = Object.getPrototypeOf(s);
   return e === null || e === Object.prototype;
 };
-o("Date");
-o("File");
-o("Blob");
-o("FileList");
-o("URLSearchParams");
+c("Date");
+c("File");
+c("Blob");
+c("FileList");
+c("URLSearchParams");
 const L = (s, e) => {
   if (!(s === null || typeof s > "u"))
     if (typeof s != "object" && (s = [s]), D(s))
@@ -158,7 +158,7 @@ class P {
   }
   execute(e = {}) {
     return new Promise((t, a) => {
-      this.loading = !0, T(e.data) ? this.data = n(this.data || {}, e.data || {}) : this.data = e.data, this.params = n(this.params || {}, e.params || {}), e.url = e.url ? e.url : this.url, this.initOptions(e), this.instance.request(e).then((r) => {
+      this.loading = !0, T(e.data) ? this.data = n(this.data || {}, e.data || {}) : this.data = e.data, this.params = n(this.params || {}, e.params || {}), e.url = e.url ? e.url : this.url, this.initOptions(e), this.setDefaultResponse(this.defaultResponse), this.instance.request(e).then((r) => {
         try {
           this.handleThenResponse(t, r);
         } finally {
@@ -217,7 +217,7 @@ class Q extends P {
     super(e, t);
   }
   execute(e = {}, t = {}) {
-    return this.loading = !0, this.params = n(this.params || {}, t.params || {}, e || {}), t.params = this.params, this.initOptions(t), new Promise((a, r) => {
+    return this.loading = !0, this.params = n(this.params || {}, t.params || {}, e || {}), t.params = this.params, this.initOptions(t), this.setDefaultResponse(this.defaultResponse), new Promise((a, r) => {
       this.instance.get(t.url || this.url, t).then((i) => {
         try {
           this.handleThenResponse(a, i);
@@ -239,7 +239,7 @@ class q extends P {
     super(e, t);
   }
   execute(e = {}, t = {}, a = {}) {
-    return this.loading = !0, T(e) ? this.data = n(this.data || {}, a.data || {}, e || {}) : this.data = e, this.params = n(this.params || {}, a.params || {}, t || {}), a.params = this.params, this.initOptions(a), new Promise((r, i) => {
+    return this.loading = !0, T(e) ? this.data = n(this.data || {}, a.data || {}, e || {}) : this.data = e, this.params = n(this.params || {}, a.params || {}, t || {}), a.params = this.params, this.initOptions(a), this.setDefaultResponse(this.defaultResponse), new Promise((r, i) => {
       this.instance.post(a.url || this.url, this.data, a).then((m) => {
         try {
           this.handleThenResponse(r, m);
@@ -266,7 +266,7 @@ class z extends A {
     super(e, t), this.setDefaultResponse(new F());
   }
 }
-const c = class extends S {
+const o = class extends S {
   constructor(e = {}) {
     super(e);
   }
@@ -335,33 +335,33 @@ const c = class extends S {
    * @param options
    */
   static getInstance(e) {
-    return this.instance ? e && console.error("实例已经存在，重获取实例时，配置选项将不会生效！") : this.instance = new c(e), this.instance;
+    return this.instance ? e && console.error("实例已经存在，重获取实例时，配置选项将不会生效！") : this.instance = new o(e), this.instance;
   }
   static post() {
     return {
       do(e, t = {}, a = {}, r = {}) {
-        return c.getInstance().createPostExecutor(e, r).execute(t, a, r);
+        return o.getInstance().createPostExecutor(e, r).execute(t, a, r);
       },
       multipartFormData(e, t = {}, a = {}, r = {}) {
-        return c.getInstance().createPostExecutor(e, r).toFormDataRequest().execute(t, a, r);
+        return o.getInstance().createPostExecutor(e, r).toFormDataRequest().execute(t, a, r);
       },
       form(e, t = {}, a = {}, r = {}) {
-        return c.getInstance().createPostExecutor(e, r).toFormRequest().execute(t, a, r);
+        return o.getInstance().createPostExecutor(e, r).toFormRequest().execute(t, a, r);
       },
       json(e, t = {}, a = {}, r = {}) {
-        return c.getInstance().createPostExecutor(e, r).toJsonRequest().execute(t, a, r);
+        return o.getInstance().createPostExecutor(e, r).toJsonRequest().execute(t, a, r);
       }
     };
   }
   static get() {
     return {
       do(e, t = {}, a = {}) {
-        return c.getInstance().createGetExecutor(e, a).execute(t, a);
+        return o.getInstance().createGetExecutor(e, a).execute(t, a);
       }
     };
   }
 };
-let x = c;
+let x = o;
 l(x, "instance");
 export {
   X as Condition,

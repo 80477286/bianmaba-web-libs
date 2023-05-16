@@ -57,6 +57,7 @@ export default class Executor {
             this.params = merge(this.params || {}, options.params || {});
             options.url = options.url ? options.url : this.url;
             this.initOptions(options)
+            this.setDefaultResponse(this.defaultResponse)
             this.instance.request(options).then((resp: AxiosResponse<any>) => {
                 try {
                     this.handleThenResponse(resolve, resp);
