@@ -100,7 +100,7 @@ export default class Executor {
 
     public setDefaultResponse(defaultResponse: Response = new DefaultResponse()): ExecutorType {
         this.response = defaultResponse;
-        this.defaultResponse = merge(this.response, {});
+        this.defaultResponse = merge(defaultResponse, {});
         return this;
     }
 
