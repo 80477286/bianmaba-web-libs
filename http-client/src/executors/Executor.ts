@@ -1,6 +1,6 @@
 "use strict";
 import {AxiosInstance, AxiosRequestConfig, AxiosResponse} from "axios";
-import {isObject, merge} from "@bianmaba/utils";
+import {isArray, isObject, merge} from "@bianmaba/utils";
 import {HttpContentType, RequestData, RequestParams} from "./request/Request";
 import {DefaultResponse, Response} from "./response/Response";
 import GetExecutor from "./GetExecutor";
@@ -117,8 +117,14 @@ export default class Executor {
 
     public handleThenResponse(resolve: (value: any) => void, resp: AxiosResponse<any>) {
         for (let key in this.defaultResponse) {
-            if (resp.data[key] == undefined || resp.data[key] == null) {
-                resp.data[key] = this.defaultResponse[key];
+            if (isObject(this.defaultResponse.data)) {
+                if (resp.data[key] == undefined || resp.data[key] == null) {
+                    resp.data[key] = this.defaultResponse.data[key];
+                }
+            } else if (isArray(this.defaultResponse.data)) {
+                if (resp.data == undefined || resp.data == null) {
+                    resp.data = this.defaultResponse.data;
+                }
             }
         }
         this.response = resp.data;
