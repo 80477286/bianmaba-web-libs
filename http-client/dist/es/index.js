@@ -1,17 +1,17 @@
-var j = Object.defineProperty;
-var k = (s, e, t) => e in s ? j(s, e, { enumerable: !0, configurable: !0, writable: !0, value: t }) : s[e] = t;
-var n = (s, e, t) => (k(s, typeof e != "symbol" ? e + "" : e, t), t);
+var A = Object.defineProperty;
+var U = (s, e, t) => e in s ? A(s, e, { enumerable: !0, configurable: !0, writable: !0, value: t }) : s[e] = t;
+var n = (s, e, t) => (U(s, typeof e != "symbol" ? e + "" : e, t), t);
 import f from "axios";
 import { reactive as p } from "vue";
-const N = Object.prototype.toString, T = ((s) => (e) => {
-  let t = N.call(e);
+const L = Object.prototype.toString, S = ((s) => (e) => {
+  let t = L.call(e);
   return s[t] || (s[t] = t.slice(8, -1).toLowerCase());
 })(/* @__PURE__ */ Object.create(null)), h = (s) => (s = s.toLowerCase(), function(e) {
-  return T(e) === s;
+  return S(e) === s;
 }), w = (s) => Array.isArray(s);
 h("ArrayBuffer");
-const F = (s) => s != null && typeof s == "object" && Array.isArray(s) === !1, g = (s) => {
-  if (T(s) !== "object")
+const j = (s) => s != null && typeof s == "object" && Array.isArray(s) === !1, g = (s) => {
+  if (S(s) !== "object")
     return !1;
   let e = Object.getPrototypeOf(s);
   return e === null || e === Object.prototype;
@@ -21,7 +21,7 @@ h("File");
 h("Blob");
 h("FileList");
 h("URLSearchParams");
-const E = (s, e) => {
+const k = (s, e) => {
   if (!(s === null || typeof s > "u"))
     if (typeof s != "object" && (s = [s]), w(s))
       for (let t = 0, a = s.length; t < a; t++)
@@ -29,21 +29,21 @@ const E = (s, e) => {
     else
       for (let t in s)
         Object.prototype.hasOwnProperty.call(s, t) && e.call(null, s[t], t, s);
-}, R = function(...s) {
+}, x = function(...s) {
   let e = arguments[0], t = (a, r) => {
-    g(e[r]) && g(a) ? e[r] = R(e[r], a) : g(a) ? e[r] = R({}, a) : w(a) ? e[r] = a.slice() : e[r] = a;
+    g(e[r]) && g(a) ? e[r] = x(e[r], a) : g(a) ? e[r] = x({}, a) : w(a) ? e[r] = a.slice() : e[r] = a;
   };
   for (let a = 0, r = arguments.length; a < r; a++)
-    E(arguments[a], t);
+    k(arguments[a], t);
   return e;
-}, i = R, y = F, b = w;
-class I {
+}, i = x, y = j, T = w;
+class N {
   constructor() {
     n(this, "order", new D("id", "ascending"));
     n(this, "queryProperties", ["id"]);
   }
 }
-class G extends I {
+class F extends N {
   constructor(t = 1, a = 10, r = -1) {
     super();
     n(this, "size", 10);
@@ -61,7 +61,7 @@ class G extends I {
     this.pageOffset = t;
   }
 }
-class S {
+class b {
   constructor(e, t, a) {
     n(this, "property", null);
     n(this, "joinType", null);
@@ -69,7 +69,7 @@ class S {
     this.property = e || this.property, this.joinType = t || this.joinType, this.on = a || this.on;
   }
   of(e, t, a) {
-    return new S(e, t, a);
+    return new b(e, t, a);
   }
 }
 class D {
@@ -98,7 +98,7 @@ class V {
     this.or.push(e);
   }
 }
-var J = /* @__PURE__ */ ((s) => (s.Asc = "asc", s.Desc = "desc", s))(J || {}), O = /* @__PURE__ */ ((s) => (s.equals = "equals", s.eq = "eq", s.ge = "ge", s.gt = "gt", s.lt = "lt", s.le = "le", s.ne = "ne", s.notlike = "notlike", s.like = "like", s["like:"] = "like:", s[":like"] = ":like", s[":like:"] = ":like:", s.lk = "like", s["lk:"] = "like:", s[":lk"] = ":like", s[":lk:"] = ":like:", s.between = "between", s.btw = "btw", s.isnull = "isnull", s.isnotnull = "isnotnull", s.isempty = "isempty", s.isnotempty = "isnotempty", s.in = "in", s.notin = "notin", s))(O || {}), u = /* @__PURE__ */ ((s) => (s["application/atom+xml"] = "application/atom+xml", s["application/json"] = "application/json", s["application/x-www-form-urlencoded"] = "application/x-www-form-urlencoded", s["application/xml"] = "application/xml", s["multipart/form-data"] = "multipart/form-data", s["text/html"] = "text/html", s["text/plain"] = "text/plain", s))(u || {}), d = /* @__PURE__ */ ((s) => (s.POST = "POST", s.GET = "GET", s.DELETE = "DELETE", s.HEAD = "HEAD", s.OPTIONS = "OPTIONS", s.PUT = "PUT", s.PATCH = "PATCH", s.PURGE = "PURGE", s.LINK = "LINK", s.UNLINK = "UNLINK", s))(d || {});
+var E = /* @__PURE__ */ ((s) => (s.Asc = "asc", s.Desc = "desc", s))(E || {}), G = /* @__PURE__ */ ((s) => (s.equals = "equals", s.eq = "eq", s.ge = "ge", s.gt = "gt", s.lt = "lt", s.le = "le", s.ne = "ne", s.notlike = "notlike", s.like = "like", s["like:"] = "like:", s[":like"] = ":like", s[":like:"] = ":like:", s.lk = "like", s["lk:"] = "like:", s[":lk"] = ":like", s[":lk:"] = ":like:", s.between = "between", s.btw = "btw", s.isnull = "isnull", s.isnotnull = "isnotnull", s.isempty = "isempty", s.isnotempty = "isnotempty", s.in = "in", s.notin = "notin", s))(G || {}), u = /* @__PURE__ */ ((s) => (s["application/atom+xml"] = "application/atom+xml", s["application/json"] = "application/json", s["application/x-www-form-urlencoded"] = "application/x-www-form-urlencoded", s["application/xml"] = "application/xml", s["multipart/form-data"] = "multipart/form-data", s["text/html"] = "text/html", s["text/plain"] = "text/plain", s))(u || {}), d = /* @__PURE__ */ ((s) => (s.POST = "POST", s.GET = "GET", s.DELETE = "DELETE", s.HEAD = "HEAD", s.OPTIONS = "OPTIONS", s.PUT = "PUT", s.PATCH = "PATCH", s.PURGE = "PURGE", s.LINK = "LINK", s.UNLINK = "UNLINK", s))(d || {});
 class v {
   constructor(e = {}) {
     f.defaults = i(f.defaults || {}, {
@@ -126,23 +126,23 @@ class P {
     n(this, "progressEvent", { progress: 0 });
   }
 }
-class A extends P {
+class I extends P {
   constructor() {
     super(...arguments);
     n(this, "data", []);
   }
 }
-class Q extends A {
+class Q extends I {
   constructor() {
     super(...arguments);
     n(this, "status", null);
     n(this, "total", 0);
   }
 }
-const z = (s) => s instanceof FormData ? new FormData() : s instanceof URLSearchParams ? new URLSearchParams() : b(s) ? [] : y(s) ? {} : s, m = (...s) => {
+const z = (s) => s instanceof FormData ? new FormData() : s instanceof URLSearchParams ? new URLSearchParams() : T(s) ? [] : y(s) ? {} : s, m = (...s) => {
   if (s.length <= 0)
     return null;
-  if (b(s[s.length - 1]))
+  if (T(s[s.length - 1]))
     return s[s.length - 1];
   let e = z(s[s.length - 1]);
   for (let t = 0; t < s.length; t++) {
@@ -233,19 +233,19 @@ class q {
     return this.instance.defaults.headers["Content-Type"] = u["multipart/form-data"], this;
   }
   setDefaultResponse(e = {}) {
-    return this.defaultResponse = e, this;
+    return this.defaultResponse = e, this.response = JSON.parse(JSON.stringify(this.defaultResponse)), this;
   }
   mergeDefaultResponse(e = {}) {
-    return this.defaultResponse = i(this.defaultResponse, e || {}, {}), this;
+    return this.defaultResponse = i(this.defaultResponse, e || {}, {}), this.response = JSON.parse(JSON.stringify(this.defaultResponse)), this;
   }
   setDefaultRequestData(e = {}) {
-    return this.defaultRequestData = e, this;
+    return this.defaultRequestData = e, this.data = JSON.parse(JSON.stringify(this.defaultRequestData)), this;
   }
   mergeDefaultRequestData(e = {}) {
-    return i(this.defaultRequestData, e || {}), this;
+    return i(this.defaultRequestData, e || {}), this.data = JSON.parse(JSON.stringify(this.defaultRequestData)), this;
   }
   setDefaultResultParams(e = {}) {
-    return this.defaultRequestParams = e, this;
+    return this.defaultRequestParams = e, this.params = JSON.parse(JSON.stringify(this.defaultRequestParams)), this;
   }
   handleThenResponse(e, t) {
     var a;
@@ -282,7 +282,7 @@ class K extends q {
     });
   }
 }
-class U extends q {
+class J extends q {
   constructor(e, t) {
     super(e, t);
   }
@@ -304,14 +304,14 @@ class U extends q {
     });
   }
 }
-class L extends U {
+class O extends J {
   constructor(e, t) {
-    super(e, t), this.setDefaultResponse(new A()), this.setDefaultRequestData(new I());
+    super(e, t), this.setDefaultResponse(new I()), this.setDefaultRequestData(new N());
   }
 }
-class B extends L {
+class B extends O {
   constructor(e, t) {
-    super(e, t), this.setDefaultResponse(new Q()), this.setDefaultRequestData(new G());
+    super(e, t), this.setDefaultResponse(new Q()), this.setDefaultRequestData(new F());
   }
 }
 const o = class extends v {
@@ -350,7 +350,7 @@ const o = class extends v {
       params: null,
       headers: { "Content-Type": u["application/x-www-form-urlencoded"] }
     }, t), r = this.createAxiosInstance(a);
-    return p(new L(r, e));
+    return p(new O(r, e));
   }
   /**
    *
@@ -376,7 +376,7 @@ const o = class extends v {
       params: null,
       headers: { "Content-Type": u["multipart/form-data"] }
     }, t), r = this.createAxiosInstance(a);
-    return p(new U(r, e));
+    return p(new J(r, e));
   }
   /**
    * 获取HttpClient实例（单例模式），首将获取时会根据参数初始化实例，后续再获取时参数将不会生效，而是直接返回已经存在的实例
@@ -409,26 +409,26 @@ const o = class extends v {
     };
   }
 };
-let x = o;
-n(x, "instance");
+let R = o;
+n(R, "instance");
 export {
   V as Condition,
-  G as DefaultPageableQueryRequestData,
+  F as DefaultPageableQueryRequestData,
   Q as DefaultPageableQueryResponse,
-  I as DefaultQueryRequestData,
+  N as DefaultQueryRequestData,
   P as DefaultResponse,
-  O as EConditionOpt,
-  J as EOrderDirection,
+  G as EConditionOpt,
+  E as EOrderDirection,
   q as Executor,
   K as GetExecutor,
-  x as HttpClient,
+  R as HttpClient,
   u as HttpContentType,
   d as HttpMethod,
-  S as Join,
+  b as Join,
   D as Order,
   B as PageableQueryExecutor,
-  U as PostExecutor,
-  L as QueryExecutor,
+  J as PostExecutor,
+  O as QueryExecutor,
   m as mergeDataOrParams
 };
 //# sourceMappingURL=index.js.map

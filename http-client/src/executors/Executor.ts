@@ -99,26 +99,31 @@ export default class Executor {
 
     public setDefaultResponse(defaultResponse: Response = {}): ExecutorType {
         this.defaultResponse = defaultResponse;
+        this.response = JSON.parse(JSON.stringify(this.defaultResponse));
         return this;
     }
 
     public mergeDefaultResponse(defaultResponse: Response = {}): ExecutorType {
         this.defaultResponse = merge(this.defaultResponse, defaultResponse || {}, {});
+        this.response = JSON.parse(JSON.stringify(this.defaultResponse));
         return this;
     }
 
     public setDefaultRequestData(defaultRequestData: RequestData = {}): ExecutorType {
         this.defaultRequestData = defaultRequestData;
+        this.data = JSON.parse(JSON.stringify(this.defaultRequestData));
         return this;
     }
 
     public mergeDefaultRequestData(defaultRequestData: RequestData = {}): ExecutorType {
         merge(this.defaultRequestData, defaultRequestData || {});
+        this.data = JSON.parse(JSON.stringify(this.defaultRequestData));
         return this;
     }
 
     public setDefaultResultParams(defaultResultParams: RequestParams = {}): ExecutorType {
         this.defaultRequestParams = defaultResultParams;
+        this.params = JSON.parse(JSON.stringify(this.defaultRequestParams));
         return this;
     }
 
