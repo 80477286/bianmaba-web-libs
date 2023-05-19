@@ -1,1 +1,5 @@
-export declare const mergeDataOrParams: (src: FormData | URLSearchParams | any, target: FormData | URLSearchParams | any) => any;
+/**
+ * 合并参数，最终返回参数类型为最后一个参数的类型
+ * @param args
+ */
+export declare const mergeDataOrParams: (...args: any[]) => any;

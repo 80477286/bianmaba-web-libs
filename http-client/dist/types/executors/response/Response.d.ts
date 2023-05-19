@@ -19,6 +19,7 @@ export interface IPageableQueryResponse extends IResponse {
     page?: number;
     size?: number;
     total?: number;
+    pageOffset?: number;
 }
 export declare class DefaultResponse implements IResponse {
     success: boolean;

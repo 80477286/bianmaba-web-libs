@@ -1,7 +1,7 @@
 "use strict";
 import {AxiosInstance, AxiosRequestConfig, AxiosResponse} from "axios";
 import {isArray, isObject, merge} from "@bianmaba/utils";
-import {HttpContentType, RequestData, RequestParams} from "./request/Request";
+import {DefaultQueryRequestData, HttpContentType, RequestData, RequestParams} from "./request/Request";
 import {DefaultResponse, Response} from "./response/Response";
 import GetExecutor from "./GetExecutor";
 import PostExecutor from "./PostExecutor";
@@ -14,10 +14,12 @@ export default class Executor {
     public instance: AxiosInstance;
     public url: string = '';
     public loading: boolean = false;
-    public response: Response = new DefaultResponse();
     public data: RequestData = {}
     public params: RequestParams = {}
+    public response: Response = new DefaultResponse();
     public defaultResponse: Response = new DefaultResponse();
+    public defaultRequestParams: Response = {} as RequestData;
+    public defaultRequestData: Response = {} as RequestData;
 
     constructor(instance: AxiosInstance, url?: string) {
 
@@ -50,11 +52,10 @@ export default class Executor {
     public execute(options: AxiosRequestConfig<any> | any = {}): Promise<Response> {
         return new Promise((resolve, reject) => {
             this.loading = true;
-            options.data = mergeDataOrParams(this.data, options.data);
-            options.params = mergeDataOrParams(this.params, options.params);
+            options.data = this.data = mergeDataOrParams(this.defaultRequestData, options.data);
+            options.params = this.data = mergeDataOrParams(this.defaultRequestParams, options.params);
             options.url = options.url ? options.url : this.url;
             this.initOptions(options)
-            this.setDefaultResponse(this.defaultResponse)
             this.instance.request(options).then((resp: AxiosResponse<any>) => {
                 try {
                     this.handleThenResponse(resolve, resp);
@@ -97,46 +98,48 @@ export default class Executor {
     }
 
     public setDefaultResponse(defaultResponse: Response = new DefaultResponse()): ExecutorType {
-        this.response = defaultResponse;
-        this.defaultResponse = merge(defaultResponse, {});
+        this.defaultResponse = defaultResponse;
+        return this;
+    }
+
+    public mergeDefaultResponse(defaultResponse: Response = new DefaultResponse()): ExecutorType {
+        this.defaultResponse = merge(this.defaultResponse, defaultResponse, {});
         return this;
     }
 
     public setDefaultRequestData(defaultRequestData: RequestData = {}): ExecutorType {
-        this.data = merge(this.data, defaultRequestData);
+        this.defaultRequestData = defaultRequestData;
+        return this;
+    }
+
+    public mergeDefaultRequestData(defaultRequestData: RequestData = {}): ExecutorType {
+        merge(this.defaultRequestData, defaultRequestData);
         return this;
     }
 
     public setDefaultResultParams(defaultResultParams: RequestParams = {}): ExecutorType {
-        this.params = merge(this.params, defaultResultParams);
+        this.defaultRequestParams = defaultResultParams;
         return this;
     }
 
+    public mergeDefaultResultParams(defaultResultParams: RequestParams = {}): ExecutorType {
+        merge(this.defaultRequestParams, defaultResultParams);
+        return this;
+    }
 
     public handleThenResponse(resolve: (value: any) => void, resp: AxiosResponse<any>) {
-        for (let key in this.defaultResponse) {
-            if (isObject(this.defaultResponse.data)) {
-                if (resp.data[key] == undefined || resp.data[key] == null) {
-                    resp.data[key] = this.defaultResponse.data[key];
-                }
-            } else if (isArray(this.defaultResponse.data)) {
-                if (resp.data == undefined || resp.data == null) {
-                    resp.data = this.defaultResponse.data;
-                }
-            }
-        }
-        this.response = resp.data;
+        this.response = merge({}, this.defaultResponse, resp.data);
         resolve(resp.data)
     }
 
     public handleCatchResponse(reject: (reason?: any) => void, e: any) {
         console.error('远程请求发生异常：', e)
         if (e.response) {
-            this.response = e.response.data;
+            this.response = merge({}, this.defaultResponse, e.response.data);
             reject(e.response.data)
         } else {
-            let result = {success: false, result: '远程请求发生异常！', data: null};
-            this.response = result;
+            let result = {success: false, result: '远程请求发生异常！'};
+            this.response = merge({}, this.defaultResponse, result);
             reject(result)
         }
     }

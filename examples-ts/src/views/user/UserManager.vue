@@ -1,13 +1,13 @@
 <template>
   <el-config-provider :locale="locales[local]" size="large">
-    <div style="display: flex;flex-direction: row;justify-content: space-between">{{ query.data.page }}
+    <div style="display: flex;flex-direction: row;justify-content: space-between">{{ query.requestData.page }}
       <el-button-group>
         <el-select v-model="local" class="m-2" placeholder="Select">
           <el-option v-for="key in keys" :key="key" :label="key" :value="key"/>
         </el-select>
       </el-button-group>
       <el-button-group style="margin-left: 5px;">
-        <el-input v-model="query.data.query" @clear="exeQuery"
+        <el-input v-model="query.requestData.query" @clear="exeQuery"
                   v-on:keypress.enter="exeQuery" clearable>
           <template #append>
             <el-button @click="exeQuery">Search</el-button>
@@ -30,9 +30,9 @@
     <el-pagination background
                    @current-change="exeQuery"
                    @size-change="exeQuery"
-                   :total="query.response.total||0"
-                   v-model:current-page="query.data.page"
-                   v-model:page-size="query.data.size"
+                   :total="query.response.total"
+                   v-model:current-page="query.requestData.page"
+                   v-model:page-size="query.requestData.size"
                    :hide-on-single-page="false"
                    :page-sizes="[10, 15, 20, 25,30, 35,40]"
                    layout="total, sizes, prev, pager, next, jumper"></el-pagination>
@@ -45,6 +45,7 @@ import {onMounted, ref} from "vue";
 import {userService} from "./UserService";
 import * as locales from 'element-plus/es/locale/index'
 import UserEditor from "./UserEditor.vue";
+import {merge} from "@bianmaba/utils";
 
 const keys = ref(Object.keys(locales));
 const local = ref('zhCn');
@@ -60,7 +61,7 @@ const onRowDblClickHandler = (row: any) => {
 }
 const exeQuery = () => {
   setTimeout(() => {
-    query.execute().then((resp: any) => {
+    query.execute({abc: 1}).then((resp: any) => {
       console.log(resp)
     })
   }, 1000)

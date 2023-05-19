@@ -9,10 +9,12 @@ export default class Executor {
     instance: AxiosInstance;
     url: string;
     loading: boolean;
+    requestData: RequestData;
+    requestParams: RequestParams;
     response: Response;
-    data: RequestData;
-    params: RequestParams;
     defaultResponse: Response;
+    defaultRequestParams: Response;
+    defaultRequestData: Response;
     constructor(instance: AxiosInstance, url?: string);
     abort(): void;
     initOptions(options?: AxiosRequestConfig<any> | any): void;
@@ -30,8 +32,11 @@ export default class Executor {
      */
     toFormDataRequest(): ExecutorType;
     setDefaultResponse(defaultResponse?: Response): ExecutorType;
+    mergeDefaultResponse(defaultResponse?: Response): ExecutorType;
     setDefaultRequestData(defaultRequestData?: RequestData): ExecutorType;
+    mergeDefaultRequestData(defaultRequestData?: RequestData): ExecutorType;
     setDefaultResultParams(defaultResultParams?: RequestParams): ExecutorType;
+    mergeDefaultResultParams(defaultResultParams?: RequestParams): ExecutorType;
     handleThenResponse(resolve: (value: any) => void, resp: AxiosResponse<any>): void;
     handleCatchResponse(reject: (reason?: any) => void, e: any): void;
 }

@@ -11,10 +11,9 @@ class UserService extends HttpClient {
     }
 
     public createQuery(): PostExecutor {
-        return this.createPageableQueryExecutor('/user/query').toJsonRequest().setDefaultRequestData({
-            order: new Order('name', 'asc'),
-            page: 1, size: 10
-        });
+        return this.createPageableQueryExecutor('/user/query').toJsonRequest().mergeDefaultRequestData({
+            order: new Order('name', 'asc')
+        }).mergeDefaultResponse();
     }
 
     public createSave(): PostExecutor {

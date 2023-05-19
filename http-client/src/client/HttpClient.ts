@@ -16,6 +16,7 @@ import {
 } from "../executors/request/Request";
 import QueryExecutor from "../executors/QueryExecutor";
 import PageableQueryExecutor from "../executors/PageableQueryExecutor";
+import {DefaultPageableQueryResponse, DefaultResponse} from "../executors/response/Response";
 
 export default class HttpClient extends AbstractHttpClient {
     private static instance: HttpClient | any;
@@ -60,7 +61,7 @@ export default class HttpClient extends AbstractHttpClient {
             headers: {'Content-Type': HttpContentType["application/x-www-form-urlencoded"]}
         }, options);
         let axiosInstance = this.createAxiosInstance(_options);
-        return reactive(new QueryExecutor(axiosInstance, url).setDefaultResponse({data: []}).setDefaultRequestData(new DefaultQueryRequestData()));
+        return reactive(new QueryExecutor(axiosInstance, url).setDefaultRequestData(new DefaultQueryRequestData()));
     }
 
     /**
@@ -75,7 +76,7 @@ export default class HttpClient extends AbstractHttpClient {
             headers: {'Content-Type': HttpContentType["application/x-www-form-urlencoded"]}
         }, options);
         let axiosInstance = this.createAxiosInstance(_options);
-        return reactive(new PageableQueryExecutor(axiosInstance, url).setDefaultResponse({data: []}).setDefaultRequestData(new DefaultPageableQueryRequestData()));
+        return reactive(new PageableQueryExecutor(axiosInstance, url).setDefaultResponse(new DefaultPageableQueryResponse()).setDefaultRequestData(new DefaultPageableQueryRequestData()));
     }
 
     /**

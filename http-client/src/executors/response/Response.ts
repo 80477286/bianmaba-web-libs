@@ -16,6 +16,7 @@ export interface IPageableQueryResponse extends IResponse {
     page?: number;
     size?: number;
     total?: number;
+    pageOffset?: number;
 }
 
 export class DefaultResponse implements IResponse {
@@ -29,6 +30,7 @@ export class DefaultResponse implements IResponse {
     status = null;
     progressEvent = {progress: 0};
 }
+
 
 export class DefaultPageableQueryResponse extends DefaultResponse implements IPageableQueryResponse {
     status = null;
