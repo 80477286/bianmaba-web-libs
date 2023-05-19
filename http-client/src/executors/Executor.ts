@@ -5,6 +5,7 @@ import {HttpContentType, RequestData, RequestParams} from "./request/Request";
 import {DefaultResponse, Response} from "./response/Response";
 import GetExecutor from "./GetExecutor";
 import PostExecutor from "./PostExecutor";
+import {mergeDataOrParams} from "../utils/utils";
 
 export type ExecutorType = (Executor | GetExecutor | PostExecutor | any)
 
@@ -49,12 +50,8 @@ export default class Executor {
     public execute(options: AxiosRequestConfig<any> | any = {}): Promise<Response> {
         return new Promise((resolve, reject) => {
             this.loading = true;
-            if (isObject(options.data)) {
-                this.data = merge(this.data || {}, options.data || {});
-            } else {
-                this.data = options.data;
-            }
-            this.params = merge(this.params || {}, options.params || {});
+            options.data = mergeDataOrParams(this.data, options.data);
+            options.params = mergeDataOrParams(this.params, options.params);
             options.url = options.url ? options.url : this.url;
             this.initOptions(options)
             this.setDefaultResponse(this.defaultResponse)
@@ -73,6 +70,7 @@ export default class Executor {
             });
         })
     }
+
 
     /**
      * 将执行器请求方式设置为：application/json

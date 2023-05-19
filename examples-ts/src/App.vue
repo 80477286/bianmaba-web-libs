@@ -2,10 +2,6 @@
   <router-view></router-view>
 </template>
 <script setup lang="ts">
-import {HttpClient} from "@bianmaba/http-client";
-
-HttpClient.post().form('/test', {a: 1})
-HttpClient.get().do('/test1', {a: 1})
 </script>
 
 

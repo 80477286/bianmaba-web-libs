@@ -1,6 +1,6 @@
 <template>
   <el-config-provider :locale="locales[local]" size="large">
-    <div style="display: flex;flex-direction: row;justify-content: space-between">
+    <div style="display: flex;flex-direction: row;justify-content: space-between">{{ query.data.page }}
       <el-button-group>
         <el-select v-model="local" class="m-2" placeholder="Select">
           <el-option v-for="key in keys" :key="key" :label="key" :value="key"/>
@@ -31,8 +31,8 @@
                    @current-change="exeQuery"
                    @size-change="exeQuery"
                    :total="query.response.total||0"
-                   v-model:current-page="query.response.page"
-                   v-model:page-size="query.response.size"
+                   v-model:current-page="query.data.page"
+                   v-model:page-size="query.data.size"
                    :hide-on-single-page="false"
                    :page-sizes="[10, 15, 20, 25,30, 35,40]"
                    layout="total, sizes, prev, pager, next, jumper"></el-pagination>
@@ -45,6 +45,7 @@ import {onMounted, ref} from "vue";
 import {userService} from "./UserService";
 import * as locales from 'element-plus/es/locale/index'
 import UserEditor from "./UserEditor.vue";
+
 const keys = ref(Object.keys(locales));
 const local = ref('zhCn');
 
@@ -58,9 +59,12 @@ const onRowDblClickHandler = (row: any) => {
   userEditorRef.value.edit(row.id)
 }
 const exeQuery = () => {
-  query.execute().then((resp: any) => {
-    console.log(resp)
-  })
+  setTimeout(() => {
+    query.execute().then((resp: any) => {
+      console.log(resp)
+    })
+  }, 1000)
+
 }
 </script>
 

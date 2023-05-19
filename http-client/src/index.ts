@@ -5,6 +5,7 @@ import GetExecutor from "./executors/GetExecutor";
 import PostExecutor from "./executors/PostExecutor";
 import QueryExecutor from "./executors/QueryExecutor";
 import PageableQueryExecutor from "./executors/PageableQueryExecutor";
+import {mergeDataOrParams} from "./utils/utils";
 import {
     DefaultQueryRequestData,
     DefaultPageableQueryRequestData,
@@ -22,6 +23,8 @@ import {
     DefaultPageableQueryResponse
 } from "./executors/response/Response";
 
+
+export {mergeDataOrParams}
 export {HttpClient}
 export {Executor, GetExecutor, PostExecutor, QueryExecutor, PageableQueryExecutor}
 export {DefaultResponse, DefaultPageableQueryResponse}
