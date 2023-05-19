@@ -12,7 +12,7 @@ export default class GetExecutor extends Executor {
 
     public execute(params: any = {}, options: AxiosRequestConfig<any> | any = {}): Promise<Response> {
         this.loading = true;
-        this.params = options.params = mergeDataOrParams(this.defaultRequestParams, this.params, options.params, params);
+        options.params = mergeDataOrParams(this.defaultRequestParams, this.params, options.params, params);
         this.initOptions(options)
         this.response = JSON.parse(JSON.stringify(this.defaultResponse))
         return new Promise((resolve, reject) => {

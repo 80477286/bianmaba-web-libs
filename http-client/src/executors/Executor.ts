@@ -51,8 +51,8 @@ export default class Executor {
     public execute(options: AxiosRequestConfig<any> | any = {}): Promise<Response> {
         return new Promise((resolve, reject) => {
             this.loading = true;
-            options.data = this.data = mergeDataOrParams(this.defaultRequestData, this.data, options.data);
-            options.params = this.params = options.params = mergeDataOrParams(this.defaultRequestParams, this.params, options.params);
+            options.data = mergeDataOrParams(this.defaultRequestData, this.data, options.data);
+            options.params = options.params = mergeDataOrParams(this.defaultRequestParams, this.params, options.params);
             options.url = options.url ? options.url : this.url;
             this.initOptions(options)
             this.response = JSON.parse(JSON.stringify(this.defaultResponse))
