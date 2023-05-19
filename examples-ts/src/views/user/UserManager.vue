@@ -39,6 +39,7 @@
                    :page-sizes="[10, 15, 20, 25,30, 35,40]"
                    layout="total, sizes, prev, pager, next, jumper"></el-pagination>
     <user-editor ref="userEditorRef"></user-editor>
+    {{ query.data.order }}
   </el-config-provider>
 </template>
 

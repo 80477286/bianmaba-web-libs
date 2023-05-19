@@ -39,7 +39,7 @@ const E = (s, e) => {
 }, i = R, y = F, b = w;
 class I {
   constructor() {
-    n(this, "order", new D("id", "asc"));
+    n(this, "order", new D("id", "ascending"));
     n(this, "queryProperties", ["id"]);
   }
 }
@@ -75,7 +75,7 @@ class S {
 class D {
   constructor(e, t) {
     n(this, "prop", null);
-    n(this, "order", "asc");
+    n(this, "order", "ascending");
     this.prop = e, this.order = t;
   }
   of(e, t = "asc") {

@@ -20,7 +20,7 @@ export interface IPageableQueryRequestData extends IQueryRequestData {
 }
 
 export class DefaultQueryRequestData implements IQueryRequestData {
-    order = new Order("id", 'asc')
+    order = new Order("id", 'ascending')
     queryProperties = ['id']
 }
 
@@ -68,7 +68,7 @@ export class Join {
 
 export class Order {
     prop?: string | null = null
-    order?: OrderDirection = 'asc'
+    order?: OrderDirection = 'ascending'
 
     constructor(prop?: string, order?: OrderDirection) {
         this.prop = prop
