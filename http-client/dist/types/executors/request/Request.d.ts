@@ -37,10 +37,10 @@ export declare class Join {
     of(property: string, joinType: string, on: Array<Condition>): Join;
 }
 export declare class Order {
-    property?: string | null;
-    direction?: OrderDirection;
-    constructor(property?: string, direction?: OrderDirection);
-    of(property: string, direction?: OrderDirection): Order;
+    prop?: string | null;
+    order?: OrderDirection;
+    constructor(prop?: string, order?: OrderDirection);
+    of(prop: string, order?: OrderDirection): Order;
 }
 export declare class Condition {
     property?: string | null;
@@ -53,7 +53,7 @@ export declare class Condition {
     addOr(condition: Condition): void;
 }
 export type ConditionOpt = EConditionOpt | 'equals' | 'eq' | 'ge' | 'gt' | 'lt' | 'le' | 'ne' | 'notlike' | 'like' | 'like:' | ':like' | ':like:' | 'lk' | 'lk:' | ':lk' | ':lk:' | 'between' | 'btw' | 'isnull' | 'isnotnull' | 'isempty' | 'isnotempty' | 'in' | 'notin';
-export type OrderDirection = EOrderDirection | 'asc' | 'desc';
+export type OrderDirection = EOrderDirection | 'asc' | 'desc' | 'descending' | 'ascending';
 export declare enum EOrderDirection {
     Asc = "asc",
     Desc = "desc"

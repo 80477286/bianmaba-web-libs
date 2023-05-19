@@ -12,7 +12,7 @@ class UserService extends HttpClient {
 
     public createQuery(): PostExecutor {
         return this.createPageableQueryExecutor('/user/query').toJsonRequest().mergeDefaultRequestData({
-            order: new Order('name', 'asc')
+            order: new Order('name', 'descending')
         }).mergeDefaultResponse();
     }
 

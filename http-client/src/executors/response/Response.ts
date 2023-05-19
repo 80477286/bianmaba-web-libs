@@ -3,7 +3,7 @@ export type Response = (IResponse | IPageableQueryResponse | any);
 export interface IResponse {
     success: boolean
     result?: string | null
-    data?: Array<any> | any
+    data?: Array<any> | any | null
     errors?: Array<any>
     messages?: Array<any>
     extendedData?: any
@@ -31,9 +31,12 @@ export class DefaultResponse implements IResponse {
     progressEvent = {progress: 0};
 }
 
+export class DefaultQueryResponse extends DefaultResponse {
+    data = [] as any;
+}
 
-export class DefaultPageableQueryResponse extends DefaultResponse implements IPageableQueryResponse {
+
+export class DefaultPageableQueryResponse extends DefaultQueryResponse implements IPageableQueryResponse {
     status = null;
     total = 0;
-    progressEvent = {progress: 0};
 }

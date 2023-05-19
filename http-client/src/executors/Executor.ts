@@ -55,6 +55,7 @@ export default class Executor {
             options.params = this.params = options.params = mergeDataOrParams(this.defaultRequestParams, this.params, options.params);
             options.url = options.url ? options.url : this.url;
             this.initOptions(options)
+            this.response = JSON.parse(JSON.stringify(this.defaultResponse))
             this.instance.request(options).then((resp: AxiosResponse<any>) => {
                 try {
                     this.handleThenResponse(resolve, resp);
@@ -96,13 +97,13 @@ export default class Executor {
         return this;
     }
 
-    public setDefaultResponse(defaultResponse: Response = new DefaultResponse()): ExecutorType {
+    public setDefaultResponse(defaultResponse: Response = {}): ExecutorType {
         this.defaultResponse = defaultResponse;
         return this;
     }
 
-    public mergeDefaultResponse(defaultResponse: Response = new DefaultResponse()): ExecutorType {
-        this.defaultResponse = merge(this.defaultResponse, defaultResponse, {});
+    public mergeDefaultResponse(defaultResponse: Response = {}): ExecutorType {
+        this.defaultResponse = merge(this.defaultResponse, defaultResponse || {}, {});
         return this;
     }
 
@@ -112,7 +113,7 @@ export default class Executor {
     }
 
     public mergeDefaultRequestData(defaultRequestData: RequestData = {}): ExecutorType {
-        merge(this.defaultRequestData, defaultRequestData);
+        merge(this.defaultRequestData, defaultRequestData || {});
         return this;
     }
 

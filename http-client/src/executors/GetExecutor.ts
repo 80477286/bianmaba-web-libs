@@ -14,6 +14,7 @@ export default class GetExecutor extends Executor {
         this.loading = true;
         this.params = options.params = mergeDataOrParams(this.defaultRequestParams, this.params, options.params, params);
         this.initOptions(options)
+        this.response = JSON.parse(JSON.stringify(this.defaultResponse))
         return new Promise((resolve, reject) => {
             this.instance.get(options.url || this.url, options).then((resp) => {
                 try {

@@ -17,12 +17,15 @@ const instanceByTargetType = (target: any) => {
     return target;
 }
 /**
- * 合并参数，最终返回参数类型为最后一个参数的类型
+ * 合并参数，最终返回参数类型为最后一个参数的类型,注如果最后一个参数是数组则直接返回
  * @param args
  */
 export const mergeDataOrParams = (...args: any[]) => {
     if (args.length <= 0) {
         return null;
+    }
+    if (isArray(args[args.length - 1])) {
+        return args[args.length - 1];
     }
     //克隆目标数据
     let coped = instanceByTargetType(args[args.length - 1]);

@@ -67,16 +67,16 @@ export class Join {
 
 
 export class Order {
-    property?: string | null = null
-    direction?: OrderDirection = 'asc'
+    prop?: string | null = null
+    order?: OrderDirection = 'asc'
 
-    constructor(property?: string, direction?: OrderDirection) {
-        this.property = property
-        this.direction = direction;
+    constructor(prop?: string, order?: OrderDirection) {
+        this.prop = prop
+        this.order = order;
     }
 
-    of(property: string, direction: OrderDirection = EOrderDirection.Asc) {
-        return new Order(property, direction);
+    of(prop: string, order: OrderDirection = EOrderDirection.Asc) {
+        return new Order(prop, order);
     }
 }
 
@@ -129,7 +129,7 @@ export type ConditionOpt =
     | 'isnotempty'
     | 'in'
     | 'notin';
-export type OrderDirection = EOrderDirection | 'asc' | 'desc';
+export type OrderDirection = EOrderDirection | 'asc' | 'desc' | 'descending' | 'ascending';
 
 export enum EOrderDirection {
     Asc = 'asc',

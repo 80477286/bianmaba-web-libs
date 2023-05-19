@@ -17,6 +17,7 @@ export default class PostExecutor extends Executor {
         this.data = mergeDataOrParams(this.defaultRequestData, this.data, options.data, data);
         this.params = options.params = mergeDataOrParams(this.defaultRequestParams, this.params, options.params, params);
         this.initOptions(options)
+        this.response = JSON.parse(JSON.stringify(this.defaultResponse))
         return new Promise((resolve, reject) => {
             this.instance.post(options.url || this.url, this.data, options).then((resp) => {
                 try {

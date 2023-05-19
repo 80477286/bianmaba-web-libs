@@ -17,9 +17,11 @@
     </div>
     <el-table :data="query.response.data" v-mask="{visible:true}"
               @row-dblclick="onRowDblClickHandler"
+              :default-sort="query.data.order"
+              @sort-change="sortChangeHandler"
               border stripe style="padding: 10px 0 10px 0;">
       <el-table-column prop="id" label="ID" width="180"/>
-      <el-table-column prop="name" label="姓名" width="180"/>
+      <el-table-column prop="name" label="姓名" width="180" sortable/>
       <el-table-column prop="regin" label="所在地域"/>
       <el-table-column prop="province" label="所在省份"/>
       <el-table-column prop="city" label="所在城市"/>
@@ -46,6 +48,7 @@ import {userService} from "./UserService";
 import * as locales from 'element-plus/es/locale/index'
 import UserEditor from "./UserEditor.vue";
 import {merge} from "@bianmaba/utils";
+import {Order} from "@bianmaba/http-client";
 
 const keys = ref(Object.keys(locales));
 const local = ref('zhCn');
@@ -53,6 +56,9 @@ const local = ref('zhCn');
 const query = userService.createQuery();
 const userEditorRef = ref();
 
+const sortChangeHandler = (column) => {
+  exeQuery();
+}
 onMounted(() => {
   exeQuery();
 })
@@ -60,10 +66,7 @@ const onRowDblClickHandler = (row: any) => {
   userEditorRef.value.edit(row.id)
 }
 const exeQuery = () => {
-  query.execute({abc: 1}).then((resp: any) => {
-    console.log(resp)
-  })
-
+  query.execute()
 }
 </script>
 
