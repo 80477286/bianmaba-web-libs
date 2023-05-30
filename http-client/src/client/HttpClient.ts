@@ -13,7 +13,7 @@ import PageableQueryExecutor from "../executors/PageableQueryExecutor";
 export default class HttpClient extends AbstractHttpClient {
     private static instance: HttpClient | any;
 
-    constructor(options: CreateAxiosDefaults = {}) {
+    constructor(options: CreateAxiosDefaults | any = {}) {
         super(options)
     }
 
@@ -22,8 +22,7 @@ export default class HttpClient extends AbstractHttpClient {
      * @param options  axios实例配置选项，此选项中的data及params不会生效
      */
     public createRequestExecutor(url: string = '', options: CreateAxiosDefaults<any> | any = {}): Executor {
-        let axiosInstance = this.createAxiosInstance(options);
-        return reactive(new Executor(axiosInstance, url));
+        return reactive(new Executor(this.defaultAxiosInstance, url, options));
     }
 
     /**
@@ -33,12 +32,9 @@ export default class HttpClient extends AbstractHttpClient {
     public createGetExecutor(url: string = '', options: CreateAxiosDefaults<any> | any = {}): GetExecutor {
         let _options = merge({
             method: HttpMethod.GET,
-            data: null,
-            params: null,
             headers: {'Content-Type': HttpContentType["application/x-www-form-urlencoded"]}
         }, options);
-        let axiosInstance = this.createAxiosInstance(_options);
-        return reactive(new GetExecutor(axiosInstance, url));
+        return reactive(new GetExecutor(this.defaultAxiosInstance, url, _options));
     }
 
     /**
@@ -47,13 +43,10 @@ export default class HttpClient extends AbstractHttpClient {
      */
     public createQueryExecutor(url: string = '', options: CreateAxiosDefaults<any> | any = {}): GetExecutor {
         let _options = merge({
-            method: HttpMethod.GET,
-            data: null,
-            params: null,
-            headers: {'Content-Type': HttpContentType["application/x-www-form-urlencoded"]}
+            method: HttpMethod.POST,
+            headers: {'Content-Type': HttpContentType["application/json"]}
         }, options);
-        let axiosInstance = this.createAxiosInstance(_options);
-        return reactive(new QueryExecutor(axiosInstance, url));
+        return reactive(new QueryExecutor(this.defaultAxiosInstance, url, _options));
     }
 
     /**
@@ -62,13 +55,10 @@ export default class HttpClient extends AbstractHttpClient {
      */
     public createPageableQueryExecutor(url: string = '', options: CreateAxiosDefaults<any> | any = {}): GetExecutor {
         let _options = merge({
-            method: HttpMethod.GET,
-            data: null,
-            params: null,
-            headers: {'Content-Type': HttpContentType["application/x-www-form-urlencoded"]}
+            method: HttpMethod.POST,
+            headers: {'Content-Type': HttpContentType["application/json"]}
         }, options);
-        let axiosInstance = this.createAxiosInstance(_options);
-        return reactive(new PageableQueryExecutor(axiosInstance, url));
+        return reactive(new PageableQueryExecutor(this.defaultAxiosInstance, url, _options));
     }
 
     /**
@@ -78,12 +68,9 @@ export default class HttpClient extends AbstractHttpClient {
     public createPostExecutor(url: string = '', options: CreateAxiosDefaults<any> | any = {}): PostExecutor {
         let _options = merge({
             method: HttpMethod.POST,
-            data: null,
-            params: null,
             headers: {'Content-Type': HttpContentType["multipart/form-data"]}
         }, options);
-        let axiosInstance = this.createAxiosInstance(_options);
-        return reactive(new PostExecutor(axiosInstance, url));
+        return reactive(new PostExecutor(this.defaultAxiosInstance, url, _options));
     }
 
     /**
@@ -104,16 +91,16 @@ export default class HttpClient extends AbstractHttpClient {
     public static post(): PostMethod {
         return {
             do(url: string, data: RequestData = {}, params: RequestParams = {}, options: CreateAxiosDefaults = {}) {
-                return HttpClient.getInstance().createPostExecutor(url, options).execute(data, params, options)
+                return HttpClient.getInstance().createPostExecutor(url, options).execute(data, params)
             },
             multipartFormData(url: string, data: RequestData = {}, params: RequestParams = {}, options: CreateAxiosDefaults = {}) {
-                return HttpClient.getInstance().createPostExecutor(url, options).toFormDataRequest().execute(data, params, options)
+                return HttpClient.getInstance().createPostExecutor(url, options).toFormDataRequest().execute(data, params)
             },
             form(url: string, data: RequestData = {}, params: RequestParams = {}, options: CreateAxiosDefaults = {}) {
-                return HttpClient.getInstance().createPostExecutor(url, options).toFormRequest().execute(data, params, options)
+                return HttpClient.getInstance().createPostExecutor(url, options).toFormRequest().execute(data, params)
             },
             json(url: string, data: RequestData = {}, params: RequestParams = {}, options: CreateAxiosDefaults = {}) {
-                return HttpClient.getInstance().createPostExecutor(url, options).toJsonRequest().execute(data, params, options)
+                return HttpClient.getInstance().createPostExecutor(url, options).toJsonRequest().execute(data, params)
             }
         } as PostMethod
     }
@@ -121,7 +108,7 @@ export default class HttpClient extends AbstractHttpClient {
     public static get(): GetMethods {
         return {
             do(url: string, params: RequestParams = {}, options: CreateAxiosDefaults = {}) {
-                return HttpClient.getInstance().createGetExecutor(url, options).execute(params, options)
+                return HttpClient.getInstance().createGetExecutor(url, options).execute(params)
             }
         } as GetMethods
     }

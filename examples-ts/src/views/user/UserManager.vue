@@ -48,8 +48,6 @@ import {onMounted, ref} from "vue";
 import {userService} from "./UserService";
 import * as locales from 'element-plus/es/locale/index'
 import UserEditor from "./UserEditor.vue";
-import {merge} from "@bianmaba/utils";
-import {Order} from "@bianmaba/http-client";
 
 const keys = ref(Object.keys(locales));
 const local = ref('zhCn');

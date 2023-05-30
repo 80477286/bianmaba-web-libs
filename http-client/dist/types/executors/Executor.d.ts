@@ -7,6 +7,7 @@ export type ExecutorType = (Executor | GetExecutor | PostExecutor | any);
 export default class Executor {
     controller: AbortController;
     instance: AxiosInstance;
+    options: AxiosRequestConfig;
     url: string;
     loading: boolean;
     data: RequestData;
@@ -15,7 +16,7 @@ export default class Executor {
     defaultResponse: Response;
     defaultRequestParams: Response;
     defaultRequestData: Response;
-    constructor(instance: AxiosInstance, url?: string);
+    constructor(instance: AxiosInstance, url?: string, options?: AxiosRequestConfig);
     abort(): void;
     initOptions(options?: AxiosRequestConfig<any> | any): void;
     execute(options?: AxiosRequestConfig<any> | any): Promise<Response>;

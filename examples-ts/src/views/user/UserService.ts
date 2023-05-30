@@ -3,8 +3,9 @@ import {HttpClient, GetExecutor, PostExecutor, HttpContentType, DefaultResponse,
 class UserService extends HttpClient {
     static userService: UserService = new UserService();
 
+
     public createGetById(): GetExecutor {
-        let executor = this.createGetExecutor('/user/getById').setDefaultResponse({
+        let executor = this.createGetExecutor('/user/getById').mergeDefaultResponse({
             data: {}
         });
         return executor;
@@ -13,13 +14,11 @@ class UserService extends HttpClient {
     public createQuery(): PostExecutor {
         return this.createPageableQueryExecutor('/user/query').toJsonRequest().mergeDefaultRequestData({
             order: new Order('name', 'descending')
-        }).mergeDefaultResponse();
+        });
     }
 
     public createSave(): PostExecutor {
-        return this.createPostExecutor('/user/save', {
-            headers: {'Content-Type': HttpContentType["application/json"]}
-        });
+        return this.createPostExecutor('/user/save').toJsonRequest();
     }
 }
 

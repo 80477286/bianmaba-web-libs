@@ -7,7 +7,8 @@ import "element-plus/theme-chalk/el-loading.css";
 import "element-plus/theme-chalk/el-message.css";
 import "element-plus/theme-chalk/el-notification.css";
 import "element-plus/theme-chalk/el-message-box.css";
-import axios from "axios";
+import axios, {AxiosInstance} from "axios";
+import {merge} from "@bianmaba/utils";
 
 const app = createApp(App)
 axios.interceptors.request.use((config) => {
@@ -18,6 +19,8 @@ axios.interceptors.response.use((resp) => {
     console.log("test-response-interceptor", resp)
     return resp;
 })
+axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
+
 app.use(createPinia())
 app.use(router)
 app.use(bmbView)

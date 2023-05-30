@@ -1,4 +1,4 @@
-import {HttpClient, HttpContentType} from '@bianmaba/http-client'
+import {GetExecutor, HttpClient, HttpContentType, PostExecutor} from '@bianmaba/http-client'
 import {Order} from "@bianmaba/http-client";
 
 // @ts-ignore
@@ -6,22 +6,20 @@ class UserService extends HttpClient {
     static instance = new UserService();
 
     createGetById() {
-        let executor = this.createGetExecutor('/user/getById').setDefaultResponse({
+        let executor = this.createGetExecutor('/user/getById').mergeDefaultResponse({
             data: {}
         });
         return executor;
     }
 
     createQuery() {
-        return this.createQueryExecutor('/user/query').toJsonRequest().setDefaultRequestData({
-            order: new Order('name', 'asc')
+        return this.createPageableQueryExecutor('/user/query').toJsonRequest().mergeDefaultRequestData({
+            order: new Order('name', 'descending')
         });
     }
 
     createSave() {
-        return this.createPostExecutor('/user/save', {
-            headers: {'Content-Type': HttpContentType["application/json"]}
-        });
+        return this.createPostExecutor('/user/save').toJsonRequest();
     }
 }
 

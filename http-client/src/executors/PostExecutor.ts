@@ -7,13 +7,13 @@ import {DefaultPageableQueryResponse, Response} from "./response/Response";
 import {mergeDataOrParams} from "../utils/utils";
 
 export default class PostExecutor extends Executor {
-    constructor(instance: AxiosInstance, url?: string) {
-        super(instance, url);
+    constructor(instance: AxiosInstance, url?: string, options: AxiosRequestConfig = {}) {
+        super(instance, url, options);
     }
 
     public execute(data: RequestData | null = {}, params: RequestParams = {}, options: AxiosRequestConfig<any> | any = {}): Promise<Response> {
-
         this.loading = true;
+        options = merge({},this.options || {}, options || {})
         let rd = mergeDataOrParams(this.defaultRequestData, this.data, options.data, data);
         options.params = mergeDataOrParams(this.defaultRequestParams, this.params, options.params, params);
         this.initOptions(options)

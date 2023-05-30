@@ -1,7 +1,7 @@
 "use strict";
-import {AxiosInstance, AxiosRequestConfig, AxiosResponse} from "axios";
-import {isArray, isObject, merge} from "@bianmaba/utils";
-import {DefaultQueryRequestData, HttpContentType, RequestData, RequestParams} from "./request/Request";
+import {AxiosInstance, AxiosRequestConfig, AxiosResponse, CreateAxiosDefaults} from "axios";
+import {merge} from "@bianmaba/utils";
+import {HttpContentType, RequestData, RequestParams} from "./request/Request";
 import {DefaultResponse, Response} from "./response/Response";
 import GetExecutor from "./GetExecutor";
 import PostExecutor from "./PostExecutor";
@@ -12,6 +12,7 @@ export type ExecutorType = (Executor | GetExecutor | PostExecutor | any)
 export default class Executor {
     public controller: AbortController = new AbortController()
     public instance: AxiosInstance;
+    public options: AxiosRequestConfig = {};
     public url: string = '';
     public loading: boolean = false;
     public data: RequestData = {}
@@ -21,9 +22,10 @@ export default class Executor {
     public defaultRequestParams: Response = {} as RequestData;
     public defaultRequestData: Response = {} as RequestData;
 
-    constructor(instance: AxiosInstance, url?: string) {
+    constructor(instance: AxiosInstance, url?: string, options: AxiosRequestConfig = {}) {
         this.instance = instance;
         this.url = url || this.url;
+        this.options = options;
     }
 
     public abort() {
@@ -51,6 +53,7 @@ export default class Executor {
     public execute(options: AxiosRequestConfig<any> | any = {}): Promise<Response> {
         return new Promise((resolve, reject) => {
             this.loading = true;
+            options = merge({}, this.options || {}, options || {})
             options.data = mergeDataOrParams(this.defaultRequestData, this.data, options.data);
             options.params = options.params = mergeDataOrParams(this.defaultRequestParams, this.params, options.params);
             options.url = options.url ? options.url : this.url;
@@ -77,7 +80,7 @@ export default class Executor {
      * 将执行器请求方式设置为：application/json
      */
     public toJsonRequest(): ExecutorType {
-        this.instance.defaults.headers['Content-Type'] = HttpContentType["application/json"]
+        merge(this.options, {headers: {'Content-Type': HttpContentType["application/json"]}})
         return this;
     }
 
@@ -85,7 +88,7 @@ export default class Executor {
      * 将执行器请求方式设置为：application/x-www-form-urlencoded
      */
     public toFormRequest(): ExecutorType {
-        this.instance.defaults.headers['Content-Type'] = HttpContentType["application/x-www-form-urlencoded"]
+        merge(this.options, {headers: {'Content-Type': HttpContentType["application/x-www-form-urlencoded"]}})
         return this;
     }
 
@@ -93,7 +96,7 @@ export default class Executor {
      * 将执行器请求方式设置为：multipart/form-data
      */
     public toFormDataRequest(): ExecutorType {
-        this.instance.defaults.headers['Content-Type'] = HttpContentType["multipart/form-data"]
+        merge(this.options, {headers: {'Content-Type': HttpContentType["multipart/form-data"]}})
         return this;
     }
 
@@ -104,7 +107,7 @@ export default class Executor {
     }
 
     public mergeDefaultResponse(defaultResponse: Response = {}): ExecutorType {
-        this.defaultResponse = merge(this.defaultResponse, defaultResponse || {}, {});
+        merge(this.defaultResponse, defaultResponse || {}, {});
         this.response = JSON.parse(JSON.stringify(this.defaultResponse));
         return this;
     }

@@ -5,7 +5,7 @@ import GetExecutor from "../executors/GetExecutor";
 import PostExecutor from "../executors/PostExecutor";
 export default class HttpClient extends AbstractHttpClient {
     private static instance;
-    constructor(options?: CreateAxiosDefaults);
+    constructor(options?: CreateAxiosDefaults | any);
     /**
      *
      * @param options  axios实例配置选项，此选项中的data及params不会生效

@@ -48,7 +48,6 @@
 import {reactive} from "vue";
 import {ElNotification} from "element-plus";
 import {userService} from "./UserService";
-import {DefaultResponse} from "@bianmaba/http-client";
 
 const getById = userService.createGetById();
 const save = userService.createSave();
@@ -72,14 +71,14 @@ const onBtnResetHandler = () => {
   exeGetById();
 }
 const onBtnSaveHandler = () => {
-  save.execute('/user/save', getById.response).then((resp: any) => {
+  save.execute(getById.response.data).then((resp: any) => {
     state.visible = false;
     ElNotification.success({title: '提示', message: resp.result})
   });
 }
 
 const exeGetById = () => {
-  getById.execute('user/getById', {id: state.srcId}).then((resp: any) => {
+  getById.execute({id: state.srcId}).then((resp: any) => {
     console.log(resp)
   })
 }

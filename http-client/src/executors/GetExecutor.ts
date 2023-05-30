@@ -6,12 +6,13 @@ import {Response} from "./response/Response";
 import {mergeDataOrParams} from "../utils/utils";
 
 export default class GetExecutor extends Executor {
-    constructor(instance: AxiosInstance, url?: string) {
-        super(instance, url);
+    constructor(instance: AxiosInstance, url?: string, options: AxiosRequestConfig = {}) {
+        super(instance, url, options);
     }
 
     public execute(params: any = {}, options: AxiosRequestConfig<any> | any = {}): Promise<Response> {
         this.loading = true;
+        options = merge({}, this.options || {}, options || {})
         options.params = mergeDataOrParams(this.defaultRequestParams, this.params, options.params, params);
         this.initOptions(options)
         this.response = JSON.parse(JSON.stringify(this.defaultResponse))

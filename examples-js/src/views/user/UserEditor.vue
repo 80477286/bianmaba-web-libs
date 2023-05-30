@@ -71,14 +71,14 @@ const onBtnResetHandler = () => {
   exeGetById();
 }
 const onBtnSaveHandler = () => {
-  save.execute('/user/save', getById.response).then((resp) => {
+  save.execute(getById.response.data).then((resp) => {
     state.visible = false;
     ElNotification.success({title: '提示', message: resp.result})
   });
 }
 
 const exeGetById = () => {
-  getById.execute('user/getById', {id: state.srcId}).then((resp) => {
+  getById.execute({id: state.srcId}).then((resp) => {
     console.log(resp)
   })
 }
