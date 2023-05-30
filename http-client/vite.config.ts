@@ -8,12 +8,12 @@ import dts from 'vite-plugin-dts'
 // https://vitejs.dev/config/
 export default defineConfig({
     plugins: [vue(),
-        //     vitePluginCompression({
-        //     ext: '.gz',
-        //     filter: /\.(js|mjs|ts|json|css|html)$/i,
-        //     algorithm: 'gzip',
-        //     threshold: 5120
-        // }),
+        vitePluginCompression({
+            ext: '.gz',
+            filter: /\.(js|mjs|ts|json|css|html)$/i,
+            algorithm: 'gzip',
+            threshold: 5120
+        }),
         dts({
             entryRoot: "./src",
             outputDir: ["dist/types"]
