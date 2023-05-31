@@ -1,6 +1,6 @@
 <template>
   <el-config-provider :locale="locales[local]" size="large">
-    <div style="display: flex;flex-direction: row;justify-content: space-between">{{ query.data.page }}
+    <div style="display: flex;flex-direction: row;justify-content: space-between">
       <el-button-group>
         <el-select v-model="local" class="m-2" placeholder="Select">
           <el-option v-for="key in keys" :key="key" :label="key" :value="key"/>
@@ -15,10 +15,11 @@
         </el-input>
       </el-button-group>
     </div>
-    <el-table :data="query.response.data" v-mask="{visible:true}"
+    <el-table :data="query.response.data"
               @row-dblclick="onRowDblClickHandler"
               :default-sort="query.data.order"
               @sort-change="sortChangeHandler"
+              ref="tableRef"
               border stripe style="padding: 10px 0 10px 0;">
       <el-table-column prop="id" label="ID" width="180"/>
       <el-table-column prop="name" label="姓名" width="180" sortable/>
@@ -39,7 +40,6 @@
                    :page-sizes="[10, 15, 20, 25,30, 35,40]"
                    layout="total, sizes, prev, pager, next, jumper"></el-pagination>
     <user-editor ref="userEditorRef"></user-editor>
-    {{ query.data.order }}
   </el-config-provider>
 </template>
 
@@ -48,18 +48,24 @@ import {onMounted, ref} from "vue";
 import {userService} from "./UserService";
 import * as locales from 'element-plus/es/locale/index'
 import UserEditor from "./UserEditor.vue";
+import {masking} from "@bianmaba/bmb-view/packages/bmb-mask/src/mask";
 
 const keys = ref(Object.keys(locales));
 const local = ref('zhCn');
 
 const query = userService.createQuery();
 const userEditorRef = ref();
-
+const tableRef = ref();
 const sortChangeHandler = (column) => {
   exeQuery();
 }
 onMounted(() => {
   exeQuery();
+  masking({target: tableRef.value.$el})
+  let instance = masking({target: tableRef.value.$el, visible: true})
+  setTimeout(() => {
+    instance.close()
+  }, 3000)
 })
 const onRowDblClickHandler = (row: any) => {
   userEditorRef.value.edit(row.id)

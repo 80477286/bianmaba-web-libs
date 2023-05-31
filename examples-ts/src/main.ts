@@ -7,8 +7,8 @@ import "element-plus/theme-chalk/el-loading.css";
 import "element-plus/theme-chalk/el-message.css";
 import "element-plus/theme-chalk/el-notification.css";
 import "element-plus/theme-chalk/el-message-box.css";
-import axios, {AxiosInstance} from "axios";
-import {merge} from "@bianmaba/utils";
+import "@bianmaba/bmb-view/dist/index.css"
+import axios from "axios";
 
 const app = createApp(App)
 axios.interceptors.request.use((config) => {

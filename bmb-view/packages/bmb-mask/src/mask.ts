@@ -22,6 +22,13 @@ export function createMaskComponent(options: MaskOption | any = {
         ...options
     })
 
+    function update(options: MaskOption | any = {}) {
+        let keys = Object.keys(options);
+        keys.forEach(key => {
+            data[key] = options[key];
+        })
+    }
+
     function setText(text: string) {
         data.text = text
     }
@@ -177,18 +184,28 @@ export function createMaskComponent(options: MaskOption | any = {
         setProgress,
         setFullScreen,
         setVisible,
+        update,
         vm
     }
 }
 
 
-export function masking(options: MaskOption | any = {visible: false, fullScreen: false, target: document.body}) {
+const masking = function (options: MaskOption | any = {
+    visible: false,
+    fullScreen: false,
+    target: document.body
+}) {
     options.target = options.target ?? document.body;
     let instance = options.target['MASK_KEY']?.instance
     if (!instance) {
         instance = createMaskComponent(options);
         options.target.appendChild(instance.vm.$el)
         options.target['MASK_KEY'] = {instance: instance, options}
+    } else {
+        instance.update(options)
     }
-    return {setText: instance.setText(), vm: instance.vm}
+    return instance
 }
+
+
+export {masking};

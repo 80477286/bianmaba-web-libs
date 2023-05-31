@@ -229,7 +229,7 @@ class S {
     return this.defaultResponse = e, this.response = JSON.parse(JSON.stringify(this.defaultResponse)), this;
   }
   mergeDefaultResponse(e = {}) {
-    return this.defaultResponse = i(this.defaultResponse, e || {}, {}), this.response = JSON.parse(JSON.stringify(this.defaultResponse)), this;
+    return i(this.defaultResponse, e || {}, {}), this.response = JSON.parse(JSON.stringify(this.defaultResponse)), this;
   }
   setDefaultRequestData(e = {}) {
     return this.defaultRequestData = e, this.data = JSON.parse(JSON.stringify(this.defaultRequestData)), this;
