@@ -24,6 +24,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
+    "release": "npm publish --access=public",
     "preview": "vite preview"
   },
   "dependencies": {

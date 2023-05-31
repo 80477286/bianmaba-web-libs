@@ -48,24 +48,17 @@ import {onMounted, ref} from "vue";
 import {userService} from "./UserService";
 import * as locales from 'element-plus/es/locale/index'
 import UserEditor from "./UserEditor.vue";
-import {masking} from "@bianmaba/bmb-view/packages/bmb-mask/src/mask";
 
 const keys = ref(Object.keys(locales));
 const local = ref('zhCn');
 
 const query = userService.createQuery();
 const userEditorRef = ref();
-const tableRef = ref();
 const sortChangeHandler = (column) => {
   exeQuery();
 }
 onMounted(() => {
   exeQuery();
-  masking({target: tableRef.value.$el})
-  let instance = masking({target: tableRef.value.$el, visible: true})
-  setTimeout(() => {
-    instance.close()
-  }, 3000)
 })
 const onRowDblClickHandler = (row: any) => {
   userEditorRef.value.edit(row.id)

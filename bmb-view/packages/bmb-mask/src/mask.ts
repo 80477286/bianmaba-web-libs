@@ -190,11 +190,11 @@ export function createMaskComponent(options: MaskOption | any = {
 }
 
 
-const masking = function (options: MaskOption | any = {
+export const masking = (options: MaskOption | any = {
     visible: false,
     fullScreen: false,
     target: document.body
-}) {
+}) => {
     options.target = options.target ?? document.body;
     let instance = options.target['MASK_KEY']?.instance
     if (!instance) {
@@ -207,5 +207,3 @@ const masking = function (options: MaskOption | any = {
     return instance
 }
 
-
-export {masking};
