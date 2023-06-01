@@ -3,20 +3,14 @@ var j = (s, e, t) => e in s ? U(s, e, { enumerable: !0, configurable: !0, writab
 var r = (s, e, t) => (j(s, typeof e != "symbol" ? e + "" : e, t), t);
 import g from "axios";
 import { reactive as h } from "vue";
-class L {
-  constructor(e = {}) {
-    r(this, "defaultAxiosInstance", g.create());
-    this.defaultAxiosInstance = g.create(e || {}), this.defaultAxiosInstance.interceptors.response = g.interceptors.response, this.defaultAxiosInstance.interceptors.request = g.interceptors.request;
-  }
-}
-const k = Object.prototype.toString, N = ((s) => (e) => {
-  let t = k.call(e);
+const L = Object.prototype.toString, N = ((s) => (e) => {
+  let t = L.call(e);
   return s[t] || (s[t] = t.slice(8, -1).toLowerCase());
 })(/* @__PURE__ */ Object.create(null)), c = (s) => (s = s.toLowerCase(), function(e) {
   return N(e) === s;
 }), w = (s) => Array.isArray(s);
 c("ArrayBuffer");
-const F = (s) => s != null && typeof s == "object" && Array.isArray(s) === !1, R = (s) => {
+const k = (s) => s != null && typeof s == "object" && Array.isArray(s) === !1, R = (s) => {
   if (N(s) !== "object")
     return !1;
   let e = Object.getPrototypeOf(s);
@@ -27,7 +21,7 @@ c("File");
 c("Blob");
 c("FileList");
 c("URLSearchParams");
-const E = (s, e) => {
+const F = (s, e) => {
   if (!(s === null || typeof s > "u"))
     if (typeof s != "object" && (s = [s]), w(s))
       for (let t = 0, a = s.length; t < a; t++)
@@ -40,9 +34,15 @@ const E = (s, e) => {
     R(e[n]) && R(a) ? e[n] = P(e[n], a) : R(a) ? e[n] = P({}, a) : w(a) ? e[n] = a.slice() : e[n] = a;
   };
   for (let a = 0, n = arguments.length; a < n; a++)
-    E(arguments[a], t);
+    F(arguments[a], t);
   return e;
-}, i = P, x = F, T = w;
+}, i = P, x = k, T = w;
+class E {
+  constructor(e = {}) {
+    r(this, "defaultAxiosInstance");
+    this.defaultAxiosInstance = g.create(i({}, g.defaults, e || {})), this.defaultAxiosInstance.interceptors.response = g.interceptors.response, this.defaultAxiosInstance.interceptors.request = g.interceptors.request;
+  }
+}
 class b {
   constructor() {
     r(this, "order", new q("id", "ascending"));
@@ -309,7 +309,7 @@ class $ extends J {
     super(e, t, a), this.setDefaultResponse(new z()), this.setDefaultRequestData(new v());
   }
 }
-const u = class extends L {
+const u = class extends E {
   constructor(e = {}) {
     super(e);
   }
