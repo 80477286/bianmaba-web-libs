@@ -27,7 +27,7 @@ c("File");
 c("Blob");
 c("FileList");
 c("URLSearchParams");
-const E = (s, e) => {
+const v = (s, e) => {
   if (!(s === null || typeof s > "u"))
     if (typeof s != "object" && (s = [s]), w(s))
       for (let t = 0, a = s.length; t < a; t++)
@@ -40,7 +40,7 @@ const E = (s, e) => {
     R(e[n]) && R(a) ? e[n] = P(e[n], a) : R(a) ? e[n] = P({}, a) : w(a) ? e[n] = a.slice() : e[n] = a;
   };
   for (let a = 0, n = arguments.length; a < n; a++)
-    E(arguments[a], t);
+    v(arguments[a], t);
   return e;
 }, i = P, x = F, T = w;
 class b {
@@ -49,7 +49,7 @@ class b {
     r(this, "queryProperties", ["id"]);
   }
 }
-class v extends b {
+class E extends b {
   constructor(t = 1, a = 10, n = -1) {
     super();
     r(this, "size", 10);
@@ -104,7 +104,7 @@ class Y {
     this.or.push(e);
   }
 }
-var G = /* @__PURE__ */ ((s) => (s.Asc = "asc", s.Desc = "desc", s))(G || {}), Q = /* @__PURE__ */ ((s) => (s.equals = "equals", s.eq = "eq", s.ge = "ge", s.gt = "gt", s.lt = "lt", s.le = "le", s.ne = "ne", s.notlike = "notlike", s.like = "like", s["like:"] = "like:", s[":like"] = ":like", s[":like:"] = ":like:", s.lk = "like", s["lk:"] = "like:", s[":lk"] = ":like", s[":lk:"] = ":like:", s.between = "between", s.btw = "btw", s.isnull = "isnull", s.isnotnull = "isnotnull", s.isempty = "isempty", s.isnotempty = "isnotempty", s.in = "in", s.notin = "notin", s))(Q || {}), o = /* @__PURE__ */ ((s) => (s["application/atom+xml"] = "application/atom+xml", s["application/json"] = "application/json", s["application/x-www-form-urlencoded"] = "application/x-www-form-urlencoded", s["application/xml"] = "application/xml", s["multipart/form-data"] = "multipart/form-data", s["text/html"] = "text/html", s["text/plain"] = "text/plain", s))(o || {}), f = /* @__PURE__ */ ((s) => (s.POST = "POST", s.GET = "GET", s.DELETE = "DELETE", s.HEAD = "HEAD", s.OPTIONS = "OPTIONS", s.PUT = "PUT", s.PATCH = "PATCH", s.PURGE = "PURGE", s.LINK = "LINK", s.UNLINK = "UNLINK", s))(f || {});
+var z = /* @__PURE__ */ ((s) => (s.Asc = "asc", s.Desc = "desc", s))(z || {}), G = /* @__PURE__ */ ((s) => (s.equals = "equals", s.eq = "eq", s.ge = "ge", s.gt = "gt", s.lt = "lt", s.le = "le", s.ne = "ne", s.notlike = "notlike", s.like = "like", s["like:"] = "like:", s[":like"] = ":like", s[":like:"] = ":like:", s.lk = "like", s["lk:"] = "like:", s[":lk"] = ":like", s[":lk:"] = ":like:", s.between = "between", s.btw = "btw", s.isnull = "isnull", s.isnotnull = "isnotnull", s.isempty = "isempty", s.isnotempty = "isnotempty", s.in = "in", s.notin = "notin", s))(G || {}), o = /* @__PURE__ */ ((s) => (s["application/atom+xml"] = "application/atom+xml", s["application/json"] = "application/json", s["application/x-www-form-urlencoded"] = "application/x-www-form-urlencoded", s["application/xml"] = "application/xml", s["multipart/form-data"] = "multipart/form-data", s["text/html"] = "text/html", s["text/plain"] = "text/plain", s))(o || {}), f = /* @__PURE__ */ ((s) => (s.POST = "POST", s.GET = "GET", s.DELETE = "DELETE", s.HEAD = "HEAD", s.OPTIONS = "OPTIONS", s.PUT = "PUT", s.PATCH = "PATCH", s.PURGE = "PURGE", s.LINK = "LINK", s.UNLINK = "UNLINK", s))(f || {});
 class D {
   constructor() {
     r(this, "success", !1);
@@ -124,7 +124,7 @@ class I extends D {
     r(this, "data", []);
   }
 }
-class z extends I {
+class Q extends I {
   constructor() {
     super(...arguments);
     r(this, "status", null);
@@ -242,7 +242,7 @@ class S {
   }
   handleThenResponse(e, t) {
     var a;
-    this.response = i({}, this.defaultResponse, t.data), this.response.total && (this.data.total = this.response.total), this.response.page && (this.data.page = ((a = this.response) == null ? void 0 : a.page) - (this.data.pageOffset || 0)), this.response.size && (this.data.size = this.response.size), e(this.response);
+    this.response = i({}, this.defaultResponse, t.data), this.response.total != null && this.response.total != null && (this.data.total = this.response.total), this.response.page != null && this.response.page != null && (this.data.page = ((a = this.response) == null ? void 0 : a.page) - (this.data.pageOffset || 0)), this.response.size != null && this.response.size != null && (this.data.size = this.response.size), e(this.response);
   }
   handleCatchResponse(e, t) {
     if (console.error("远程请求发生异常：", t), t.response)
@@ -306,7 +306,7 @@ class J extends O {
 }
 class $ extends J {
   constructor(e, t, a = {}) {
-    super(e, t, a), this.setDefaultResponse(new z()), this.setDefaultRequestData(new v());
+    super(e, t, a), this.setDefaultResponse(new Q()), this.setDefaultRequestData(new E());
   }
 }
 const u = class extends L {
@@ -399,12 +399,12 @@ let y = u;
 r(y, "instance");
 export {
   Y as Condition,
-  v as DefaultPageableQueryRequestData,
-  z as DefaultPageableQueryResponse,
+  E as DefaultPageableQueryRequestData,
+  Q as DefaultPageableQueryResponse,
   b as DefaultQueryRequestData,
   D as DefaultResponse,
-  Q as EConditionOpt,
-  G as EOrderDirection,
+  G as EConditionOpt,
+  z as EOrderDirection,
   S as Executor,
   B as GetExecutor,
   y as HttpClient,

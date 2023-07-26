@@ -1,4 +1,12 @@
-import {HttpClient, GetExecutor, PostExecutor, HttpContentType, DefaultResponse, Order} from '@bianmaba/http-client'
+import {
+    HttpClient,
+    GetExecutor,
+    PostExecutor,
+    HttpContentType,
+    DefaultResponse,
+    Order,
+    PageableQueryExecutor
+} from '@bianmaba/http-client'
 
 class UserService extends HttpClient {
     static userService: UserService = new UserService();
@@ -11,7 +19,7 @@ class UserService extends HttpClient {
         return executor;
     }
 
-    public createQuery(): PostExecutor {
+    public createQuery() {
         return this.createPageableQueryExecutor('/user/query').toJsonRequest().mergeDefaultRequestData({
             order: new Order('name', 'descending')
         });

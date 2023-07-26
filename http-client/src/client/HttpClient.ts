@@ -41,7 +41,7 @@ export default class HttpClient extends AbstractHttpClient {
      *
      * @param options  axios实例配置选项，此选项中的data及params不会生效
      */
-    public createQueryExecutor(url: string = '', options: CreateAxiosDefaults<any> | any = {}): GetExecutor {
+    public createQueryExecutor(url: string = '', options: CreateAxiosDefaults<any> | any = {}): QueryExecutor {
         let _options = merge({
             method: HttpMethod.POST,
             headers: {'Content-Type': HttpContentType["application/json"]}
@@ -53,7 +53,7 @@ export default class HttpClient extends AbstractHttpClient {
      *
      * @param options  axios实例配置选项，此选项中的data及params不会生效
      */
-    public createPageableQueryExecutor(url: string = '', options: CreateAxiosDefaults<any> | any = {}): GetExecutor {
+    public createPageableQueryExecutor(url: string = '', options: CreateAxiosDefaults<any> | any = {}): PageableQueryExecutor {
         let _options = merge({
             method: HttpMethod.POST,
             headers: {'Content-Type': HttpContentType["application/json"]}

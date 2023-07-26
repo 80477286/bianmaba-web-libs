@@ -3,6 +3,8 @@ import { CreateAxiosDefaults } from "axios";
 import Executor from "../executors/Executor";
 import GetExecutor from "../executors/GetExecutor";
 import PostExecutor from "../executors/PostExecutor";
+import QueryExecutor from "../executors/QueryExecutor";
+import PageableQueryExecutor from "../executors/PageableQueryExecutor";
 export default class HttpClient extends AbstractHttpClient {
     private static instance;
     constructor(options?: CreateAxiosDefaults | any);
@@ -20,12 +22,12 @@ export default class HttpClient extends AbstractHttpClient {
      *
      * @param options  axios实例配置选项，此选项中的data及params不会生效
      */
-    createQueryExecutor(url?: string, options?: CreateAxiosDefaults<any> | any): GetExecutor;
+    createQueryExecutor(url?: string, options?: CreateAxiosDefaults<any> | any): QueryExecutor;
     /**
      *
      * @param options  axios实例配置选项，此选项中的data及params不会生效
      */
-    createPageableQueryExecutor(url?: string, options?: CreateAxiosDefaults<any> | any): GetExecutor;
+    createPageableQueryExecutor(url?: string, options?: CreateAxiosDefaults<any> | any): PageableQueryExecutor;
     /**
      *
      * @param options  axios实例配置选项，此选项中的data及params不会生效
