@@ -1,22 +1,22 @@
 var U = Object.defineProperty;
 var j = (s, e, t) => e in s ? U(s, e, { enumerable: !0, configurable: !0, writable: !0, value: t }) : s[e] = t;
-var r = (s, e, t) => (j(s, typeof e != "symbol" ? e + "" : e, t), t);
+var n = (s, e, t) => (j(s, typeof e != "symbol" ? e + "" : e, t), t);
 import g from "axios";
 import { reactive as h } from "vue";
-class L {
+class k {
   constructor(e = {}) {
-    r(this, "defaultAxiosInstance");
+    n(this, "defaultAxiosInstance");
     this.defaultAxiosInstance = g.create(e || {}), this.defaultAxiosInstance.interceptors.response = g.interceptors.response, this.defaultAxiosInstance.interceptors.request = g.interceptors.request;
   }
 }
-const k = Object.prototype.toString, N = ((s) => (e) => {
-  let t = k.call(e);
+const L = Object.prototype.toString, N = ((s) => (e) => {
+  let t = L.call(e);
   return s[t] || (s[t] = t.slice(8, -1).toLowerCase());
 })(/* @__PURE__ */ Object.create(null)), c = (s) => (s = s.toLowerCase(), function(e) {
   return N(e) === s;
 }), w = (s) => Array.isArray(s);
 c("ArrayBuffer");
-const F = (s) => s != null && typeof s == "object" && Array.isArray(s) === !1, R = (s) => {
+const F = (s) => s != null && typeof s == "object" && Array.isArray(s) === !1, x = (s) => {
   if (N(s) !== "object")
     return !1;
   let e = Object.getPrototypeOf(s);
@@ -27,7 +27,7 @@ c("File");
 c("Blob");
 c("FileList");
 c("URLSearchParams");
-const v = (s, e) => {
+const E = (s, e) => {
   if (!(s === null || typeof s > "u"))
     if (typeof s != "object" && (s = [s]), w(s))
       for (let t = 0, a = s.length; t < a; t++)
@@ -35,27 +35,27 @@ const v = (s, e) => {
     else
       for (let t in s)
         Object.prototype.hasOwnProperty.call(s, t) && e.call(null, s[t], t, s);
-}, P = function(...s) {
-  let e = arguments[0], t = (a, n) => {
-    R(e[n]) && R(a) ? e[n] = P(e[n], a) : R(a) ? e[n] = P({}, a) : w(a) ? e[n] = a.slice() : e[n] = a;
+}, y = function(...s) {
+  let e = arguments[0], t = (a, r) => {
+    x(e[r]) && x(a) ? e[r] = y(e[r], a) : x(a) ? e[r] = y({}, a) : w(a) ? e[r] = a.slice() : e[r] = a;
   };
-  for (let a = 0, n = arguments.length; a < n; a++)
-    v(arguments[a], t);
+  for (let a = 0, r = arguments.length; a < r; a++)
+    E(arguments[a], t);
   return e;
-}, i = P, x = F, T = w;
-class b {
+}, i = y, P = F, O = w;
+class T {
   constructor() {
-    r(this, "order", new q("id", "ascending"));
-    r(this, "queryProperties", ["id"]);
+    n(this, "order", new q("id", "ascending"));
+    n(this, "queryProperties", ["id"]);
   }
 }
-class E extends b {
-  constructor(t = 1, a = 10, n = -1) {
+class v extends T {
+  constructor(t = 1, a = 10, r = -1) {
     super();
-    r(this, "size", 10);
-    r(this, "page", 1);
-    r(this, "pageOffset", -1);
-    this.page = t, this.size = a, this.pageOffset = n;
+    n(this, "size", 10);
+    n(this, "page", 1);
+    n(this, "pageOffset", -1);
+    this.page = t, this.size = a, this.pageOffset = r;
   }
   setSize(t) {
     this.size = t;
@@ -67,21 +67,21 @@ class E extends b {
     this.pageOffset = t;
   }
 }
-class A {
+class b {
   constructor(e, t, a) {
-    r(this, "property", null);
-    r(this, "joinType", null);
-    r(this, "on", null);
+    n(this, "property", null);
+    n(this, "joinType", null);
+    n(this, "on", null);
     this.property = e || this.property, this.joinType = t || this.joinType, this.on = a || this.on;
   }
   of(e, t, a) {
-    return new A(e, t, a);
+    return new b(e, t, a);
   }
 }
 class q {
   constructor(e, t) {
-    r(this, "prop", null);
-    r(this, "order", "ascending");
+    n(this, "prop", null);
+    n(this, "order", "ascending");
     this.prop = e, this.order = t;
   }
   of(e, t = "asc") {
@@ -90,11 +90,11 @@ class q {
 }
 class Y {
   constructor(e, t, a) {
-    r(this, "property", null);
-    r(this, "value", null);
-    r(this, "opt", "eq");
-    r(this, "and", []);
-    r(this, "or", []);
+    n(this, "property", null);
+    n(this, "value", null);
+    n(this, "opt", "eq");
+    n(this, "and", []);
+    n(this, "or", []);
     this.property = e || this.property, this.value = t || this.value, this.opt = a || this.opt;
   }
   addAnd(e) {
@@ -104,59 +104,59 @@ class Y {
     this.or.push(e);
   }
 }
-var z = /* @__PURE__ */ ((s) => (s.Asc = "asc", s.Desc = "desc", s))(z || {}), G = /* @__PURE__ */ ((s) => (s.equals = "equals", s.eq = "eq", s.ge = "ge", s.gt = "gt", s.lt = "lt", s.le = "le", s.ne = "ne", s.notlike = "notlike", s.like = "like", s["like:"] = "like:", s[":like"] = ":like", s[":like:"] = ":like:", s.lk = "like", s["lk:"] = "like:", s[":lk"] = ":like", s[":lk:"] = ":like:", s.between = "between", s.btw = "btw", s.isnull = "isnull", s.isnotnull = "isnotnull", s.isempty = "isempty", s.isnotempty = "isnotempty", s.in = "in", s.notin = "notin", s))(G || {}), o = /* @__PURE__ */ ((s) => (s["application/atom+xml"] = "application/atom+xml", s["application/json"] = "application/json", s["application/x-www-form-urlencoded"] = "application/x-www-form-urlencoded", s["application/xml"] = "application/xml", s["multipart/form-data"] = "multipart/form-data", s["text/html"] = "text/html", s["text/plain"] = "text/plain", s))(o || {}), f = /* @__PURE__ */ ((s) => (s.POST = "POST", s.GET = "GET", s.DELETE = "DELETE", s.HEAD = "HEAD", s.OPTIONS = "OPTIONS", s.PUT = "PUT", s.PATCH = "PATCH", s.PURGE = "PURGE", s.LINK = "LINK", s.UNLINK = "UNLINK", s))(f || {});
+var G = /* @__PURE__ */ ((s) => (s.Asc = "asc", s.Desc = "desc", s))(G || {}), Q = /* @__PURE__ */ ((s) => (s.equals = "equals", s.eq = "eq", s.ge = "ge", s.gt = "gt", s.lt = "lt", s.le = "le", s.ne = "ne", s.notlike = "notlike", s.like = "like", s["like:"] = "like:", s[":like"] = ":like", s[":like:"] = ":like:", s.lk = "like", s["lk:"] = "like:", s[":lk"] = ":like", s[":lk:"] = ":like:", s.between = "between", s.btw = "btw", s.isnull = "isnull", s.isnotnull = "isnotnull", s.isempty = "isempty", s.isnotempty = "isnotempty", s.in = "in", s.notin = "notin", s))(Q || {}), o = /* @__PURE__ */ ((s) => (s["application/atom+xml"] = "application/atom+xml", s["application/json"] = "application/json", s["application/x-www-form-urlencoded"] = "application/x-www-form-urlencoded", s["application/xml"] = "application/xml", s["multipart/form-data"] = "multipart/form-data", s["text/html"] = "text/html", s["text/plain"] = "text/plain", s))(o || {}), f = /* @__PURE__ */ ((s) => (s.POST = "POST", s.GET = "GET", s.DELETE = "DELETE", s.HEAD = "HEAD", s.OPTIONS = "OPTIONS", s.PUT = "PUT", s.PATCH = "PATCH", s.PURGE = "PURGE", s.LINK = "LINK", s.UNLINK = "UNLINK", s))(f || {});
 class D {
   constructor() {
-    r(this, "success", !1);
-    r(this, "data", null);
-    r(this, "errors", []);
-    r(this, "exception", null);
-    r(this, "extendedData", null);
-    r(this, "messages", []);
-    r(this, "result", null);
-    r(this, "status", null);
-    r(this, "progressEvent", { progress: 0 });
+    n(this, "success", !1);
+    n(this, "data", null);
+    n(this, "errors", []);
+    n(this, "exception", null);
+    n(this, "extendedData", null);
+    n(this, "messages", []);
+    n(this, "result", null);
+    n(this, "status", null);
+    n(this, "progressEvent", { progress: 0 });
   }
 }
-class I extends D {
+class A extends D {
   constructor() {
     super(...arguments);
-    r(this, "data", []);
+    n(this, "data", []);
   }
 }
-class Q extends I {
+class z extends A {
   constructor() {
     super(...arguments);
-    r(this, "status", null);
-    r(this, "total", 0);
+    n(this, "status", null);
+    n(this, "total", 0);
   }
 }
-const K = (s) => s instanceof FormData ? new FormData() : s instanceof URLSearchParams ? new URLSearchParams() : T(s) ? [] : x(s) ? {} : s, p = (...s) => {
+const K = (s) => s instanceof FormData ? new FormData() : s instanceof URLSearchParams ? new URLSearchParams() : O(s) ? [] : P(s) ? {} : s, p = (...s) => {
   if (s.length <= 0)
     return null;
-  if (T(s[s.length - 1]))
+  if (O(s[s.length - 1]))
     return s[s.length - 1];
   let e = K(s[s.length - 1]);
   for (let t = 0; t < s.length; t++) {
     let a = s[t] || {};
-    if (e instanceof FormData || e instanceof URLSearchParams || x(e)) {
+    if (e instanceof FormData || e instanceof URLSearchParams || P(e)) {
       if (a instanceof FormData)
-        a.forEach((n, l) => {
-          e instanceof FormData || e instanceof URLSearchParams ? e.append(l, n) : e[l] = n;
+        a.forEach((r, l) => {
+          e instanceof FormData || e instanceof URLSearchParams ? e.append(l, r) : e[l] = r;
         });
       else if (a instanceof URLSearchParams)
-        a.forEach((n, l) => {
-          e instanceof FormData || e instanceof URLSearchParams ? e.append(l, n) : e[l] = n;
+        a.forEach((r, l) => {
+          e instanceof FormData || e instanceof URLSearchParams ? e.append(l, r) : e[l] = r;
         });
-      else if (x(a)) {
-        let n = Object.keys(a);
+      else if (P(a)) {
+        let r = Object.keys(a);
         if (e instanceof FormData || e instanceof URLSearchParams)
-          n.forEach((l) => {
+          r.forEach((l) => {
             e.append(l, a[l]);
           });
         else {
           let l = JSON.parse(JSON.stringify(a));
-          n.forEach((d) => {
+          r.forEach((d) => {
             e[d] = l[d];
           });
         }
@@ -167,17 +167,17 @@ const K = (s) => s instanceof FormData ? new FormData() : s instanceof URLSearch
 };
 class S {
   constructor(e, t, a = {}) {
-    r(this, "controller", new AbortController());
-    r(this, "instance");
-    r(this, "options", {});
-    r(this, "url", "");
-    r(this, "loading", !1);
-    r(this, "data", {});
-    r(this, "params", {});
-    r(this, "response", new D());
-    r(this, "defaultResponse", new D());
-    r(this, "defaultRequestParams", {});
-    r(this, "defaultRequestData", {});
+    n(this, "controller", new AbortController());
+    n(this, "instance");
+    n(this, "options", {});
+    n(this, "url", "");
+    n(this, "loading", !1);
+    n(this, "data", {});
+    n(this, "params", {});
+    n(this, "response", new D());
+    n(this, "defaultResponse", new D());
+    n(this, "defaultRequestParams", {});
+    n(this, "defaultRequestData", {});
     this.instance = e, this.url = t || this.url, this.options = a;
   }
   abort() {
@@ -192,15 +192,15 @@ class S {
   }
   execute(e = {}) {
     return new Promise((t, a) => {
-      this.loading = !0, e = i({}, this.options || {}, e || {}), e.data = p(this.defaultRequestData, this.data, e.data), e.params = e.params = p(this.defaultRequestParams, this.params, e.params), e.url = e.url ? e.url : this.url, this.initOptions(e), this.response = JSON.parse(JSON.stringify(this.defaultResponse)), this.instance.request(e).then((n) => {
+      this.loading = !0, e = i({}, this.options || {}, e || {}), e.data = p(this.defaultRequestData, this.data, e.data), e.params = e.params = p(this.defaultRequestParams, this.params, e.params), e.url = e.url ? e.url : this.url, this.initOptions(e), this.response = JSON.parse(JSON.stringify(this.defaultResponse)), this.instance.request(e).then((r) => {
         try {
-          this.handleThenResponse(t, n);
+          this.handleThenResponse(t, r);
         } finally {
           this.loading = !1;
         }
-      }).catch((n) => {
+      }).catch((r) => {
         try {
-          this.handleCatchResponse(a, n);
+          this.handleCatchResponse(a, r);
         } finally {
           this.loading = !1;
         }
@@ -241,8 +241,10 @@ class S {
     return this.defaultRequestParams = e, this.params = JSON.parse(JSON.stringify(this.defaultRequestParams)), this;
   }
   handleThenResponse(e, t) {
-    var a;
-    this.response = i({}, this.defaultResponse, t.data), this.response.total != null && this.response.total != null && (this.data.total = this.response.total), this.response.page != null && this.response.page != null && (this.data.page = ((a = this.response) == null ? void 0 : a.page) - (this.data.pageOffset || 0)), this.response.size != null && this.response.size != null && (this.data.size = this.response.size), e(this.response);
+    var r;
+    this.response = i({}, this.defaultResponse, t.data);
+    let a = Object.keys(this.response);
+    a.indexOf("total") > -1 && (this.data.total = this.response.total), a.indexOf("page") > -1 && (this.data.page = ((r = this.response) == null ? void 0 : r.page) - (this.data.pageOffset || 0)), a.indexOf("size") > -1 && (this.data.size = this.response.size), e(this.response);
   }
   handleCatchResponse(e, t) {
     if (console.error("远程请求发生异常：", t), t.response)
@@ -258,7 +260,7 @@ class B extends S {
     super(e, t, a);
   }
   execute(e = {}, t = {}) {
-    return this.loading = !0, t = i({}, this.options || {}, t || {}), t.params = p(this.defaultRequestParams, this.params, t.params, e), this.initOptions(t), this.response = JSON.parse(JSON.stringify(this.defaultResponse)), new Promise((a, n) => {
+    return this.loading = !0, t = i({}, this.options || {}, t || {}), t.params = p(this.defaultRequestParams, this.params, t.params, e), this.initOptions(t), this.response = JSON.parse(JSON.stringify(this.defaultResponse)), new Promise((a, r) => {
       this.instance.get(t.url || this.url, t).then((l) => {
         try {
           this.handleThenResponse(a, l);
@@ -267,7 +269,7 @@ class B extends S {
         }
       }).catch((l) => {
         try {
-          this.handleCatchResponse(n, l);
+          this.handleCatchResponse(r, l);
         } finally {
           this.loading = !1;
         }
@@ -275,15 +277,15 @@ class B extends S {
     });
   }
 }
-class O extends S {
+class I extends S {
   constructor(e, t, a = {}) {
     super(e, t, a);
   }
   execute(e = {}, t = {}, a = {}) {
     this.loading = !0, a = i({}, this.options || {}, a || {});
-    let n = p(this.defaultRequestData, this.data, a.data, e);
+    let r = p(this.defaultRequestData, this.data, a.data, e);
     return a.params = p(this.defaultRequestParams, this.params, a.params, t), this.initOptions(a), this.response = JSON.parse(JSON.stringify(this.defaultResponse)), new Promise((l, d) => {
-      this.instance.post(a.url || this.url, n, a).then((m) => {
+      this.instance.post(a.url || this.url, r, a).then((m) => {
         try {
           this.handleThenResponse(l, m), l(m.data);
         } finally {
@@ -299,17 +301,17 @@ class O extends S {
     });
   }
 }
-class J extends O {
+class J extends I {
   constructor(e, t, a = {}) {
-    super(e, t, a), this.setDefaultResponse(new I()), this.setDefaultRequestData(new b());
+    super(e, t, a), this.setDefaultResponse(new A()), this.setDefaultRequestData(new T());
   }
 }
 class $ extends J {
   constructor(e, t, a = {}) {
-    super(e, t, a), this.setDefaultResponse(new Q()), this.setDefaultRequestData(new E());
+    super(e, t, a), this.setDefaultResponse(new z()), this.setDefaultRequestData(new v());
   }
 }
-const u = class extends L {
+const u = class extends k {
   constructor(e = {}) {
     super(e);
   }
@@ -362,7 +364,7 @@ const u = class extends L {
       method: f.POST,
       headers: { "Content-Type": o["multipart/form-data"] }
     }, t);
-    return h(new O(this.defaultAxiosInstance, e, a));
+    return h(new I(this.defaultAxiosInstance, e, a));
   }
   /**
    * 获取HttpClient实例（单例模式），首将获取时会根据参数初始化实例，后续再获取时参数将不会生效，而是直接返回已经存在的实例
@@ -373,17 +375,17 @@ const u = class extends L {
   }
   static post() {
     return {
-      do(e, t = {}, a = {}, n = {}) {
-        return u.getInstance().createPostExecutor(e, n).execute(t, a);
+      do(e, t = {}, a = {}, r = {}) {
+        return u.getInstance().createPostExecutor(e, r).execute(t, a);
       },
-      multipartFormData(e, t = {}, a = {}, n = {}) {
-        return u.getInstance().createPostExecutor(e, n).toFormDataRequest().execute(t, a);
+      multipartFormData(e, t = {}, a = {}, r = {}) {
+        return u.getInstance().createPostExecutor(e, r).toFormDataRequest().execute(t, a);
       },
-      form(e, t = {}, a = {}, n = {}) {
-        return u.getInstance().createPostExecutor(e, n).toFormRequest().execute(t, a);
+      form(e, t = {}, a = {}, r = {}) {
+        return u.getInstance().createPostExecutor(e, r).toFormRequest().execute(t, a);
       },
-      json(e, t = {}, a = {}, n = {}) {
-        return u.getInstance().createPostExecutor(e, n).toJsonRequest().execute(t, a);
+      json(e, t = {}, a = {}, r = {}) {
+        return u.getInstance().createPostExecutor(e, r).toJsonRequest().execute(t, a);
       }
     };
   }
@@ -395,25 +397,25 @@ const u = class extends L {
     };
   }
 };
-let y = u;
-r(y, "instance");
+let R = u;
+n(R, "instance");
 export {
   Y as Condition,
-  E as DefaultPageableQueryRequestData,
-  Q as DefaultPageableQueryResponse,
-  b as DefaultQueryRequestData,
+  v as DefaultPageableQueryRequestData,
+  z as DefaultPageableQueryResponse,
+  T as DefaultQueryRequestData,
   D as DefaultResponse,
-  G as EConditionOpt,
-  z as EOrderDirection,
+  Q as EConditionOpt,
+  G as EOrderDirection,
   S as Executor,
   B as GetExecutor,
-  y as HttpClient,
+  R as HttpClient,
   o as HttpContentType,
   f as HttpMethod,
-  A as Join,
+  b as Join,
   q as Order,
   $ as PageableQueryExecutor,
-  O as PostExecutor,
+  I as PostExecutor,
   J as QueryExecutor,
   p as mergeDataOrParams
 };

@@ -22,7 +22,7 @@ export default class HttpClient extends AbstractHttpClient {
      * @param options  axios实例配置选项，此选项中的data及params不会生效
      */
     public createRequestExecutor(url: string = '', options: CreateAxiosDefaults<any> | any = {}): Executor {
-        return reactive(new Executor(this.defaultAxiosInstance, url, options));
+        return reactive(new Executor(this.defaultAxiosInstance, url, options)) as Executor;
     }
 
     /**
@@ -34,7 +34,8 @@ export default class HttpClient extends AbstractHttpClient {
             method: HttpMethod.GET,
             headers: {'Content-Type': HttpContentType["application/x-www-form-urlencoded"]}
         }, options);
-        return reactive(new GetExecutor(this.defaultAxiosInstance, url, _options));
+        let executor = reactive(new GetExecutor(this.defaultAxiosInstance, url, _options)) as GetExecutor;
+        return executor;
     }
 
     /**
@@ -46,7 +47,8 @@ export default class HttpClient extends AbstractHttpClient {
             method: HttpMethod.POST,
             headers: {'Content-Type': HttpContentType["application/json"]}
         }, options);
-        return reactive(new QueryExecutor(this.defaultAxiosInstance, url, _options));
+        let executor = reactive(new QueryExecutor(this.defaultAxiosInstance, url, _options)) as QueryExecutor;
+        return executor;
     }
 
     /**
@@ -58,7 +60,8 @@ export default class HttpClient extends AbstractHttpClient {
             method: HttpMethod.POST,
             headers: {'Content-Type': HttpContentType["application/json"]}
         }, options);
-        return reactive(new PageableQueryExecutor(this.defaultAxiosInstance, url, _options));
+        let executor = reactive(new PageableQueryExecutor(this.defaultAxiosInstance, url, _options)) as PageableQueryExecutor;
+        return executor;
     }
 
     /**
@@ -70,7 +73,8 @@ export default class HttpClient extends AbstractHttpClient {
             method: HttpMethod.POST,
             headers: {'Content-Type': HttpContentType["multipart/form-data"]}
         }, options);
-        return reactive(new PostExecutor(this.defaultAxiosInstance, url, _options));
+        let executor = reactive(new PostExecutor(this.defaultAxiosInstance, url, _options)) as PostExecutor;
+        return executor;
     }
 
     /**

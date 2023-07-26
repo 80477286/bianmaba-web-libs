@@ -132,13 +132,14 @@ export default class Executor {
 
     public handleThenResponse(resolve: (value: any) => void, resp: AxiosResponse<any>) {
         this.response = merge({}, this.defaultResponse, resp.data);
-        if (this.response.total != undefined && this.response.total != null) {
+        let keys = Object.keys(this.response);
+        if (keys.indexOf("total") > -1) {
             this.data.total = this.response.total;
         }
-        if (this.response.page != undefined && this.response.page != null) {
+        if (keys.indexOf("page") > -1) {
             this.data.page = this.response?.page - (this.data.pageOffset || 0);
         }
-        if (this.response.size != undefined && this.response.size != null) {
+        if (keys.indexOf("size") > -1) {
             this.data.size = this.response.size;
         }
         resolve(this.response)

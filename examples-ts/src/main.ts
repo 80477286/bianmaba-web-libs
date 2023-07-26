@@ -20,7 +20,6 @@ axios.interceptors.response.use((resp) => {
     return resp;
 })
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
-
 app.use(createPinia())
 app.use(router)
 app.use(bmbView)
