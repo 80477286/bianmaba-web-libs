@@ -3,6 +3,7 @@ import {createPinia} from 'pinia'
 import bmbView from '@bianmaba/bmb-view'
 import App from './App.vue'
 import router from './router'
+import './assets/main.css'
 import "element-plus/theme-chalk/el-loading.css";
 import "element-plus/theme-chalk/el-message.css";
 import "element-plus/theme-chalk/el-notification.css";

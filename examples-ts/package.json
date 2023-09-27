@@ -12,14 +12,14 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
-    "@bianmaba/utils": "file:../utils",
-    "@bianmaba/bmb-view": "file:../bmb-view",
-    "@bianmaba/http-client": "file:../http-client",
     "axios": "^1.3.5",
     "element-plus": "^2.3.3",
     "pinia": "^2.0.34",
     "vue": "^3.2.47",
-    "vue-router": "^4.1.6"
+    "vue-router": "^4.1.6",
+    "@bianmaba/http-client": "file:../http-client",
+    "@bianmaba/bmb-view": "file:../bmb-view",
+    "@bianmaba/utils": "file:../utils"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.2.0",

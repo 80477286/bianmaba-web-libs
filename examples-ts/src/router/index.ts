@@ -5,11 +5,15 @@ const router = createRouter({
     routes: [{
         name: '首页',
         path: '/',
-        redirect: '/user/user_manager'
+        component: () => import('@/views/Home.vue')
     }, {
         name: '用户管理',
         path: '/user/user_manager',
         component: () => import('@/views/user/UserManager.vue')
+    }, {
+        name: 'NPMN设计',
+        path: '/npmn/designer',
+        component: () => import('@/views/npmn/Designer.vue')
     }]
 })
 
