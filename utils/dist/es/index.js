@@ -3,20 +3,20 @@ const d = Object.prototype.toString, B = ((t) => (e) => {
   return t[r] || (t[r] = r.slice(8, -1).toLowerCase());
 })(/* @__PURE__ */ Object.create(null)), o = (t) => (t = t.toLowerCase(), function(r) {
   return B(r) === t;
-}), C = (t, e) => function() {
+}), z = (t, e) => function() {
   return t.apply(e, arguments);
 }, a = (t) => Array.isArray(t), u = (t) => typeof t > "u", A = (t) => t !== null && !u(t) && t.constructor !== null && !u(t.constructor) && typeof t.constructor.isBuffer == "function" && t.constructor.isBuffer(t), m = o("ArrayBuffer"), O = (t) => {
   let e;
   return typeof ArrayBuffer < "u" && ArrayBuffer.isView ? e = ArrayBuffer.isView(t) : e = t && t.buffer && m(t.buffer), e;
-}, l = (t) => typeof t == "string", W = (t) => typeof t == "boolean", F = (t) => typeof t == "number" && isFinite(t), g = (t) => t != null && typeof t == "object" && Array.isArray(t) === !1, c = (t) => {
+}, l = (t) => typeof t == "string", I = (t) => typeof t == "boolean", F = (t) => typeof t == "number" && isFinite(t), $ = (t) => t != null && typeof t == "object" && Array.isArray(t) === !1, c = (t) => {
   if (B(t) !== "object")
     return !1;
   let e = Object.getPrototypeOf(t);
   return e === null || e === Object.prototype;
-}, S = o("Date"), w = o("File"), b = o("Blob"), h = o("FileList"), y = (t) => d.call(t) === "[object Function]", P = (t) => g(t) && y(t.pipe), D = (t) => {
+}, S = o("Date"), w = o("File"), b = o("Blob"), h = o("FileList"), y = (t) => d.call(t) === "[object Function]", P = (t) => $(t) && y(t.pipe), E = (t) => {
   let e = "[object FormData]";
   return t && (typeof FormData == "function" && t instanceof FormData || d.call(t) === e || y(t.toString) && t.toString() === e);
-}, L = o("URLSearchParams"), U = (t) => t.trim ? t.trim() : t.replace(/^\s+|\s+$/g, ""), E = () => typeof navigator < "u" && (navigator.product === "ReactNative" || navigator.product === "NativeScript" || navigator.product === "NS") ? !1 : typeof window < "u" && typeof document < "u", p = (t, e) => {
+}, D = o("URLSearchParams"), L = (t) => t.trim ? t.trim() : t.replace(/^\s+|\s+$/g, ""), N = () => typeof navigator < "u" && (navigator.product === "ReactNative" || navigator.product === "NativeScript" || navigator.product === "NS") ? !1 : typeof window < "u" && typeof document < "u", p = (t, e) => {
   if (!(t === null || typeof t > "u"))
     if (typeof t != "object" && (t = [t]), a(t))
       for (let r = 0, n = t.length; r < n; r++)
@@ -24,16 +24,16 @@ const d = Object.prototype.toString, B = ((t) => (e) => {
     else
       for (let r in t)
         Object.prototype.hasOwnProperty.call(t, r) && e.call(null, t[r], r, t);
-}, N = (t, e, r) => (p(e, function(i, s) {
-  r && typeof i == "function" ? t[s] = C(i, r) : t[s] = i;
+}, U = (t, e, r) => (p(e, function(i, s) {
+  r && typeof i == "function" ? t[s] = z(i, r) : t[s] = i;
 }), t), V = (t) => (t.charCodeAt(0) === 65279 && (t = t.slice(1)), t), x = (t, e, r, n) => {
   t.prototype = Object.create(e.prototype, n), t.prototype.constructor = t, r && Object.assign(t.prototype, r);
 }, j = (t, e, r) => {
-  let n, i, s, $ = {};
+  let n, i, s, g = {};
   e = e || {};
   do {
     for (n = Object.getOwnPropertyNames(t), i = n.length; i-- > 0; )
-      s = n[i], $[s] || (e[s] = t[s], $[s] = !0);
+      s = n[i], g[s] || (e[s] = t[s], g[s] = !0);
     t = Object.getPrototypeOf(t);
   } while (t && (!r || r(t, e)) && t !== Object.prototype);
   return e;
@@ -64,45 +64,45 @@ const d = Object.prototype.toString, B = ((t) => (e) => {
   for (let n = 0, i = arguments.length; n < i; n++)
     p(arguments[n], r);
   return e;
-}, z = function(t) {
+}, C = function(t) {
   return !!(t == null || t == null || l(t) && t === "");
-}, I = function(t) {
+}, W = function(t) {
   return !(t == null || t == null || l(t) && t === "");
 }, K = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   delay: _,
   endsWith: R,
-  extend: N,
+  extend: U,
   forEach: p,
   inherits: x,
   isArray: a,
   isArrayBuffer: m,
   isArrayBufferView: O,
   isBlob: b,
-  isBoolean: W,
+  isBoolean: I,
   isBuffer: A,
   isDate: S,
-  isEmpty: z,
+  isEmpty: C,
   isFile: w,
   isFileList: h,
-  isFormData: D,
+  isFormData: E,
   isFunction: y,
-  isNotEmpty: I,
+  isNotEmpty: W,
   isNumber: F,
-  isObject: g,
+  isObject: $,
   isPlainObject: c,
-  isStandardBrowserEnv: E,
+  isStandardBrowserEnv: N,
   isStream: P,
   isString: l,
   isTypedArray: M,
-  isURLSearchParams: L,
+  isURLSearchParams: D,
   isUndefined: u,
   merge: f,
   stripBOM: V,
   toArray: T,
   toFlatObject: j,
-  trim: U
-}, Symbol.toStringTag, { value: "Module" })), q = f, G = _, H = M, J = T, Q = R, X = j, Y = x, Z = V, k = N, v = p, tt = E, et = U, rt = L, nt = D, it = P, st = y, ot = h, ct = b, ut = w, ft = S, at = c, lt = g, yt = F, pt = l, dt = O, mt = m, gt = A, $t = u, Bt = a;
+  trim: L
+}, Symbol.toStringTag, { value: "Module" })), q = f, G = _, H = M, J = T, Q = R, X = j, Y = x, Z = V, k = U, v = p, tt = N, et = L, rt = D, nt = E, it = P, st = y, ot = h, ct = b, ut = w, ft = S, at = c, lt = $, yt = F, pt = l, dt = O, mt = m, $t = A, gt = u, Bt = a, At = C, Ot = W;
 export {
   K as default,
   G as delay,
@@ -114,12 +114,14 @@ export {
   mt as isArrayBuffer,
   dt as isArrayBufferView,
   ct as isBlob,
-  gt as isBuffer,
+  $t as isBuffer,
   ft as isDate,
+  At as isEmpty,
   ut as isFile,
   ot as isFileList,
   nt as isFormData,
   st as isFunction,
+  Ot as isNotEmpty,
   yt as isNumber,
   lt as isObject,
   at as isPlainObject,
@@ -128,7 +130,7 @@ export {
   pt as isString,
   H as isTypedArray,
   rt as isURLSearchParams,
-  $t as isUndefined,
+  gt as isUndefined,
   q as merge,
   Z as stripBOM,
   J as toArray,

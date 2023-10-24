@@ -29,3 +29,5 @@ export declare const isArrayBuffer: Function;
 export declare const isBuffer: (val: any) => boolean;
 export declare const isUndefined: (val: any) => boolean;
 export declare const isArray: (val: any) => boolean;
+export declare const isEmpty: (val: any) => Boolean;
+export declare const isNotEmpty: (val: any) => Boolean;

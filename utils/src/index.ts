@@ -30,3 +30,5 @@ export const isArrayBuffer = utils.isArrayBuffer;
 export const isBuffer = utils.isBuffer;
 export const isUndefined = utils.isUndefined;
 export const isArray = utils.isArray;
+export const isEmpty = utils.isEmpty;
+export const isNotEmpty = utils.isNotEmpty;
