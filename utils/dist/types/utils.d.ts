@@ -236,3 +236,5 @@ export declare const delay: (wait?: number) => Promise<unknown>;
  * @param {Object} obj1,obj3... 要合并的对象
  */
 export declare const merge: (...args: any[]) => any;
+export declare const isEmpty: (val: any) => Boolean;
+export declare const isNotEmpty: (val: any) => Boolean;
