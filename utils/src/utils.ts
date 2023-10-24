@@ -455,13 +455,13 @@ export const merge = function (...args: any[]): any {
     return result;
 }
 
-export const isEmpty = function (val: any): Boolean {
+export const isEmpty = function (val: any): boolean {
     if (val == null || val == null || (isString(val) && val === '')) {
         return true;
     }
     return false;
 }
-export const isNotEmpty = function (val: any): Boolean {
+export const isNotEmpty = function (val: any): boolean {
     if (val == null || val == null || (isString(val) && val === '')) {
         return false;
     }
