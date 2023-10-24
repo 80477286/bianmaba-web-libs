@@ -25,6 +25,9 @@ npm rm --global package-name
 
 npm ls --global --depth 0
 
+#设置仓库
+npm config set registry https://registry.npm.taobao.org
+npm config set registry https://registry.npmjs.org/
 # 登录仓库
 
 npm login
