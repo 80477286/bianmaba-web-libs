@@ -6,6 +6,7 @@ export default class AbstractHttpClient {
 
     constructor(options: CreateAxiosDefaults | any = {}) {
         this.defaultAxiosInstance = axios.create(options || {})
+        console.log("create axios:", this.defaultAxiosInstance)
         this.defaultAxiosInstance.interceptors.response = axios.interceptors.response;
         this.defaultAxiosInstance.interceptors.request = axios.interceptors.request;
     }
