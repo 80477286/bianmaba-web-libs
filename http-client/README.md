@@ -1,7 +1,7 @@
 axios支持库，封闭远程接口访问服务类，以减少前端处理axios的代码量。
 #开发环境： Vue 3 + TypeScript + Vite +element+plus+axios
 #最新状态：测试中
-
+发布命令：npm run release
 
 
 ```

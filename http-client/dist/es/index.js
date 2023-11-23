@@ -6,7 +6,14 @@ import { reactive as h } from "vue";
 class k {
   constructor(e = {}) {
     n(this, "defaultAxiosInstance");
-    this.defaultAxiosInstance = g.create(e || {}), this.defaultAxiosInstance.interceptors.response = g.interceptors.response, this.defaultAxiosInstance.interceptors.request = g.interceptors.request;
+    this.defaultAxiosInstance = g.create(e || {}), console.log("create axios:", this.defaultAxiosInstance), this.defaultAxiosInstance.interceptors.response = g.interceptors.response, this.defaultAxiosInstance.interceptors.request = g.interceptors.request;
+  }
+  /**
+   * 初始化默认能数
+   * @param options
+   */
+  static defaults(e) {
+    e(g);
   }
 }
 const L = Object.prototype.toString, N = ((s) => (e) => {
@@ -131,12 +138,12 @@ class z extends A {
     n(this, "total", 0);
   }
 }
-const K = (s) => s instanceof FormData ? new FormData() : s instanceof URLSearchParams ? new URLSearchParams() : O(s) ? [] : P(s) ? {} : s, p = (...s) => {
+const B = (s) => s instanceof FormData ? new FormData() : s instanceof URLSearchParams ? new URLSearchParams() : O(s) ? [] : P(s) ? {} : s, p = (...s) => {
   if (s.length <= 0)
     return null;
   if (O(s[s.length - 1]))
     return s[s.length - 1];
-  let e = K(s[s.length - 1]);
+  let e = B(s[s.length - 1]);
   for (let t = 0; t < s.length; t++) {
     let a = s[t] || {};
     if (e instanceof FormData || e instanceof URLSearchParams || P(e)) {
@@ -255,7 +262,7 @@ class S {
     }
   }
 }
-class B extends S {
+class K extends S {
   constructor(e, t, a = {}) {
     super(e, t, a);
   }
@@ -331,7 +338,7 @@ const u = class extends k {
       method: f.GET,
       headers: { "Content-Type": o["application/x-www-form-urlencoded"] }
     }, t);
-    return h(new B(this.defaultAxiosInstance, e, a));
+    return h(new K(this.defaultAxiosInstance, e, a));
   }
   /**
    *
@@ -408,7 +415,7 @@ export {
   Q as EConditionOpt,
   G as EOrderDirection,
   S as Executor,
-  B as GetExecutor,
+  K as GetExecutor,
   R as HttpClient,
   o as HttpContentType,
   f as HttpMethod,

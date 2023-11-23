@@ -1,5 +1,5 @@
 import AbstractHttpClient from "./AbstractHttpClient";
-import {CreateAxiosDefaults} from "axios";
+import {CreateAxiosDefaults, default as axios} from "axios";
 import Executor from "../executors/Executor";
 import GetExecutor from "../executors/GetExecutor";
 import PostExecutor from "../executors/PostExecutor";
@@ -9,6 +9,7 @@ import {merge} from "@bianmaba/utils";
 import {HttpContentType, HttpMethod, RequestData, RequestParams} from "../executors/request/Request";
 import QueryExecutor from "../executors/QueryExecutor";
 import PageableQueryExecutor from "../executors/PageableQueryExecutor";
+import {AxiosStatic} from "axios/index";
 
 export default class HttpClient extends AbstractHttpClient {
     private static instance: HttpClient | any;
@@ -108,6 +109,7 @@ export default class HttpClient extends AbstractHttpClient {
             }
         } as PostMethod
     }
+
 
     public static get(): GetMethods {
         return {

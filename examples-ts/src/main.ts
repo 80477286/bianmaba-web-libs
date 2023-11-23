@@ -10,6 +10,11 @@ import "element-plus/theme-chalk/el-notification.css";
 import "element-plus/theme-chalk/el-message-box.css";
 import "@bianmaba/bmb-view/dist/index.css"
 import axios from "axios";
+import {HttpClient} from "@bianmaba/http-client";
+
+HttpClient.defaults((axios) => {
+    axios.defaults.headers.common['abc'] = "abc";
+})
 
 const app = createApp(App)
 axios.interceptors.request.use((config) => {
